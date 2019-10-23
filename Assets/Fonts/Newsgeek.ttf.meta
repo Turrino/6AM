@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 55cc9e02b61792445bca9d79e68ed14b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Newsgeek
+  fontNames:
+  - Newsgeek
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a26fa6f9a5842524782960be73723d6d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

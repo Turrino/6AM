@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Location
+  - Exit
+  - LocationBoundary
+  - Character
+  - DialogueBox
+  - DialogueText
+  - DialogueManager
+  - LocationParent
+  - MapParent
+  - ListText
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Messages
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 3065583691
+    locked: 0
+  - name: world
+    uniqueID: 3171120207
+    locked: 0
+  - name: foreground
+    uniqueID: 1811769951
+    locked: 0
+  - name: ui
+    uniqueID: 451164445
+    locked: 0

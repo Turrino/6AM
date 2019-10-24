@@ -14,7 +14,7 @@ namespace Assets.Scripts.Resources
             MapName = "pond3x",
             ManualLinesCount = 3,
             LocationsCount = 3,
-            SecondsAvailable = 120,
+            SecondsAvailable = 30,
             GetManual = RulesLevels.ComplexityOne
         };
 
@@ -23,7 +23,7 @@ namespace Assets.Scripts.Resources
             MapName = "flower3x",
             ManualLinesCount = 3,
             LocationsCount = 3,
-            SecondsAvailable = 120,
+            SecondsAvailable = 30,
             GetManual = RulesLevels.ComplexityTwo
         };
 

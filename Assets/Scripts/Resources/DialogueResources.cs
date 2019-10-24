@@ -13,11 +13,16 @@ public static class DialogueResources
     public static string LineAboutOthersStole(string otherCharacter) => $"{otherCharacter} is teh thief.";
     public static string LineAboutOthersDidNotSteal(string otherCharacter) => $"{otherCharacter} is innosent.";
 
-    public static string GetCaptureMessage(bool correct, string name)
+    public static string GetArrestMessage(bool correct, string name)
     {
         return correct? $"YOU GOT THE THEIF! {name} stole the cookies."
             : $"WHOOPS, THAT WAS NOT THE THEIF. {name} was innocent...";
     }
+
+    // Menus
+    // TODO move all the menu texts here
+    public static string ArrestTimeout = "Oh snap... Time's up. The theif ate the cookie. GG mate.";
+
 
     // Manual lines
     public static string ManualShape(string adjective, string objectType, bool liars) =>

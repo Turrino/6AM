@@ -175,15 +175,21 @@ public class Master : MonoBehaviour {
     public void ArrestAttempt()
     {
         var success = CurrentLocation.Person.IsThief;
-        var function = success ? DiagButtonsFunction.CaptureSuccess :
-            DiagButtonsFunction.CaptureFailed;
+        var function = success ? DiagButtonsFunction.ArrestSuccess :
+            DiagButtonsFunction.ArrestFailed;
 
-        var captureMsg = DialogueResources.GetCaptureMessage(
+        var arrestMsg = DialogueResources.GetArrestMessage(
                 success,
                 GM.CurrentLocation.Person.Name
             );
 
-        DialogueManager.CaptureMenu(function, captureMsg);
+        DialogueManager.CaptureMenu(function, arrestMsg);
+    }
+
+    public void WDCTimeout()
+    {
+        DialogueManager.CaptureMenu(DiagButtonsFunction.ArrestFailed,
+            DialogueResources.ArrestTimeout);
     }
 
     //public void SetupList()

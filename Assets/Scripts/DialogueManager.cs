@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour {
     public Text DialogueText;
     public bool DialogueEnabled;
     public GameObject DialogueFace;
+    public ClockScript Clock;
 
     public Image InfoBox;
     public Text InfoText;
@@ -81,10 +82,10 @@ public class DialogueManager : MonoBehaviour {
     {
         switch (function)
         {
-            case DiagButtonsFunction.CaptureSuccess:
+            case DiagButtonsFunction.ArrestSuccess:
                 CaptureSuccessFunction();
                 break;
-            case DiagButtonsFunction.CaptureFailed:
+            case DiagButtonsFunction.ArrestFailed:
                 CaptureFailedFunction();
                 break;
             default:
@@ -105,7 +106,7 @@ public class DialogueManager : MonoBehaviour {
     public void CaptureFailedFunction(bool failedColor = true)
     {
         MenuBgImage.color = failedColor? FailClr : SuccessClr;
-        MenuScreen.SetActive(true);
+        EnableMenuScreen();
 
         MenuButton1Text.text = "Restart";
         MenuButton2Text.text = "Ragequit";
@@ -113,7 +114,7 @@ public class DialogueManager : MonoBehaviour {
         MenuButton1.onClick.RemoveAllListeners();
         MenuButton1.onClick.AddListener(() =>
         {
-            CloseDialogue();
+            DisableMenuScreen();
             Master.GM.RestartButton();
         });
         MenuButton2.onClick.RemoveAllListeners();
@@ -128,7 +129,7 @@ public class DialogueManager : MonoBehaviour {
     {
         MenuBgImage.color = SuccessClr;
         MenuText.text = "Only two levels exist at the moment :(";
-        MenuScreen.SetActive(true);
+        EnableMenuScreen();
         CaptureFailedFunction(false);
         MenuButton2Text.text = "Quit";
     }
@@ -136,16 +137,28 @@ public class DialogueManager : MonoBehaviour {
     public void CaptureSuccessFunction()
     {
         MenuBgImage.color = SuccessClr;
-        MenuScreen.SetActive(true);
+        EnableMenuScreen();
         MenuButton1Text.text = "Next!";
         MenuButton2.gameObject.SetActive(false);
 
         MenuButton1.onClick.RemoveAllListeners();
         MenuButton1.onClick.AddListener(() =>
         {
-            CloseDialogue();
+            DisableMenuScreen();
             Master.GM.NextLevel();
         });
+    }
+
+    void EnableMenuScreen()
+    {
+        Clock.StopTimer();
+        MenuScreen.SetActive(true);
+    }
+
+    void DisableMenuScreen()
+    {
+        // no need to re-enable the timer, master will do that when restarting the level
+        MenuScreen.SetActive(false);
     }
 
     public void DisableButtons()
@@ -189,7 +202,7 @@ public class DialogueManager : MonoBehaviour {
 
     public enum DiagButtonsFunction
     {
-        CaptureSuccess,
-        CaptureFailed
+        ArrestSuccess,
+        ArrestFailed
     }
 }

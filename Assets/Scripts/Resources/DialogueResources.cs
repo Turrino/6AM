@@ -13,6 +13,18 @@ public static class DialogueResources
     public static string LineAboutOthersStole(string otherCharacter) => $"{otherCharacter} is teh thief.";
     public static string LineAboutOthersDidNotSteal(string otherCharacter) => $"{otherCharacter} is innosent.";
 
+    //public static string EnrichDialogue(LocationInfo locInfo, string originalDialogue)
+    //{
+        
+    //}
+
+    //private static string Enrich1 = "Hey do you like my place?";
+    //private static string Enrich1 = "How do you do?";
+    //private static string Enrich1 = "Hey bud.";
+    //private static string Enrich1 = "Do you like my REPL";
+    //private static string Enrich1 = "";
+
+
     public static string GetArrestMessage(bool correct, string name)
     {
         return correct? $"YOU GOT THE THEIF! {name} stole the cookies."

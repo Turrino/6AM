@@ -23,7 +23,7 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if(Input.GetMouseButton(0)) //&& !Master.GM.ListButton.MouseOver)
+        if(Input.GetMouseButton(0) && !Master.GM.PomaButtonOver)
         {
             var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = transform.position.z;

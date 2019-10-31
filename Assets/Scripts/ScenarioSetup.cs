@@ -46,7 +46,7 @@ public class ScenarioSetup
     public int LocationsCount;
     public int ManualLinesCount;
     public ManualParts ManualLines;
-    public string Manual => $"STIRCTLY IN ORDER OF IMPORTENCE:{Environment.NewLine}{string.Join(Environment.NewLine, ManualLines)}";
+    public string Manual => $"STIRCTLY IN ORDER OF IMPORTENCE:{Environment.NewLine}•{string.Join($"{Environment.NewLine}•", ManualLines)}";
     //public Characteristics Characteristics;
     public Vector2 DefaultLocationAnchor;
     public float Scale = 0.7f;

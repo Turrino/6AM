@@ -15,15 +15,18 @@ public class Master : MonoBehaviour {
 
     public static Master GM;
     public GameObject Player;
-    public GameObject List;
+    //public GameObject List;
     public GameObject CurrentParent;
     public Texture2D CanvasTexture;
     public ScenarioData ScenarioData = null;
     public Location Location;
     public LocationInfo CurrentLocation = null;
     public DialogueManager DialogueManager;
-    public ListTextScript ListUi;
+
+    public GameObject PomaUI;
     public Button PomaButton;
+    public bool PomaButtonOver;
+
     //public ListButtonScript ListButton;
     public Player PlayerScript;
     public GameObject PlayerInstance;
@@ -57,7 +60,7 @@ public class Master : MonoBehaviour {
             LevelCounter = 0;
 
             PomaButton.onClick.AddListener(() => {
-                ListUi.Trigger();
+                TriggerPoma();
             });
 
             ConfigureColors();
@@ -158,6 +161,7 @@ public class Master : MonoBehaviour {
 
         if (To.IsMap)
         {
+            HidePoma();
             DialogueManager.HideInfo();
             SceneManager.LoadScene(NamesList.MainScenario, LoadSceneMode.Single);
             Location.CreateLocation(CurrentLocation, GetSceneTransform());
@@ -184,6 +188,16 @@ public class Master : MonoBehaviour {
             );
 
         DialogueManager.CaptureMenu(function, arrestMsg);
+    }
+
+    public void TriggerPoma()
+    {
+        GM.PomaUI.gameObject.SetActive(!GM.PomaUI.gameObject.activeSelf);
+    }
+
+    public void HidePoma()
+    {
+        GM.PomaUI.gameObject.SetActive(false);
     }
 
     public void WDCTimeout()
@@ -231,6 +245,9 @@ public class Master : MonoBehaviour {
         DialogueManager.HideInfo();
 
         LoadingScreen.SetActive(false);
+
+        PomaUI.GetComponentInChildren<Text>().text = GM.ScenarioData.PomaText;
+
         Clock.StartTimer(level.SecondsAvailable);
     }
 
@@ -262,7 +279,6 @@ public class Master : MonoBehaviour {
     {
         TearDown();
         FirstTimeSetup();
-        ListUi.Initialise(true);
         ChangeScene(ScenarioData.Main, true);
     }
 
@@ -296,6 +312,14 @@ public class Master : MonoBehaviour {
         //        var data = (ScenarioData)new BinaryFormatter().Deserialize(file);
         //    }
         //}
+    }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            TriggerPoma();
+        }
     }
 
     void Wait(Func<bool> predicate) => StartCoroutine(WaitUntil(predicate));

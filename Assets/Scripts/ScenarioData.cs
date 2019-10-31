@@ -19,14 +19,14 @@ public class ScenarioData {
             kv => kv.Person.Name,
             kv => kv);
 
-        InformationText = informationText;
+        PomaText = informationText;
     }
 
     public bool Initialised = false;
     public List<LocationInfo> Locations;
     public Dictionary<string, LocationInfo> LocationsDict;
     public LocationInfo Main;
-    public string InformationText;
+    public string PomaText;
 }
 
 [Serializable]

@@ -96,6 +96,7 @@ public class Location : MonoBehaviour {
             renderer.sprite = prop.Sprite;
             renderer.sortingLayerName = NamesList.SortingLayerWorld;
             renderer.SetSortingOrder();
+            propInstance.AddComponent<PolygonCollider2D>();
         }
     }
 

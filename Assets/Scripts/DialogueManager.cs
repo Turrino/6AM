@@ -36,6 +36,7 @@ public class DialogueManager : MonoBehaviour {
 
     public void ShowDialogue()
     {
+        Master.GM.HidePoma();
         DialogueFace.GetComponent<Image>().sprite = Master.GM.CurrentLocation.Person.DialogueImg;
         DialogueText.text = Master.GM.CurrentLocation.Person.DialogueLine;
         DialogueFunction();
@@ -44,6 +45,7 @@ public class DialogueManager : MonoBehaviour {
 
     public void CaptureMenu(DiagButtonsFunction function, string message)
     {
+        Master.GM.HidePoma();
         MenuText.text = message;
         EnableButtons(function);
     }
@@ -53,15 +55,7 @@ public class DialogueManager : MonoBehaviour {
         DisableButtons();
         TriggerDialogue(false);
     }
-
-    public void TriggerDialogue(bool on)
-    {
-        DialogueScreen.SetActive(on);
-        //DialogueIcon.enabled = on;
-        //DialogueText.enabled = on;
-        DialogueEnabled = on;
-    }
-
+    
     public void ShowInfo(string text, float displayTime = 0)
     {
         InfoText.text = text;
@@ -148,6 +142,14 @@ public class DialogueManager : MonoBehaviour {
             Master.GM.NextLevel();
         });
     }
+    private void TriggerDialogue(bool on)
+    {
+        DialogueScreen.SetActive(on);
+        //DialogueIcon.enabled = on;
+        //DialogueText.enabled = on;
+        DialogueEnabled = on;
+    }
+
 
     void EnableMenuScreen()
     {

@@ -23,7 +23,8 @@ namespace Assets.Scripts.Resources
 
         // Tags
         public const string LocationBounds = "LocationBoundary";
-        public const string Character = "Character";        
+        public const string Character = "Character";
+        public const string Container = "Container";
 
         // Overlay usage (location)
         //public static string OverlaySpawn = "00EAFF"; (player isn't placed on location anymore)

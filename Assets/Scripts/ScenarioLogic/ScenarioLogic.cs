@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Generators;
+﻿using Assets.Scripts.Bayeux;
+using Assets.Scripts.Generators;
 using Assets.Scripts.Resources;
 using BayeuxBundle;
 using BayeuxBundle.Models;
@@ -78,6 +79,7 @@ namespace Assets.Scripts.ScenarioLogic
         /// <param name="locations"></param>
         public static void CreateProps(ManualParts manual, List<LocationInfo> locations, Assembler<Texture2D> assembler, float scale)
         {
+            var tools = new TextureTools(OverlayRef.Am6RefDictWHash);
             // Ground rules are OFF because they complicate things too much. Just use specific rules for now.
             //// First apply all the ground rules (have/have not) in order of importance 
             //var groundRules = manual.Where(r => !r.Specific).ToList().OrderBy(r => r.Rank);
@@ -122,7 +124,7 @@ namespace Assets.Scripts.ScenarioLogic
                     //var instructions = InstructionsPrefabs.Vase((Shape)rl.r.Classifier, StaticHelpers.Flip());
                     var instructions = Demo2Instructions.VaseInstructions((Shape)rl.r.Classifier);
                     instructions.Palette = palette;
-                    var vase = assembler.Assemble(instructions).ToProp(scale);
+                    var vase = assembler.Assemble(instructions).ToProp(tools, scale);
                     props.Add(vase);
                     rl.l.Person.Liar = rl.r.AreLiars;
                 }
@@ -174,7 +176,7 @@ namespace Assets.Scripts.ScenarioLogic
                 var wallProps = new List<PropInfo>();
                 var paint = assembler.Assemble(
                         Demo2Instructions.PaintingInstructions(location.Assets.PaletteInfo.PropsPalette));
-                wallProps.Add(paint.ToProp(StaticHelpers.CentralPivot, scale));
+                wallProps.Add(paint.ToProp(tools, StaticHelpers.CentralPivot, scale));
 
                 location.Assets.AddProps(wallProps, true);
                 location.Assets.AddProps(props);
@@ -190,12 +192,12 @@ namespace Assets.Scripts.ScenarioLogic
             {
                 if (objectType == ObjectType.am6cabinet)
                 {
-                    var plant = assembler.Assemble(Demo2Instructions.CabinetInstructions(palette)).ToProp(scale*1.5f);
+                    var plant = assembler.Assemble(Demo2Instructions.CabinetInstructions(palette)).ToProp(tools, scale * 1.5f);
                     return plant;
                 }
                 if (objectType == ObjectType.am6plant)
                 {
-                    var plant = assembler.Assemble(Demo2Instructions.PottedPlantInstructions(palette)).ToProp(scale);
+                    var plant = assembler.Assemble(Demo2Instructions.PottedPlantInstructions(palette)).ToProp(tools, scale);
                     return plant;
                 }
                 if(objectType == ObjectType.am6vase)
@@ -204,7 +206,7 @@ namespace Assets.Scripts.ScenarioLogic
                     var instructions = Demo2Instructions.VaseInstructions(availableShape);
                     instructions.UseOnce = false;
                     instructions.Palette = palette;
-                    var vase = assembler.Assemble(instructions).ToProp(scale);
+                    var vase = assembler.Assemble(instructions).ToProp(tools, scale);
                     return vase;
                 }
                 throw new InvalidOperationException("missing prop!GetProp()");

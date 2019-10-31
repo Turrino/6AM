@@ -2854,6 +2854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1480654159}
   - component: {fileID: 1480654160}
+  - component: {fileID: 1480654161}
   m_Layer: 5
   m_Name: LocInterface
   m_TagString: Untagged
@@ -2898,6 +2899,18 @@ MonoBehaviour:
   TalkBtn: {fileID: 720930325}
   LeaveBtn: {fileID: 1789159423}
   ArrestBtn: {fileID: 128267285}
+--- !u!114 &1480654161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480654158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4509927cf78f04a4aa2cc07ee35bc75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1531352730
 GameObject:
   m_ObjectHideFlags: 0

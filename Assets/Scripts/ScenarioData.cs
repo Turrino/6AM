@@ -180,15 +180,19 @@ public class PropInfo
 {
     public PropInfo(
         Sprite sprite,
+        Sprite bgSprite,
         ResourceDefinition definition)
     {
         Sprite = sprite;
+        BgSprite = bgSprite;
         Definition = definition;
+        Contents = new List<Sprite>();
     }
 
     private PropInfo()
     {
         NoProp = true;
+        Contents = new List<Sprite>();
     }
 
     public static PropInfo GetNoProp()
@@ -199,7 +203,9 @@ public class PropInfo
     public bool NoProp;
     public ResourceDefinition Definition;
     public Sprite Sprite;
+    public Sprite BgSprite;
     public Vector2 SpawnPoint;
+    public List<Sprite> Contents;
 }
 
 /// <summary>

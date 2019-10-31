@@ -84,19 +84,27 @@ public class Location : MonoBehaviour {
         //    renderer.sprite = ph;
         //    renderer.sortingLayerName = NamesList.SortingLayerForeground;
         //}
-
-        SpriteRenderer renderer;
         foreach (var prop in _locInfo.Assets.Props)
         {
             if (prop.NoProp)
                 continue;
             var propInstance = Instantiate(Prop, prop.SpawnPoint, Quaternion.identity);
             propInstance.transform.SetParent(parent);
-            renderer = propInstance.GetComponent<SpriteRenderer>();
+            var propMain = propInstance.transform.GetChild(0);
+            var renderer = propMain.GetComponent<SpriteRenderer>();
             renderer.sprite = prop.Sprite;
-            renderer.sortingLayerName = NamesList.SortingLayerWorld;
+            //renderer.sortingLayerName = NamesList.SortingLayerWorld;
             renderer.SetSortingOrder();
-            propInstance.AddComponent<PolygonCollider2D>();
+
+            var rendererBg = propInstance.transform.GetChild(1).GetComponent<SpriteRenderer>();
+            rendererBg.sprite = prop.BgSprite;
+            rendererBg.sortingOrder = renderer.sortingOrder - 1;
+
+            propMain.gameObject.AddComponent<PolygonCollider2D>();
+            if (true)//prop.Contents.Any())
+                propMain.tag = NamesList.Container;
+
+            propMain.GetComponent<PropScript>().Background = rendererBg;
         }
     }
 

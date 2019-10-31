@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Resources;
-using System.Diagnostics;
 using UnityEngine;
 
 public class Player : MonoBehaviour {

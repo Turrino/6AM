@@ -166,15 +166,23 @@ namespace Assets.Scripts.Resources
             return list.Where(x => x.ToString() != "na").ToList();
         }
 
-        public static PropInfo ToProp(this AssemblerResource<Texture2D> resource, float scale = 1)
+        public static PropInfo ToProp(this AssemblerResource<Texture2D> resource, TextureTools tools, float scale = 1)
         {
-            return ToProp(resource, BottomCenterPivot, scale);
+            return ToProp(resource, tools, BottomCenterPivot, scale);
         }
 
-        public static PropInfo ToProp(this AssemblerResource<Texture2D> resource, Vector2 pivot, float scale = 1)
+        public static PropInfo ToProp(this AssemblerResource<Texture2D> resource, TextureTools tools, Vector2 pivot, float scale = 1)
         {
+            var image = resource.Data.Image;
+            var imgSize = image.width > image.height ? image.width : image.height;
+            var circleSize = (int)(imgSize / 1.7);
+            var color = PixelInfo.White;
+            var circle = tools.PixelPerfectCircle(circleSize, color);
+            circle.Image.Apply();
+
             return new PropInfo(
                     resource.Data.Image.ToSprite(pivot, scale),
+                    circle.ToSprite(pivot, scale),
                     resource.Definition
                 );
         }

@@ -23,12 +23,14 @@ public class Master : MonoBehaviour {
     public LocationInfo CurrentLocation = null;
     public DialogueManager DialogueManager;
 
+
+    public GameObject Tooltip;
     public GameObject PomaUI;
     public Button PomaButton;
     public bool PomaButtonOver;
 
     //public ListButtonScript ListButton;
-    public Player PlayerScript;
+    //public Player PlayerScript;
     public GameObject PlayerInstance;
     public Texture2D MasterTexture;
     public GameObject LoadingScreen;
@@ -172,7 +174,7 @@ public class Master : MonoBehaviour {
             SceneManager.LoadScene(NamesList.Location, LoadSceneMode.Single);
             Location.CreateLocation(CurrentLocation, GetSceneTransform());
             DialogueManager.ShowInfo(
-                DialogueResources.LocationInfo(CurrentLocation.Person.Name));
+                TextResources.LocationInfo(CurrentLocation.Person.Name));
         }
     }
 
@@ -182,7 +184,7 @@ public class Master : MonoBehaviour {
         var function = success ? DiagButtonsFunction.ArrestSuccess :
             DiagButtonsFunction.ArrestFailed;
 
-        var arrestMsg = DialogueResources.GetArrestMessage(
+        var arrestMsg = TextResources.GetArrestMessage(
                 success,
                 GM.CurrentLocation.Person.Name
             );
@@ -203,7 +205,7 @@ public class Master : MonoBehaviour {
     public void WDCTimeout()
     {
         DialogueManager.CaptureMenu(DiagButtonsFunction.ArrestFailed,
-            DialogueResources.ArrestTimeout);
+            TextResources.ArrestTimeout);
     }
 
     //public void SetupList()
@@ -234,7 +236,7 @@ public class Master : MonoBehaviour {
         PlayerInstance.transform.SetParent(gameObject.transform);
         PlayerInstance.name = NamesList.Player;
 
-        PlayerScript = PlayerInstance.GetComponent<Player>();
+        //PlayerScript = PlayerInstance.GetComponent<Player>();
 
         SceneInit();
 

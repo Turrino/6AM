@@ -104,7 +104,11 @@ public class Location : MonoBehaviour {
             if (true)//prop.Contents.Any())
                 propMain.tag = NamesList.Container;
 
-            propMain.GetComponent<PropScript>().Background = rendererBg;
+            // Set up the prop script
+            var propScript = propMain.GetComponent<PropScript>();
+            propScript.Background = rendererBg;
+            propScript.Prop = renderer;
+            propScript.ToolTipText = prop.Description;
         }
     }
 

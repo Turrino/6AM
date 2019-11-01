@@ -187,6 +187,7 @@ public class PropInfo
         BgSprite = bgSprite;
         Definition = definition;
         Contents = new List<Sprite>();
+        Description = TextResources.DefinitionToText(definition);
     }
 
     private PropInfo()
@@ -206,6 +207,7 @@ public class PropInfo
     public Sprite BgSprite;
     public Vector2 SpawnPoint;
     public List<Sprite> Contents;
+    public string Description;
 }
 
 /// <summary>
@@ -226,7 +228,7 @@ public class ManualPart
             ObjectType = type,
             AreLiars = isLiar,
             RuleType = RuleType.type,
-            ManualLine = DialogueResources.ManualObjectType(type.ToString(), isLiar),
+            ManualLine = TextResources.ManualObjectType(type.ToString(), isLiar),
             Rank = rank
         };
     }
@@ -241,7 +243,7 @@ public class ManualPart
             AreLiars = isLiar,
             RuleType = RuleType.shape,
             //Specific = true,
-            ManualLine = DialogueResources.ManualShape(shape.ToString(), type.ToString(), isLiar),
+            ManualLine = TextResources.ManualShape(shape.ToString(), type.ToString(), isLiar),
             Rank = rank
         };            
     }

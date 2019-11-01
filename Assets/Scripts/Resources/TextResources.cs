@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Assets.Scripts.Resources;
+using BayeuxBundle;
+using BayeuxBundle.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class DialogueResources
+public static class TextResources
 {
     public static string LocationInfo(string characterName) => $"{characterName}'s place";
 
@@ -15,7 +18,7 @@ public static class DialogueResources
 
     //public static string EnrichDialogue(LocationInfo locInfo, string originalDialogue)
     //{
-        
+
     //}
 
     //private static string Enrich1 = "Hey do you like my place?";
@@ -24,7 +27,41 @@ public static class DialogueResources
     //private static string Enrich1 = "Do you like my REPL";
     //private static string Enrich1 = "";
 
+    // this just makes the text a bit silly and gives no information
+    public static string[] NoiseCategoriesAdj = { "racing", "beautiful", "hypnotic", "dazzling", "glorious", "so-so", "vegetarian", "stray", "smelly" };
+    public static string[] NoiseCategoriesAppend = { " made by an elephant", ", as seen on TV", ", hope you like it", ", looks legit to me",
+        ". Really ties the room together", ", it's got wifi too", ". Can I go home now?" };
 
+    public static string DefinitionToText(ResourceDefinition definition)
+    {
+        var baseDesc = "It's a ";
+        var hasNoise = false;
+
+        if (definition.Shape != Shape.na)
+            baseDesc += $"{EnumAdapter(definition.Shape.ToString())} ";
+        else if (StaticHelpers.Flip())
+        {
+            baseDesc += $"{NoiseCategoriesAdj.PickRandom()} ";
+            hasNoise = true;
+        }
+
+        baseDesc += $"{EnumAdapter(definition.ObjectType.ToString())}";
+
+        if (!hasNoise && StaticHelpers.Flip())
+        {
+            baseDesc += $"{NoiseCategoriesAppend.PickRandom()}";
+            hasNoise = true;
+        }
+
+        baseDesc += $".";
+
+        if (definition.ObjectType == ObjectType.am6cabinet)
+        {
+            baseDesc += " It's got stuff inside.";
+        }
+
+        return baseDesc;
+    }
     public static string GetArrestMessage(bool correct, string name)
     {
         return correct? $"YOU GOT THE THEIF! {name} stole the cookies."

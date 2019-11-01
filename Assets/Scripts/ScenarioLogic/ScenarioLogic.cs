@@ -26,7 +26,7 @@ namespace Assets.Scripts.ScenarioLogic
             {
                 var otherCharacter = locations.Where(l => l != location).ToList().PickRandom().Person;
                 var dialogueType = StaticHelpers.RandomEnumValue(exclude: new[] { DialogueType.Na });
-                location.Person.DialogueLine = DialogueResources.GetDialogue(location.Person, dialogueType, otherCharacter);
+                location.Person.DialogueLine = TextResources.GetDialogue(location.Person, dialogueType, otherCharacter);
             }
 
             var described = locations.Where(l => l.Person.DescribedByManual).Select(l => l.Person);
@@ -56,7 +56,7 @@ namespace Assets.Scripts.ScenarioLogic
                 if (talkAboutOthers)
                 {
                     cleared.Add(otherCharacter);  
-                    person.DialogueLine = DialogueResources
+                    person.DialogueLine = TextResources
                         .GetDialogue(person, DialogueType.TalkOthers, otherCharacter);
                 }
                 else
@@ -64,7 +64,7 @@ namespace Assets.Scripts.ScenarioLogic
                     cleared.Add(person);
                     // We also can't have the thief talk about themselves
                     // They MAY admit to the crime, but only if they're not in the manual (see above)
-                    person.DialogueLine = DialogueResources
+                    person.DialogueLine = TextResources
                         .GetDialogue(person, DialogueType.TalkSelf);                    
                 }
             }

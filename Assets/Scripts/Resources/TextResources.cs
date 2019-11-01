@@ -28,9 +28,9 @@ public static class TextResources
     //private static string Enrich1 = "";
 
     // this just makes the text a bit silly and gives no information
-    public static string[] NoiseCategoriesAdj = { "racing", "beautiful", "hypnotic", "dazzling", "glorious", "so-so", "vegetarian", "stray", "smelly" };
+    public static string[] NoiseCategoriesAdj = { "high-end", "beautiful", "hypnotic", "dazzling", "glorious", "so-so", "vegetarian", "stray", "smelly" };
     public static string[] NoiseCategoriesAppend = { " made by an elephant", ", as seen on TV", ", hope you like it", ", looks legit to me",
-        ". Really ties the room together", ", it's got wifi too", ". Can I go home now?" };
+        ". Really ties the room together", ", it has wifi", ". Can I go home now?", ". Are we done yet?", ". Do you like it?" };
 
     public static string DefinitionToText(ResourceDefinition definition)
     {
@@ -53,7 +53,8 @@ public static class TextResources
             hasNoise = true;
         }
 
-        baseDesc += $".";
+        if (!baseDesc.EndsWith("?"))
+            baseDesc += $".";
 
         if (definition.ObjectType == ObjectType.am6cabinet)
         {

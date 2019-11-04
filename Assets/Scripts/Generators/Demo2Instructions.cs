@@ -23,6 +23,12 @@ namespace Assets.Scripts.Generators
                     new InstructionLayer(ObjectType.am6plant),
                 };
 
+        public static Instructions ItemInstructions(Dictionary<PixelInfo, PixelInfo> palette)
+            => new Instructions(ObjectType.am6item, false, SkeletonType.None)
+        {
+            new InstructionLayer(ObjectType.am6item, false, true, true),
+        };
+
         public static Instructions PaintingInstructions(Dictionary<PixelInfo, PixelInfo> palette)
             => new Instructions(ObjectType.am6painting, false, SkeletonType.Anchors, palette)
                 {

@@ -58,7 +58,6 @@ public class Location : MonoBehaviour {
             //animator.runtimeAnimatorController = animatorOverrideController;
             //animatorOverrideController["idling"] = _locInfo.Person.Resource.Image.ToSprite();
             renderer = instance.GetComponent<SpriteRenderer>();
-            // TODO fix - we have to use the sprite now, but need to get the animation..
             renderer.sprite = _locInfo.Person.Sprite;
             renderer.sortingLayerName = NamesList.SortingLayerWorld;
             renderer.SetSortingOrder();
@@ -101,14 +100,17 @@ public class Location : MonoBehaviour {
             rendererBg.sortingOrder = renderer.sortingOrder - 1;
 
             propMain.gameObject.AddComponent<PolygonCollider2D>();
-            if (true)//prop.Contents.Any())
-                propMain.tag = NamesList.Container;
 
             // Set up the prop script
             var propScript = propMain.GetComponent<PropScript>();
             propScript.Background = rendererBg;
             propScript.Prop = renderer;
             propScript.ToolTipText = prop.Description;
+            if (prop.Contents.Any())
+            {
+                propScript.HasContents = true;
+                propScript.Contents = prop.Contents;
+            }
         }
     }
 
@@ -118,7 +120,7 @@ public class Location : MonoBehaviour {
         if (_locInfo.Assets.ForegroundSprites != null)
             AddBgParts(_locInfo.Assets.ForegroundSprites, parent, true);
 
-        // Create the collider sprite
+        // Create the collider sprite (NB. not in use currently, this gets skipped. recycle if needed)
         if (_locInfo.Assets.ColliderSprite != null)
         {
             var cInstance = Instantiate(Background, Anchor, Quaternion.identity);

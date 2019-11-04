@@ -20,7 +20,7 @@ public class ScenarioSetup
         // Skip 0, that's for the map        
         AvailableMusicClips = Enumerable.Range(1, noOfMusicClips - 1).ToList();
         // This is valid for demo2 only. If re-using this code this probably will change.
-        DefaultLocationAnchor = new Vector2(-3.2f, 2.3f);
+        DefaultLocationAnchor = new Vector2(-2.7f, 2.3f);
         //Characteristics = new Characteristics();
 
         //// TODO this will depend on the level!
@@ -114,7 +114,7 @@ public class ScenarioSetup
     private LocationAssets CreateMap(string mapName)
     {
         var resource = Assembler.AssembleNamedPoly(mapName);
-        // Center vertically & horizontally place slightly below the middle
+        // Slightly below the middle vertically and a center horizontally
         var anchor = new Vector2(-((float)resource.OverlayData.Width / 100 / 2),
             (float)resource.OverlayData.Height / 100 / 2.5f);
 

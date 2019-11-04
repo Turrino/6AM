@@ -23,6 +23,7 @@ public class Master : MonoBehaviour {
     public LocationInfo CurrentLocation = null;
     public DialogueManager DialogueManager;
 
+    public DrawerLogic Contents;
 
     public GameObject Tooltip;
     public GameObject PomaUI;

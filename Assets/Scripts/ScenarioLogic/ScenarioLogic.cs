@@ -192,8 +192,15 @@ namespace Assets.Scripts.ScenarioLogic
             {
                 if (objectType == ObjectType.am6cabinet)
                 {
-                    var plant = assembler.Assemble(Demo2Instructions.CabinetInstructions(palette)).ToProp(tools, scale * 1.5f);
-                    return plant;
+                    var cabinet = assembler.Assemble(Demo2Instructions.CabinetInstructions(palette)).ToProp(tools, scale * 1.5f);
+                    var contents = new List<Sprite>();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        contents.Add(assembler.Assemble(Demo2Instructions.ItemInstructions(palette)).Data.ToSprite(StaticHelpers.CentralPivot, 2));
+                    }
+                    cabinet.Contents = contents;
+
+                    return cabinet;
                 }
                 if (objectType == ObjectType.am6plant)
                 {

@@ -1,21 +1,29 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Resources;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PropScript : MonoBehaviour
 {
+    // Set at runtime
     public SpriteRenderer Prop;
     public SpriteRenderer Background;
     public string ToolTipText;
+    public bool HasContents;
+    public List<Sprite> Contents;
 
     private int _regularOrder;
     private bool _mouseOver;
 
-    //void OnMouseDown()
-    //{
-        
-    //}
+    void OnMouseDown()
+    {
+        if (HasContents)
+        {
+            Master.GM.Contents.ShowContents(Contents);
+        }
+    }
 
     void OnMouseOver()
     {

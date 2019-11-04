@@ -181,12 +181,13 @@ public class PropInfo
     public PropInfo(
         Sprite sprite,
         Sprite bgSprite,
-        ResourceDefinition definition)
+        ResourceDefinition definition,
+        List<Sprite> contents = null)
     {
         Sprite = sprite;
         BgSprite = bgSprite;
         Definition = definition;
-        Contents = new List<Sprite>();
+        Contents = contents ?? new List<Sprite>();
         Description = TextResources.DefinitionToText(definition);
     }
 

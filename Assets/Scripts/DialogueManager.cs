@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour {
     public GameObject DialogueFace;
     public ClockScript Clock;
 
+    // This is the name of the location at the top left
     public Image InfoBox;
     public Text InfoText;
     public bool InfoEnabled;
@@ -28,6 +29,7 @@ public class DialogueManager : MonoBehaviour {
     public Text MenuButton2Text;
     public Image MenuBgImage;
     public Text MenuText;
+    public bool MenuEnabled;
 
     private IEnumerator InfoDisplayCr;
 
@@ -153,6 +155,7 @@ public class DialogueManager : MonoBehaviour {
 
     void EnableMenuScreen()
     {
+        MenuEnabled = true;
         Clock.StopTimer();
         MenuScreen.SetActive(true);
     }
@@ -160,6 +163,7 @@ public class DialogueManager : MonoBehaviour {
     void DisableMenuScreen()
     {
         // no need to re-enable the timer, master will do that when restarting the level
+        MenuEnabled = false;
         MenuScreen.SetActive(false);
     }
 

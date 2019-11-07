@@ -28,9 +28,15 @@ public static class TextResources
     //private static string Enrich1 = "";
 
     // this just makes the text a bit silly and gives no information
-    public static string[] NoiseCategoriesAdj = { "high-end", "beautiful", "hypnotic", "dazzling", "glorious", "so-so", "vegetarian", "stray", "smelly" };
-    public static string[] NoiseCategoriesAppend = { " made by an elephant", ", as seen on TV", ", hope you like it", ", looks legit to me",
-        ". Really ties the room together", ", it has wifi", ". Can I go home now?", ". Are we done yet?", ". Do you like it?" };
+    public static string[] NoiseCategoriesAdj =
+        { "high-end", "beautiful", "hypnotic", "dazzling", "DIY", "horrible",
+        "talking", "serious", "glorious", "so-so", "vegetarian", "stray", "smelly",
+        "second-hand", "bullet-proof", "high-tech", "primitive" };
+    public static string[] NoiseCategoriesAppend =
+        { " made by an elephant", ", as seen on TV", ", hope you like it", ", looks legit to me",
+        ". Really ties the room together", ", it has wifi", ". Can I go home now?",
+        ". Are we done yet?", ". Do you like it?", ", always wanted one like that",
+        ", like all the other ones", " in all its glory", ", like it or not"};
 
     public static string DefinitionToText(ResourceDefinition definition)
     {

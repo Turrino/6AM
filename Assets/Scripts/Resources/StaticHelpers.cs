@@ -181,15 +181,21 @@ namespace Assets.Scripts.Resources
 
         public static PropInfo ToProp(this AssemblerResource<Texture2D> resource, TextureTools tools, float scale = 1)
         {
-            return ToProp(resource, tools, BottomCenterPivot, scale);
+            return ToProp(resource, tools, BottomCenterPivot, PixelInfo.White, scale);
         }
 
-        public static PropInfo ToProp(this AssemblerResource<Texture2D> resource, TextureTools tools, Vector2 pivot, float scale = 1)
+        public static PropInfo ToItemProp(this AssemblerResource<Texture2D> resource, TextureTools tools, float scale = 2)
+        {
+            return ToProp(resource, tools, CentralPivot, PixelInfo.Black, scale);
+        }
+
+        public static PropInfo ToProp(this AssemblerResource<Texture2D> resource, TextureTools tools,
+            Vector2 pivot, PixelInfo bgColor, float scale = 1)
         {
             var image = resource.Data.Image;
             var imgSize = image.width > image.height ? image.width : image.height;
             var circleSize = (int)(imgSize / 1.7);
-            var color = PixelInfo.White;
+            var color = bgColor;
             var circle = tools.PixelPerfectCircle(circleSize, color);
             circle.Image.Apply();
 

@@ -182,19 +182,20 @@ public class PropInfo
         Sprite sprite,
         Sprite bgSprite,
         ResourceDefinition definition,
-        List<Sprite> contents = null)
+        List<PropInfo> contents = null)
     {
         Sprite = sprite;
         BgSprite = bgSprite;
         Definition = definition;
-        Contents = contents ?? new List<Sprite>();
-        Description = TextResources.DefinitionToText(definition);
+        Contents = contents ?? new List<PropInfo>();
+        Description = !string.IsNullOrEmpty(definition.Description)?
+            definition.Description : TextResources.DefinitionToText(definition);
     }
 
     private PropInfo()
     {
         NoProp = true;
-        Contents = new List<Sprite>();
+        Contents = new List<PropInfo>();
     }
 
     public static PropInfo GetNoProp()
@@ -207,7 +208,7 @@ public class PropInfo
     public Sprite Sprite;
     public Sprite BgSprite;
     public Vector2 SpawnPoint;
-    public List<Sprite> Contents;
+    public List<PropInfo> Contents;
     public string Description;
 }
 

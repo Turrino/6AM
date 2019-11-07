@@ -121,7 +121,7 @@ public class Location : MonoBehaviour {
             AddBgParts(_locInfo.Assets.ForegroundSprites, parent, true);
 
         // Create the collider sprite (NB. not in use currently, this gets skipped. recycle if needed)
-        if (_locInfo.Assets.ColliderSprite != null)
+        if (_locInfo.Assets.ColliderSprite != null) 
         {
             var cInstance = Instantiate(Background, Anchor, Quaternion.identity);
             cInstance.transform.SetParent(parent);

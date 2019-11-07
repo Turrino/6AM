@@ -176,7 +176,7 @@ namespace Assets.Scripts.ScenarioLogic
                 var wallProps = new List<PropInfo>();
                 var paint = assembler.Assemble(
                         Demo2Instructions.PaintingInstructions(location.Assets.PaletteInfo.PropsPalette));
-                wallProps.Add(paint.ToProp(tools, StaticHelpers.CentralPivot, scale));
+                wallProps.Add(paint.ToProp(tools, StaticHelpers.CentralPivot, PixelInfo.White, scale));
 
                 location.Assets.AddProps(wallProps, true);
                 location.Assets.AddProps(props);
@@ -193,10 +193,13 @@ namespace Assets.Scripts.ScenarioLogic
                 if (objectType == ObjectType.am6cabinet)
                 {
                     var cabinet = assembler.Assemble(Demo2Instructions.CabinetInstructions(palette)).ToProp(tools, scale * 1.5f);
-                    var contents = new List<Sprite>();
+                    var contents = new List<PropInfo>();
                     for (int i = 0; i < 3; i++)
                     {
-                        contents.Add(assembler.Assemble(Demo2Instructions.ItemInstructions(palette)).Data.ToSprite(StaticHelpers.CentralPivot, 2));
+                        var item = assembler.Assemble(Demo2Instructions.ItemInstructions(palette))
+                            .ToItemProp(tools, 2);
+
+                        contents.Add(item);
                     }
                     cabinet.Contents = contents;
 

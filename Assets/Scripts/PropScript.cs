@@ -1,7 +1,4 @@
-﻿using Assets.Scripts.Resources;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +9,8 @@ public class PropScript : MonoBehaviour
     public SpriteRenderer Background;
     public string ToolTipText;
     public bool HasContents;
-    public List<Sprite> Contents;
+    public bool IsContents;
+    public List<PropInfo> Contents;
 
     private int _regularOrder;
     private bool _mouseOver;
@@ -25,11 +23,13 @@ public class PropScript : MonoBehaviour
         }
     }
 
+    bool IsToolTipEnabled() => IsContents? Master.GM.DrawerTooltipEnabled() : Master.GM.TooltipEnabled();
+
     void OnMouseOver()
     {
-        if (!_mouseOver)
+        if (!_mouseOver && IsToolTipEnabled())
         {
-            // TODO add sound effect
+            Master.GM.Sfx.Tooltip();
             _regularOrder = Prop.sortingOrder;
             Background.sortingOrder = 999;
             Prop.sortingOrder = 1000;

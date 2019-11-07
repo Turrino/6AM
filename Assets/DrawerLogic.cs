@@ -9,8 +9,7 @@ public class DrawerLogic : MonoBehaviour
     public SpriteRenderer DrawerRenderer;
     public GameObject Xbutton;
     public SpriteRenderer[] SpawnPoints;
-
-    private bool _shown;
+    public bool Open;
 
     public void Start()
     {
@@ -19,12 +18,12 @@ public class DrawerLogic : MonoBehaviour
 
     public void HideContents()
     {
-        if (_shown)
+        if (Open)
         {
-            _shown = false;
+            Open = false;
             foreach (var item in SpawnPoints)
             {
-                item.enabled = false;
+                item.gameObject.SetActive(false);
             }
 
             DrawerRenderer.enabled = false;
@@ -32,33 +31,33 @@ public class DrawerLogic : MonoBehaviour
         }
     }
 
-    public void ShowContents(List<Sprite> contents)
+    public void ShowContents(List<PropInfo> contents)
     {
-        //var spawnPoints = Master.GM.Contents.GetComponentsInChildren<SpriteRenderer>(true);
-        //spawnPoints.Where(x => x.sprite.name != "xbutton" && x.sprite.name != "drawer").ToList().PickRandoms(Contents.Count);
-        //var contentsAndPoints = spawnPoints.Zip(Contents, (s, c) => new { s, c });
-        //foreach (var cs in contentsAndPoints)
-        //{
-        //    cs.s.sprite = cs.c;
-        //    cs.s.enabled = true;
-        //}
+        Master.GM.Sfx.Drawer();
 
         SpawnPoints.Shuffle();
         for (int i = 0; i < SpawnPoints.Length; i++)
         {
             if (contents.Count > i)
             {
-                SpawnPoints[i].sprite = contents[i];
-                SpawnPoints[i].enabled = true;
-            }
-            else
-            {
-                SpawnPoints[i].enabled = false;
+                SpawnPoints[i].sprite = contents[i].Sprite;
+                // silly unity GetComponentInChildren finds the parent component too..
+                var bg = SpawnPoints[i].gameObject.GetComponentsInChildren<SpriteRenderer>()[1];
+                bg.sprite = contents[i].BgSprite;
+                // Configure the script... TODO, this would be better off during scenario setup and not here
+                var itemScript = SpawnPoints[i].gameObject.GetComponent<PropScript>();
+                itemScript.Prop = SpawnPoints[i];
+                itemScript.Background = bg;
+                itemScript.IsContents = true;
+                itemScript.ToolTipText = contents[i].Description;
+
+                SpawnPoints[i].gameObject.AddComponent<PolygonCollider2D>();
+                SpawnPoints[i].gameObject.SetActive(true);
             }
         }
 
         DrawerRenderer.enabled = true;
         Xbutton.SetActive(true);
-        _shown = true;
+        Open = true;
     }
 }

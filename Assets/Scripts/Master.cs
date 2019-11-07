@@ -41,6 +41,10 @@ public class Master : MonoBehaviour {
 
     public int LevelCounter;
 
+    public SfxScript Sfx;
+    public bool TooltipEnabled() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && !Contents.Open;
+    public bool DrawerTooltipEnabled() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && Contents.Open;
+
     private GameObject _parentRef;
     private BackgroundMusic _music;
     private AudioSource _audioSrc;

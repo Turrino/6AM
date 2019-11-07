@@ -72,9 +72,7 @@ public class Master : MonoBehaviour {
 
             ConfigureColors();
 
-            FirstTimeSetup();
-
-            Debug.Log("sfda");            
+            FirstTimeSetup();        
 
             Save();
         }            

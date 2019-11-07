@@ -163,12 +163,14 @@ public class LocationAssets
     public Overlay OverlayData;
     public PaletteInfo PaletteInfo;
 
-    public void AddProps(List<PropInfo> props, bool wall = false)
+    public void AddProps(List<PropInfo> props)
     {
-        var spawnPoints = wall ? WallPropSpawnPoints : PropSpawnPoints;
-
         foreach (var item in props)
         {
+            var spawnPoints =
+                item.Definition.ObjectType == ObjectType.am6painting ?
+                WallPropSpawnPoints : PropSpawnPoints;
+
             item.SpawnPoint = spawnPoints.Dequeue();
             Props.Add(item);
         }

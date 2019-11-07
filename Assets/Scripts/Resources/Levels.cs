@@ -9,6 +9,15 @@ namespace Assets.Scripts.Resources
 {
     public static class Levels
     {
+        public static LevelInfo Level0 = new LevelInfo()
+        {
+            MapName = "flower2x",
+            ManualLinesCount = 1,
+            LocationsCount = 2,
+            SecondsAvailable = 109,
+            GetManual = RulesLevels.ComplexityZero
+        };
+
         public static LevelInfo Level1 = new LevelInfo()
         {
             MapName = "pond3x",
@@ -36,6 +45,6 @@ namespace Assets.Scripts.Resources
             GetManual = RulesLevels.ComplexityTwo
         };
 
-        public static LevelInfo[] LevelList = new[] { Level1, Level2, Level3 };
+        public static LevelInfo[] LevelList = new[] { Level0, Level1, Level2, Level3 };
     }
 }

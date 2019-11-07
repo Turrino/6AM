@@ -19,7 +19,7 @@ namespace Assets.Scripts.ScenarioLogic
         public List<Shape> ReservedVaseShapes;
         public List<ObjectType> RegulatedTypes;
         public List<ObjectType> AvailableTypes;
-        public static ObjectType[] DefaultTypes = new[] { ObjectType.am6plant, ObjectType.am6vase };
+        public static ObjectType[] DefaultTypes = new[] { ObjectType.am6plant, ObjectType.am6vase, ObjectType.am6painting };
 
         public new void Add(ManualPart item)
         {

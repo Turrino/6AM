@@ -134,9 +134,11 @@ namespace Assets.Scripts.ScenarioLogic
                     props.Add(prop);
                     rl.l.Person.Liar = rl.r.AreLiars;
                 }
-                else
+                else if (rl.r.ObjectType == ObjectType.am6painting)
                 {
-                    Debug.Log("missing prop! CreateProps");
+                    var prop = GetProp(ObjectType.am6painting, palette);
+                    props.Add(prop);
+                    rl.l.Person.Liar = rl.r.AreLiars;
                 }
 
                 rl.l.RelevantRules.Add(rl.r);
@@ -161,7 +163,8 @@ namespace Assets.Scripts.ScenarioLogic
                     // Find out if it is regulated. It may be admissible if it is, but a relevant higher ranking rule exists in that location
                     if (manual.RegulatedTypes.Contains(item))
                     {
-                        var regulatedRank = manual.Where(r => r.ObjectType == item).Max(r => r.Rank);
+                        var regulatedRanks = manual.Where(r => r.ObjectType == item);
+                        var regulatedRank = regulatedRanks.Any() ? regulatedRanks.Max(r => r.Rank) : 0;
                         var locationRules = location.RelevantRules.Where(r => r.ObjectType != item);
                         var locationRulesRank = locationRules.Any() ? locationRules.Max(r => r.Rank) : 0;
                         canBeAdded = locationRulesRank > regulatedRank;
@@ -173,13 +176,6 @@ namespace Assets.Scripts.ScenarioLogic
                     }
                 }
 
-                // Stuff that goes on walls (different spawn point)
-                var wallProps = new List<PropInfo>();
-                var paint = assembler.Assemble(
-                        Demo2Instructions.PaintingInstructions(location.Assets.PaletteInfo.PropsPalette));
-                wallProps.Add(paint.ToProp(tools, StaticHelpers.CentralPivot, PixelInfo.White, scale));
-
-                location.Assets.AddProps(wallProps, true);
                 location.Assets.AddProps(props);
             }
 
@@ -219,6 +215,12 @@ namespace Assets.Scripts.ScenarioLogic
                     instructions.Palette = palette;
                     var vase = assembler.Assemble(instructions).ToProp(tools, scale);
                     return vase;
+                }
+                if (objectType == ObjectType.am6painting)
+                {
+                    var paint = assembler.Assemble(
+                            Demo2Instructions.PaintingInstructions(palette));
+                    return paint.ToProp(tools, StaticHelpers.CentralPivot, PixelInfo.White, scale);
                 }
                 throw new InvalidOperationException("missing prop!GetProp()");
             }

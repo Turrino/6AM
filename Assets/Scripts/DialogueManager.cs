@@ -124,7 +124,7 @@ public class DialogueManager : MonoBehaviour {
     public void GameEnd()
     {
         MenuBgImage.color = SuccessClr;
-        MenuText.text = "Only two levels exist at the moment :(";
+        MenuText.text = "out of levels, work in progress :(";
         EnableMenuScreen();
         CaptureFailedFunction(false);
         MenuButton2Text.text = "Quit";

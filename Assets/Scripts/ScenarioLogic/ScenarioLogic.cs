@@ -162,7 +162,8 @@ namespace Assets.Scripts.ScenarioLogic
                     if (manual.RegulatedTypes.Contains(item))
                     {
                         var regulatedRank = manual.Where(r => r.ObjectType == item).Max(r => r.Rank);
-                        var locationRulesRank = location.RelevantRules.Where(r => r.ObjectType != item).Max(r => r.Rank);
+                        var locationRules = location.RelevantRules.Where(r => r.ObjectType != item);
+                        var locationRulesRank = locationRules.Any() ? locationRules.Max(r => r.Rank) : 0;
                         canBeAdded = locationRulesRank > regulatedRank;
                     }
 

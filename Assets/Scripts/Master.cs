@@ -129,7 +129,7 @@ public class Master : MonoBehaviour {
     {
         LocationInterface.SetActive(false);
         LevelCounter++;
-        if (LevelCounter == 2)
+        if (LevelCounter == Levels.LevelList.Length)
         {
             DialogueManager.GameEnd();
         }
@@ -326,6 +326,12 @@ public class Master : MonoBehaviour {
         if (Input.GetMouseButtonDown(1))
         {
             TriggerPoma();
+        }
+
+        // TODO TODO TODO debug, remove
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            NextLevel();
         }
     }
 

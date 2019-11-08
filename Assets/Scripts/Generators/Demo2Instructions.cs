@@ -11,7 +11,7 @@ namespace Assets.Scripts.Generators
             => new Instructions(ObjectType.am6cabinet, true, SkeletonType.Overlay, palette)
                 {
                     new InstructionLayer(ObjectType.am6peg),
-                    new InstructionLayer(ObjectType.am6cabinet, true),
+                    new InstructionLayer(ObjectType.am6cabinet, null, true),
                     new InstructionLayer(ObjectType.am6cabinetdoor),
                     new InstructionLayer(ObjectType.am6trinket),
                 };
@@ -23,10 +23,10 @@ namespace Assets.Scripts.Generators
                     new InstructionLayer(ObjectType.am6plant),
                 };
 
-        public static Instructions ItemInstructions(Dictionary<PixelInfo, PixelInfo> palette)
+        public static Instructions ItemInstructions(string itemType, Dictionary<PixelInfo, PixelInfo> palette)
             => new Instructions(ObjectType.am6item, false, SkeletonType.None, palette)
         {
-            new InstructionLayer(ObjectType.am6item, false, true, true),
+            new InstructionLayer(ObjectType.am6item, itemType, false, true, true),
         };
 
         public static Instructions PaintingInstructions(Dictionary<PixelInfo, PixelInfo> palette)
@@ -39,7 +39,7 @@ namespace Assets.Scripts.Generators
             new Instructions(ObjectType.am6body, usePartsOnce, SkeletonType.Overlay, palette)
                 {
                     new InstructionLayer(ObjectType.am6tail),
-                    new InstructionLayer(ObjectType.am6body, true),
+                    new InstructionLayer(ObjectType.am6body, null, true),
                     new InstructionLayer(ObjectType.am6face),
                     new InstructionLayer(ObjectType.am6hat),
                 };

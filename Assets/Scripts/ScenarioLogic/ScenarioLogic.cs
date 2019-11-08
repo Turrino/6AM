@@ -80,36 +80,12 @@ namespace Assets.Scripts.ScenarioLogic
         public static void CreateProps(ManualParts manual, List<LocationInfo> locations, Assembler<Texture2D> assembler, float scale)
         {
             var tools = new TextureTools(OverlayRef.Am6RefDictWHash);
-            // Ground rules are OFF because they complicate things too much. Just use specific rules for now.
-            //// First apply all the ground rules (have/have not) in order of importance 
-            //var groundRules = manual.Where(r => !r.Specific).ToList().OrderBy(r => r.Rank);
-            //var flip = StaticHelpers.Flip();
 
-            //foreach (var rule in groundRules)
-            //{
-            //    foreach (var loc in locations)
-            //    {
-            //        var palette = loc.Assets.PaletteInfo.PropsPalette;
-            //        // Out-of-manual decoration
-            //        var props = new List<PropInfo>();
-            //        if (flip) // flip = does have
-            //        {
-            //            props.Add(GetGroundRuleProp(rule, palette));
-            //        }
-            //        loc.Person.Liar = flip == rule.HasOrNot & rule.AreLiars;
-            //        loc.Person.DescribedByManual = true;
-            //        flip = !flip;
-            //        loc.Assets.AddProps(props);
-            //    }
-            //}
-
-            //var specificRules = manual.Where(r => r.Specific).OrderBy(r => r.Rank).ToList();
             var specificRules = manual.OrderBy(r => r.Rank).ToList();
             var specificLocations = locations.PickRandoms(specificRules.Count());
             var rulesAndLocations = specificRules.Zip(specificLocations, (r, l) => new { r, l });
 
-            // Start with the specific rules
-            // Each should apply to one location
+            // Each rule should apply to one location
             foreach (var rl in rulesAndLocations)
             {
                 var palette = rl.l.Assets.PaletteInfo.PropsPalette;
@@ -118,29 +94,31 @@ namespace Assets.Scripts.ScenarioLogic
                 var propType = rl.r.ObjectType;
                 var propClassifier = rl.r.Classifier;
 
-                //TODO switch object type
-                if (rl.r.ObjectType == ObjectType.am6vase)
+                if (rl.r.IsCabinetItem)
+                {
+                    props.Add(SetupCabinet(palette, new[] { rl.r.ItemType }));
+                }
+                else if (rl.r.ObjectType == ObjectType.am6vase)
                 {
                     //var instructions = InstructionsPrefabs.Vase((Shape)rl.r.Classifier, StaticHelpers.Flip());
                     var instructions = Demo2Instructions.VaseInstructions((Shape)rl.r.Classifier);
                     instructions.Palette = palette;
                     var vase = assembler.Assemble(instructions).ToProp(tools, scale);
                     props.Add(vase);
-                    rl.l.Person.Liar = rl.r.AreLiars;
                 }
                 else if (rl.r.ObjectType == ObjectType.am6plant)
                 {
                     var prop = GetProp(ObjectType.am6plant, palette);
                     props.Add(prop);
-                    rl.l.Person.Liar = rl.r.AreLiars;
                 }
                 else if (rl.r.ObjectType == ObjectType.am6painting)
                 {
                     var prop = GetProp(ObjectType.am6painting, palette);
                     props.Add(prop);
-                    rl.l.Person.Liar = rl.r.AreLiars;
                 }
 
+                // Super important! Flip the liar status here or there's a 50% chance they will have the wrong dialogues
+                rl.l.Person.Liar = rl.r.AreLiars; 
                 rl.l.RelevantRules.Add(rl.r);
                 rl.l.Person.DescribedByManual = true;
                 rl.l.Assets.AddProps(props);
@@ -152,7 +130,7 @@ namespace Assets.Scripts.ScenarioLogic
                 var props = new List<PropInfo>();
 
                 // Stuff that always goes in regardless (does not feature in the manual)
-                props.Add(GetProp(ObjectType.am6cabinet, location.Assets.PaletteInfo.PropsPalette));
+                // (there's none right now, but might be added later: lamps, rugs, trinkets, ...
 
                 // The rest
                 var currentTypes = location.Assets.Props.Select(p => p.Definition.ObjectType).ToList();
@@ -175,33 +153,42 @@ namespace Assets.Scripts.ScenarioLogic
                         props.Add(GetProp(item, location.Assets.PaletteInfo.PropsPalette));
                     }
                 }
+                // Also check if we can add a cabinet - special type since it contains more items
+                if (!location.Assets.Props.Any(p => p.Definition.ObjectType == ObjectType.am6cabinet))
+                {
+                    props.Add(SetupCabinet(location.Assets.PaletteInfo.PropsPalette));
+                }
 
                 location.Assets.AddProps(props);
+
             }
 
-            //PropInfo GetGroundRuleProp(ManualPart rule, Dictionary<PixelInfo, PixelInfo> palette)
-            //{
-            //    var otherRule = rule ?? manual.Where(r => !r.Specific).ToList().PickRandom();
-            //    return GetProp(otherRule.ObjectType, palette);
-            //}
+            // Done!
+
+            // Local methods
+            PropInfo SetupCabinet(Dictionary<PixelInfo, PixelInfo> palette, string[] typesToInclude = null)
+            {
+                var cabinet = assembler.Assemble(Demo2Instructions.CabinetInstructions(palette)).ToProp(tools, scale * 1.5f);
+                var contents = new List<PropInfo>();
+                var typesQueue = typesToInclude != null? new Queue<string>(typesToInclude) : new Queue<string>();
+                //var allowableTypes = TypesInfo.CabinetItemTypes.Except(typesToExclude.Concat(typesToInclude)).ToList();
+
+                for (int i = 0; i < 3; i++)
+                {
+                    var itemType = typesQueue.Any() ? typesQueue.Dequeue() : manual.AvailableCabItems.PickRandom();
+
+                    var item = assembler.Assemble(Demo2Instructions.ItemInstructions(itemType, palette))
+                        .ToItemProp(tools, 2);
+
+                    contents.Add(item);
+                }
+                cabinet.Contents = contents;
+
+                return cabinet;
+            }
 
             PropInfo GetProp(ObjectType objectType, Dictionary<PixelInfo, PixelInfo> palette)
-            {
-                if (objectType == ObjectType.am6cabinet)
-                {
-                    var cabinet = assembler.Assemble(Demo2Instructions.CabinetInstructions(palette)).ToProp(tools, scale * 1.5f);
-                    var contents = new List<PropInfo>();
-                    for (int i = 0; i < 3; i++)
-                    {
-                        var item = assembler.Assemble(Demo2Instructions.ItemInstructions(palette))
-                            .ToItemProp(tools, 2);
-
-                        contents.Add(item);
-                    }
-                    cabinet.Contents = contents;
-
-                    return cabinet;
-                }
+            {                
                 if (objectType == ObjectType.am6plant)
                 {
                     var plant = assembler.Assemble(Demo2Instructions.PottedPlantInstructions(palette)).ToProp(tools, scale);

@@ -17,6 +17,7 @@ public class ScenarioSetup
     {
         TextureTools = new TextureTools(OverlayRef.Am6RefDictWHash);
         Assembler = new Assembler<Texture2D>(TextureTools, Demo2ResourcesAssembly.BundleAssembly);
+        TypesInfo.CabinetItemTypes = Assembler.GetAllSubtypes(ObjectType.am6item);
         // Skip 0, that's for the map        
         AvailableMusicClips = Enumerable.Range(1, noOfMusicClips - 1).ToList();
         // This is valid for demo2 only. If re-using this code this probably will change.

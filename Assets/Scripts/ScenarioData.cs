@@ -252,6 +252,20 @@ public class ManualPart
         };            
     }
 
+    public static ManualPart ManualPartAboutCabItems(string itemType, bool isLiar, int rank)
+    {
+        return new ManualPart()
+        {
+            //HasOrNot = true,
+            ItemType = itemType,
+            IsCabinetItem = true,
+            AreLiars = isLiar,
+            RuleType = RuleType.cabinetItem,
+            ManualLine = TextResources.ManualObjectType(itemType, isLiar),
+            Rank = rank
+        };
+    }
+
     //public static ManualPart ManualPartHasOrNot(bool has, ObjectType type, bool isLiar, int rank)
     //{
     //    return new ManualPart()
@@ -267,6 +281,8 @@ public class ManualPart
 
     //public bool HasOrNot;
     public ObjectType ObjectType;
+    public string ItemType; // Drawer items only. TODO, merge object types and item types
+    public bool IsCabinetItem;
     public Enum Classifier;
     public string ManualLine;
     public bool AreLiars;
@@ -303,6 +319,7 @@ public enum RuleType
 {
     shape,
     type,
+    cabinetItem,
 }
 
 // What happens when someone talks to the character

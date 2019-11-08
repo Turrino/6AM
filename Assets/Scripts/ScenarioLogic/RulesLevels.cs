@@ -1,30 +1,25 @@
 ﻿using Assets.Scripts.Resources;
 using BayeuxBundle;
 using BayeuxBundle.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.Scripts.ScenarioLogic
 {
     public static class RulesLevels
     {
-        //private static List<ObjectType> DefaultNotRegulatedTypes = new List<ObjectType> { ObjectType.am6plant, ObjectType.am6vase };
-
-        // Demo level, one rule only
-        public static ManualParts ComplexityZero()
+        // Entry level, one rule only
+        public static ManualParts Complexity0()
         {
             var manual = new ManualParts();
 
-            AddRandomObjectRule(manual, StaticHelpers.Flip(), 1);
+            AddRandomObjectRule(manual, StaticHelpers.Flip(), 1, false);
 
             return manual;
         }
 
         // Two rules Works for up to three locations, I think
-        public static ManualParts ComplexityOne()
+        public static ManualParts Complexity1()
         {
             var manual = new ManualParts();
 
@@ -36,8 +31,21 @@ namespace Assets.Scripts.ScenarioLogic
             return manual;
         }
 
+        //Cab means cabinets are included
+        public static ManualParts Complexity1Cab()
+        {
+            var manual = new ManualParts();
+
+            //Specific rule 1
+            AddCabinetItemRule(manual, StaticHelpers.Flip(), 1);
+            //Specific rule 2
+            AddRandomObjectRule(manual, StaticHelpers.Flip(), 2, true);
+
+            return manual;
+        }
+
         // Three rules, Works for up to four locations
-        public static ManualParts ComplexityTwo()
+        public static ManualParts Complexity2()
         {
             var manual = new ManualParts();
 
@@ -45,26 +53,36 @@ namespace Assets.Scripts.ScenarioLogic
 
             AddVaseRule(manual, StaticHelpers.Flip(), ranks[0]);
             AddVaseRule(manual, StaticHelpers.Flip(), ranks[1]);
-            AddRandomObjectRule(manual, StaticHelpers.Flip(), ranks[2]);
+            AddRandomObjectRule(manual, StaticHelpers.Flip(), ranks[2], false);
 
             return manual;
         }
 
         // Like C2, includes cabinet items though
-        public static ManualParts ComplexityThree()
+        public static ManualParts Complexity2Cab()
         {
             var manual = new ManualParts();
 
             var ranks = Enumerable.Range(1, 3).ToList();
 
+            AddVaseRule(manual, StaticHelpers.Flip(), ranks[0]);
+            AddRandomObjectRule(manual, StaticHelpers.Flip(), ranks[1], false);
+            AddCabinetItemRule(manual, StaticHelpers.Flip(), ranks[2]);
+
             return manual;
         }
 
-        private static void AddRandomObjectRule(ManualParts manual, bool liar, int rank, bool includeVase = false)
+        private static void AddRandomObjectRule(ManualParts manual, bool liar, int rank, bool includeVase)
         {
             var optionsCount = includeVase ? 3 : 2;
             var option = Enumerable.Range(1, optionsCount).ToList().PickRandom();
             RandomRulesOptions[option](manual, liar, rank);
+        }
+
+        private static void AddCabinetItemRule(ManualParts manual, bool liar, int rank)
+        {
+            var rule = ManualPart.ManualPartAboutCabItems(manual.AvailableCabItems.PickRandom(), liar, rank);
+            manual.Add(rule);
         }
 
         private delegate void RuleAdd(ManualParts manual, bool liar, int rank);

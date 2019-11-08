@@ -32,12 +32,15 @@ public static class TextResources
         { "high-end", "beautiful", "hypnotic", "dazzling", "DIY", "horrible",
         "talking", "serious", "glorious", "so-so", "vegetarian", "stray", "smelly",
         "second-hand", "bullet-proof", "high-tech", "primitive",
-        "strawberry-flavored", "award-winning"};
+        "strawberry-flavored", "award-winning", "pretty", "modest", "shy"};
     public static string[] NoiseCategoriesAppend =
-        { " made by an elephant", ", as seen on TV", ", hope you like it", ", looks legit to me",
+        { ", very precious", ", need I to say more?", " made by an elephant",
+        ", as seen on TV", ", hope you like it", ", looks legit to me",
         ". Really ties the room together", ", it has wifi", ". Can I go home now?",
         ". Are we done yet?", ". Do you like it?", ", always wanted one like that",
-        ", like all the other ones", " in all its glory", ", like it or not"};
+        ", like all the other ones", " in all its glory", ", like it or not",
+        ", for ever and a day", " and there's nothing you can do about it"
+    };
 
     public static string DefinitionToText(ResourceDefinition definition)
     {
@@ -83,10 +86,10 @@ public static class TextResources
 
     // Manual lines
     public static string ManualShape(string adjective, string objectType, bool liars) =>
-        $"Those who have a {EnumAdapter(adjective)} {EnumAdapter(objectType)} are {(liars ? "liars" : "not liars")}";
+        $"Has {EnumAdapter(adjective)} {EnumAdapter(objectType)} = {(liars ? "lies" : "NOT lies")}";
 
     public static string ManualObjectType(string objectType, bool liars) =>
-        $"Those who have a {EnumAdapter(objectType)} are {(liars ? "liars" : "not liars")}";
+        $"Has {EnumAdapter(objectType)} = {(liars ? "lies" : "NOT lies")}";
 
     //public static string ManualHasOrNot(bool have, string objectType, bool liars) =>
     //    $"Those who {(have? "have" : "do not have")} a {EnumAdapter(objectType)} are {(liars ? "liars" : "not liars")}";

@@ -13,9 +13,10 @@ public class SfxScript : MonoBehaviour
     }
 
     private void Play(AudioClip clip)
-    {
+    {        
         _src.clip = clip;
         _src.time = 0;
+        _src.enabled = true;
         _src.Play();
     }
 

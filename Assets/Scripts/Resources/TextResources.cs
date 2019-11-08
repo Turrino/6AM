@@ -31,7 +31,8 @@ public static class TextResources
     public static string[] NoiseCategoriesAdj =
         { "high-end", "beautiful", "hypnotic", "dazzling", "DIY", "horrible",
         "talking", "serious", "glorious", "so-so", "vegetarian", "stray", "smelly",
-        "second-hand", "bullet-proof", "high-tech", "primitive" };
+        "second-hand", "bullet-proof", "high-tech", "primitive",
+        "strawberry-flavored", "award-winning"};
     public static string[] NoiseCategoriesAppend =
         { " made by an elephant", ", as seen on TV", ", hope you like it", ", looks legit to me",
         ". Really ties the room together", ", it has wifi", ". Can I go home now?",

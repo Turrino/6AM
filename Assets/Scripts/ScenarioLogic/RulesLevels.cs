@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Resources;
+using BayeuxBundle;
 using BayeuxBundle.Models;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,7 @@ namespace Assets.Scripts.ScenarioLogic
         {
             var manual = new ManualParts();
 
-            if (StaticHelpers.Flip())
-                AddPlantRule(manual, StaticHelpers.Flip(), 1);
-            else
-                AddPaintingRule(manual, StaticHelpers.Flip(), 1);
+            AddRandomObjectRule(manual, StaticHelpers.Flip(), 1);
 
             return manual;
         }
@@ -31,20 +29,9 @@ namespace Assets.Scripts.ScenarioLogic
             var manual = new ManualParts();
 
             //Specific rule 1
-            manual.Add(AddVaseRule(StaticHelpers.Flip(), manual, 1));
+            AddVaseRule(manual, StaticHelpers.Flip(), 1);
             //Specific rule 2
-            if (StaticHelpers.Flip())
-            {
-                manual.Add(AddVaseRule(StaticHelpers.Flip(), manual, 2));
-            }
-            else
-            {
-                // TODO simplify the choice between rules and regulated types, move to a "getrandomrule" method
-                if (StaticHelpers.Flip())
-                    AddPlantRule(manual, StaticHelpers.Flip(), 2);
-                else
-                    AddPaintingRule(manual, StaticHelpers.Flip(), 2);
-            }
+            AddRandomObjectRule(manual, StaticHelpers.Flip(), 2, true);
 
             return manual;
         }
@@ -56,16 +43,38 @@ namespace Assets.Scripts.ScenarioLogic
 
             var ranks = Enumerable.Range(1, 3).ToList();
 
-            manual.Add(AddVaseRule(StaticHelpers.Flip(), manual, ranks[0]));
-            manual.Add(AddVaseRule(StaticHelpers.Flip(), manual, ranks[1]));
-
-            if (StaticHelpers.Flip())
-                AddPlantRule(manual, StaticHelpers.Flip(), ranks[2]);
-            else
-                AddPaintingRule(manual, StaticHelpers.Flip(), ranks[2]);
+            AddVaseRule(manual, StaticHelpers.Flip(), ranks[0]);
+            AddVaseRule(manual, StaticHelpers.Flip(), ranks[1]);
+            AddRandomObjectRule(manual, StaticHelpers.Flip(), ranks[2]);
 
             return manual;
         }
+
+        // Like C2, includes cabinet items though
+        public static ManualParts ComplexityThree()
+        {
+            var manual = new ManualParts();
+
+            var ranks = Enumerable.Range(1, 3).ToList();
+
+            return manual;
+        }
+
+        private static void AddRandomObjectRule(ManualParts manual, bool liar, int rank, bool includeVase = false)
+        {
+            var optionsCount = includeVase ? 3 : 2;
+            var option = Enumerable.Range(1, optionsCount).ToList().PickRandom();
+            RandomRulesOptions[option](manual, liar, rank);
+        }
+
+        private delegate void RuleAdd(ManualParts manual, bool liar, int rank);
+
+        private static Dictionary<int, RuleAdd> RandomRulesOptions = new Dictionary<int, RuleAdd>()
+        {
+            { 1, AddPlantRule },
+            { 2, AddPaintingRule },
+            { 3, AddVaseRule }
+        };
 
         private static void AddPlantRule(ManualParts manual, bool liar, int rank)
         {
@@ -81,16 +90,16 @@ namespace Assets.Scripts.ScenarioLogic
             manual.RegulatedTypes.Add(ObjectType.am6painting);
         }
 
-        private static ManualPart AddVaseRule(bool liar, List<ManualPart> existingRules, int rank)
+        private static void AddVaseRule(ManualParts manual, bool liar, int rank)
         {
-            var noOverlap = existingRules
+            var noOverlap = manual
                 .Select(r => r.Classifier)
                 .Where(c => c is Shape)
                 .Cast<Shape>();
 
             var objectType = ObjectType.am6vase; // TODO add more
             var classifier = StaticHelpers.RandomEnumValue(noOverlap);
-            return ManualPart.ManualPartAboutShape(objectType, classifier, liar, rank);
+            manual.Add(ManualPart.ManualPartAboutShape(objectType, classifier, liar, rank));
         }
     }
 }

@@ -1777,9 +1777,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ab3f2e024740ca74687e533b5a19860e, type: 3}
   - {fileID: 8300000, guid: 91376cb01481256419885b91e4a69486, type: 3}
   - {fileID: 8300000, guid: e20c92ae3dc490a4496df60164fdcacd, type: 3}
-  - {fileID: 8300000, guid: f1b768a5aee7f96469846fd633589805, type: 3}
+  - {fileID: 8300000, guid: fd49f1a59cae38745a2414881cb40589, type: 3}
   - {fileID: 8300000, guid: 768b66a7d58031a408a5ded49862fd68, type: 3}
-  - {fileID: 8300000, guid: 95df7d1adfa2c0942a34109b18e06e38, type: 3}
+  - {fileID: 8300000, guid: c14a77795bc9e0b409cdb733b350923f, type: 3}
   - {fileID: 8300000, guid: 8b46e028253f5ce4da6654713973bf32, type: 3}
   - {fileID: 8300000, guid: d6363626650186d499779d7505904ea5, type: 3}
   - {fileID: 8300000, guid: f88ebbd3e1ffd2143b87b0b52f294787, type: 3}
@@ -1797,6 +1797,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5e8ae7fe1eb8d8b499cd8369cc6c1099, type: 3}
   - {fileID: 8300000, guid: b6518ceb7f71fc24aba1d076e1bbd895, type: 3}
   - {fileID: 8300000, guid: 66a10a3eef2b689499327e774ae5d014, type: 3}
+  TimeUpSfx: {fileID: 8300000, guid: 7497f659641287346a1d7cf63108826e, type: 3}
+  ArrestSuccessSfx: {fileID: 8300000, guid: d358678c84735594e85e4c32ab7e7e58, type: 3}
+  ArrestFailSfx: {fileID: 8300000, guid: 61b40251d4cbab44e958526799cf9aad, type: 3}
 --- !u!82 &535522219
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4792,7 +4795,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: db0e6071487de0d4b8379e28374ed9c8, type: 3}
-    m_FontSize: 36
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1

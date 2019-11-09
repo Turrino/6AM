@@ -2,9 +2,6 @@
 using Assets.Scripts.Resources;
 using BayeuxBundle;
 using BayeuxBundle.Models.Palettes;
-using BayeuxDemo2Assets;
-using System;
-using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,7 +12,6 @@ public class Master : MonoBehaviour {
 
     public static Master GM;
     public GameObject Player;
-    //public GameObject List;
     public GameObject CurrentParent;
     public Texture2D CanvasTexture;
     public ScenarioData ScenarioData = null;
@@ -38,17 +34,19 @@ public class Master : MonoBehaviour {
     public GameObject LocationInterface;
     public GameObject PlayerBadge;
     public ClockScript Clock;
+    public AudioSource AudioSrc;
 
     public int LevelCounter;
 
     public SfxScript Sfx;
-    public bool TooltipEnabled() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && !Contents.Open;
-    public bool DrawerTooltipEnabled() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && Contents.Open;
+    public bool LoadingScreenOn;
+
+    private bool AllMenuOverlaysOff() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && !LoadingScreenOn;
+    public bool TooltipEnabled() => AllMenuOverlaysOff() && !Contents.Open ;
+    public bool DrawerTooltipEnabled() => AllMenuOverlaysOff() && Contents.Open;
 
     private GameObject _parentRef;
     private BackgroundMusic _music;
-    private AudioSource _audioSrc;
-    private GameObject _listInstance;
     private int LevelChangeFlag = int.MaxValue;
 
     void Awake () {
@@ -62,7 +60,7 @@ public class Master : MonoBehaviour {
             LocalRandom.ConfigureRandom(new System.Random());
 
             _music = GetComponent<BackgroundMusic>();
-            _audioSrc = GetComponent<AudioSource>();
+            AudioSrc = GetComponent<AudioSource>();
 
             LevelCounter = 0;
 
@@ -146,8 +144,8 @@ public class Master : MonoBehaviour {
     public void ChangeScene(LocationInfo To, bool restart = false)
     {
         // Save the current playback time & stop music
-        CurrentLocation.MusicPlaybackTime = _audioSrc.time;
-        _audioSrc.Stop();
+        CurrentLocation.MusicPlaybackTime = AudioSrc.time;
+        AudioSrc.Stop();
 
         // Check where the player is coming from and save it
         var playerLoc = restart ? ScenarioData.Main.SpawnPoint
@@ -158,9 +156,9 @@ public class Master : MonoBehaviour {
         SceneInit();
 
         // Restart music        
-        _audioSrc.clip = _music.Clips[CurrentLocation.MusicClipIndex];
-        _audioSrc.time = CurrentLocation.MusicPlaybackTime;
-        _audioSrc.Play();
+        AudioSrc.clip = _music.Clips[CurrentLocation.MusicClipIndex];
+        AudioSrc.time = CurrentLocation.MusicPlaybackTime;
+        AudioSrc.Play();
 
         ToggleLocation(To.IsMap);
 
@@ -192,6 +190,13 @@ public class Master : MonoBehaviour {
                 GM.CurrentLocation.Person.Name
             );
 
+        AudioSrc.Stop();
+
+        if (success)
+            Sfx.Success();
+        else
+            Sfx.Fail();
+
         DialogueManager.CaptureMenu(function, arrestMsg);
     }
 
@@ -207,6 +212,8 @@ public class Master : MonoBehaviour {
 
     public void WDCTimeout()
     {
+        AudioSrc.Stop();
+        Sfx.TimeUp();
         DialogueManager.CaptureMenu(DiagButtonsFunction.ArrestFailed,
             TextResources.ArrestTimeout);
     }
@@ -243,13 +250,13 @@ public class Master : MonoBehaviour {
 
         SceneInit();
 
-        _audioSrc.clip = _music.Clips[0];
-        _audioSrc.Play();
+        AudioSrc.clip = _music.Clips[0];
+        AudioSrc.Play();
 
         ToggleLocation(true);
         DialogueManager.HideInfo();
 
-        LoadingScreen.SetActive(false);
+        SetLoadingScreenOff();
 
         PomaUI.GetComponentInChildren<Text>().text = GM.ScenarioData.PomaText;
 
@@ -270,13 +277,26 @@ public class Master : MonoBehaviour {
     {
         Destroy(PlayerInstance);
         ScenarioData = null;
-        _audioSrc.Stop();
+        AudioSrc.Stop();
+    }
+
+    private void SetLoadingScreen()
+    {
+        LoadingScreenOn = true;
+        Sfx.Stop();
+        DialogueManager.MenuScreen.SetActive(false);
+        LoadingScreen.SetActive(true);
+    }
+
+    private void SetLoadingScreenOff()
+    {
+        LoadingScreenOn = false;
+        LoadingScreen.SetActive(false);
     }
 
     private void CallNextLevel()
     {
-        DialogueManager.MenuScreen.SetActive(false);
-        LoadingScreen.SetActive(true);
+        SetLoadingScreen();
         LevelChangeFlag = Time.frameCount;
     }
 
@@ -323,7 +343,8 @@ public class Master : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(1))
         {
-            TriggerPoma();
+            if (AllMenuOverlaysOff())
+                TriggerPoma();
         }
 
         // TODO TODO TODO debug, remove
@@ -331,24 +352,5 @@ public class Master : MonoBehaviour {
         {
             NextLevel();
         }
-    }
-
-    void Wait(Func<bool> predicate) => StartCoroutine(WaitUntil(predicate));
-    void Wait(float seconds) => StartCoroutine(WaitForSeconds(seconds));
-    void Wait() => StartCoroutine(WaitForFixedUpdate());
-
-    IEnumerator WaitUntil(Func<bool> predicate)
-    {
-        yield return new WaitUntil(predicate);
-    }
-
-    IEnumerator WaitForSeconds(float sec)
-    {
-        yield return new WaitForSeconds(sec);
-    }
-
-    IEnumerator WaitForFixedUpdate()
-    {
-        yield return new WaitForFixedUpdate();
     }
 }

@@ -17,7 +17,7 @@ public class PropScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (HasContents)
+        if (HasContents && Master.GM.TooltipEnabled())
         {
             Master.GM.Contents.ShowContents(Contents);
         }

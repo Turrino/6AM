@@ -1,0 +1,1060 @@
+{
+  "BayeuxDemo2Assets.TypeResources.am6hat.1.png": {
+    "MainType": "am6hat",
+    "MainAnchor": {
+      "X": 49,
+      "Y": 16
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6hat.2.png": {
+    "MainType": "am6hat",
+    "MainAnchor": {
+      "X": 50,
+      "Y": 15
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6hat.3.png": {
+    "MainType": "am6hat",
+    "MainAnchor": {
+      "X": 49,
+      "Y": 23
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6hat.4.png": {
+    "MainType": "am6hat",
+    "MainAnchor": {
+      "X": 47,
+      "Y": 17
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6hat.5.png": {
+    "MainType": "am6hat",
+    "MainAnchor": {
+      "X": 48,
+      "Y": 17
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6hat.6.png": {
+    "MainType": "am6hat",
+    "MainAnchor": {
+      "X": 50,
+      "Y": 14
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6hat.7.png": {
+    "MainType": "am6hat",
+    "MainAnchor": {
+      "X": 48,
+      "Y": 17
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinetdoor.1.png": {
+    "MainType": "am6cabinetdoor",
+    "MainAnchor": {
+      "X": 20,
+      "Y": 20
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinetdoor.2.png": {
+    "MainType": "am6cabinetdoor",
+    "MainAnchor": {
+      "X": 20,
+      "Y": 20
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinetdoor.3.png": {
+    "MainType": "am6cabinetdoor",
+    "MainAnchor": {
+      "X": 20,
+      "Y": 20
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinetdoor.4.png": {
+    "MainType": "am6cabinetdoor",
+    "MainAnchor": {
+      "X": 20,
+      "Y": 20
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinetdoor.5.png": {
+    "MainType": "am6cabinetdoor",
+    "MainAnchor": {
+      "X": 20,
+      "Y": 20
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinetdoor.6.png": {
+    "MainType": "am6cabinetdoor",
+    "MainAnchor": {
+      "X": 20,
+      "Y": 20
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6deco.1.png": {
+    "MainType": "am6deco",
+    "MainAnchor": {
+      "X": 52,
+      "Y": 41
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6deco.2.png": {
+    "MainType": "am6deco",
+    "MainAnchor": {
+      "X": 49,
+      "Y": 46
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6deco.4.png": {
+    "MainType": "am6deco",
+    "MainAnchor": {
+      "X": 77,
+      "Y": 77
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6deco.5.png": {
+    "MainType": "am6deco",
+    "MainAnchor": {
+      "X": 52,
+      "Y": 45
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6deco.6.png": {
+    "MainType": "am6deco",
+    "MainAnchor": {
+      "X": 50,
+      "Y": 44
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6deco.7.png": {
+    "MainType": "am6deco",
+    "MainAnchor": {
+      "X": 52,
+      "Y": 48
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6deco.8.png": {
+    "MainType": "am6deco",
+    "MainAnchor": {
+      "X": 50,
+      "Y": 45
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6face.1.png": {
+    "MainType": "am6face",
+    "MainAnchor": {
+      "X": 25,
+      "Y": 28
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6face.2.png": {
+    "MainType": "am6face",
+    "MainAnchor": {
+      "X": 23,
+      "Y": 25
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6face.3.png": {
+    "MainType": "am6face",
+    "MainAnchor": {
+      "X": 26,
+      "Y": 28
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6face.4.png": {
+    "MainType": "am6face",
+    "MainAnchor": {
+      "X": 24,
+      "Y": 26
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6face.5.png": {
+    "MainType": "am6face",
+    "MainAnchor": {
+      "X": 24,
+      "Y": 30
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6face.6.png": {
+    "MainType": "am6face",
+    "MainAnchor": {
+      "X": 27,
+      "Y": 27
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.1.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "It's a book about 'books'.",
+    "types": [ "book" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.17.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A piece of 'art'.",
+    "types": [ "piece of art" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.2.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A book about burds.",
+    "types": [ "book" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.3.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A book about words.",
+    "types": [ "book" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.4.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A speckled egg.",
+    "types": [ "egg" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.5.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A fat egg",
+    "types": [ "egg" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.6.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "Appears to be a pear.",
+    "types": [ "pear" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.7.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A simple hair brush.",
+    "types": [ "hairbrush" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.8.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "Oversized lipstick.",
+    "types": [ "lipstick" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.9.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A 8 and a half ball.",
+    "types": [ "ball" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.10.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A rare potato.",
+    "types": [ "potato" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.11.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "The famous double-spoon.",
+    "types": [ "spoon" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.12.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A reproduction of the planets, astronomy and stuff.",
+    "types": [ "decorative" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.13.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A piece of 'art'.",
+    "types": [ "piece of art" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.14.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A piece of 'art'.",
+    "types": [ "piece of art" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.15.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A clock.",
+    "types": [ "clock" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6item.16.png": {
+    "MainType": "am6item",
+    "MainAnchor": {
+      "X": 67,
+      "Y": 68
+    },
+    "Overlay": null,
+    "description": "A toy pyramid.",
+    "types": [ "decorative" ]
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.1.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 57,
+      "Y": 68
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.10.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 43,
+      "Y": 52
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.11.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 55,
+      "Y": 49
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.12.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 50,
+      "Y": 43
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.13.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 47,
+      "Y": 43
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.2.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 62,
+      "Y": 74
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.3.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 62,
+      "Y": 70
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.4.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 60,
+      "Y": 68
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.5.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 56,
+      "Y": 68
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.6.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 42,
+      "Y": 50
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.7.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 39,
+      "Y": 46
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.8.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 42,
+      "Y": 52
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6painting.9.png": {
+    "MainType": "am6painting",
+    "MainAnchor": {
+      "X": 45,
+      "Y": 52
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6peg.1.png": {
+    "MainType": "am6peg",
+    "MainAnchor": {
+      "X": 14,
+      "Y": 19
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6peg.2.png": {
+    "MainType": "am6peg",
+    "MainAnchor": {
+      "X": 13,
+      "Y": 19
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6peg.3.png": {
+    "MainType": "am6peg",
+    "MainAnchor": {
+      "X": 14,
+      "Y": 22
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6peg.4.png": {
+    "MainType": "am6peg",
+    "MainAnchor": {
+      "X": 14,
+      "Y": 20
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6peg.5.png": {
+    "MainType": "am6peg",
+    "MainAnchor": {
+      "X": 14,
+      "Y": 23
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6peg.6.png": {
+    "MainType": "am6peg",
+    "MainAnchor": {
+      "X": 15,
+      "Y": 21
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6plant.1.png": {
+    "MainType": "am6plant",
+    "MainAnchor": {
+      "X": 47,
+      "Y": 47
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6plant.2.png": {
+    "MainType": "am6plant",
+    "MainAnchor": {
+      "X": 50,
+      "Y": 47
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6plant.3.png": {
+    "MainType": "am6plant",
+    "MainAnchor": {
+      "X": 47,
+      "Y": 47
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6plant.4.png": {
+    "MainType": "am6plant",
+    "MainAnchor": {
+      "X": 49,
+      "Y": 61
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6plant.5.png": {
+    "MainType": "am6plant",
+    "MainAnchor": {
+      "X": 51,
+      "Y": 49
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6pot.1.png": {
+    "MainType": "am6pot",
+    "MainAnchor": {
+      "X": 74,
+      "Y": 46
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6pot.2.png": {
+    "MainType": "am6pot",
+    "MainAnchor": {
+      "X": 75,
+      "Y": 47
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6pot.3.png": {
+    "MainType": "am6pot",
+    "MainAnchor": {
+      "X": 75,
+      "Y": 48
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6pot.4.png": {
+    "MainType": "am6pot",
+    "MainAnchor": {
+      "X": 74,
+      "Y": 36
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6tail.1.png": {
+    "MainType": "am6tail",
+    "MainAnchor": {
+      "X": 16,
+      "Y": 26
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6tail.2.png": {
+    "MainType": "am6tail",
+    "MainAnchor": {
+      "X": 33,
+      "Y": 22
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6tail.3.png": {
+    "MainType": "am6tail",
+    "MainAnchor": {
+      "X": 28,
+      "Y": 26
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6tail.4.png": {
+    "MainType": "am6tail",
+    "MainAnchor": {
+      "X": 15,
+      "Y": 21
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6tail.5.png": {
+    "MainType": "am6tail",
+    "MainAnchor": {
+      "X": 24,
+      "Y": 18
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6tail.6.png": {
+    "MainType": "am6tail",
+    "MainAnchor": {
+      "X": 27,
+      "Y": 23
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6trinket.1.png": {
+    "MainType": "am6trinket",
+    "MainAnchor": {
+      "X": 14,
+      "Y": 10
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6trinket.2.png": {
+    "MainType": "am6trinket",
+    "MainAnchor": {
+      "X": 14,
+      "Y": 11
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6trinket.3.png": {
+    "MainType": "am6trinket",
+    "MainAnchor": {
+      "X": 14,
+      "Y": 7
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6trinket.4.png": {
+    "MainType": "am6trinket",
+    "MainAnchor": {
+      "X": 17,
+      "Y": 7
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6trinket.5.png": {
+    "MainType": "am6trinket",
+    "MainAnchor": {
+      "X": 16,
+      "Y": 8
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6trinket.6.png": {
+    "MainType": "am6trinket",
+    "MainAnchor": {
+      "X": 15,
+      "Y": 6
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6trinket.7.png": {
+    "MainType": "am6trinket",
+    "MainAnchor": {
+      "X": 15,
+      "Y": 9
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6vase.O1S1.png": {
+    "MainType": "am6vase",
+    "MainAnchor": {
+      "X": 81,
+      "Y": 64
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6vase.O1S2.png": {
+    "MainType": "am6vase",
+    "MainAnchor": {
+      "X": 75,
+      "Y": 84
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6vase.O1S3.png": {
+    "MainType": "am6vase",
+    "MainAnchor": {
+      "X": 79,
+      "Y": 76
+    },
+    "Overlay": null
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinet.1.png": {
+    "MainType": "am6cabinet",
+    "MainAnchor": {
+      "X": 75,
+      "Y": 75
+    },
+    "Overlay": {
+      "SourceType": "am6cabinet",
+      "Points": {
+        "#FF00EAFF": [
+          {
+            "X": 70,
+            "Y": 103
+          }
+        ],
+        "#FF00FF26": [
+          {
+            "X": 86,
+            "Y": 70
+          }
+        ],
+        "#FFFF00E5": [
+          {
+            "X": 98,
+            "Y": 64
+          },
+          {
+            "X": 51,
+            "Y": 60
+          },
+          {
+            "X": 78,
+            "Y": 51
+          }
+        ]
+      },
+      "Width": 150,
+      "Height": 150
+    }
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinet.2.png": {
+    "MainType": "am6cabinet",
+    "MainAnchor": {
+      "X": 75,
+      "Y": 75
+    },
+    "Overlay": {
+      "SourceType": "am6cabinet",
+      "Points": {
+        "#FF00EAFF": [
+          {
+            "X": 78,
+            "Y": 101
+          }
+        ],
+        "#FF00FF26": [
+          {
+            "X": 78,
+            "Y": 70
+          }
+        ],
+        "#FFFF00E5": [
+          {
+            "X": 101,
+            "Y": 51
+          },
+          {
+            "X": 62,
+            "Y": 49
+          }
+        ]
+      },
+      "Width": 150,
+      "Height": 150
+    }
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinet.3.png": {
+    "MainType": "am6cabinet",
+    "MainAnchor": {
+      "X": 75,
+      "Y": 75
+    },
+    "Overlay": {
+      "SourceType": "am6cabinet",
+      "Points": {
+        "#FF00EAFF": [
+          {
+            "X": 82,
+            "Y": 102
+          }
+        ],
+        "#FF00FF26": [
+          {
+            "X": 91,
+            "Y": 81
+          }
+        ],
+        "#FFFF00E5": [
+          {
+            "X": 106,
+            "Y": 66
+          },
+          {
+            "X": 58,
+            "Y": 61
+          },
+          {
+            "X": 87,
+            "Y": 51
+          }
+        ]
+      },
+      "Width": 150,
+      "Height": 150
+    }
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinet.4.png": {
+    "MainType": "am6cabinet",
+    "MainAnchor": {
+      "X": 75,
+      "Y": 75
+    },
+    "Overlay": {
+      "SourceType": "am6cabinet",
+      "Points": {
+        "#FF00EAFF": [
+          {
+            "X": 82,
+            "Y": 86
+          }
+        ],
+        "#FF00FF26": [
+          {
+            "X": 80,
+            "Y": 64
+          }
+        ],
+        "#FFFF00E5": [
+          {
+            "X": 52,
+            "Y": 53
+          },
+          {
+            "X": 63,
+            "Y": 49
+          },
+          {
+            "X": 82,
+            "Y": 49
+          },
+          {
+            "X": 93,
+            "Y": 49
+          }
+        ]
+      },
+      "Width": 150,
+      "Height": 150
+    }
+  },
+  "BayeuxDemo2Assets.TypeResources.am6cabinet.5.png": {
+    "MainType": "am6cabinet",
+    "MainAnchor": {
+      "X": 75,
+      "Y": 75
+    },
+    "Overlay": {
+      "SourceType": "am6cabinet",
+      "Points": {
+        "#FF00EAFF": [
+          {
+            "X": 81,
+            "Y": 93
+          }
+        ],
+        "#FF00FF26": [
+          {
+            "X": 86,
+            "Y": 73
+          }
+        ],
+        "#FFFF00E5": [
+          {
+            "X": 49,
+            "Y": 70
+          },
+          {
+            "X": 102,
+            "Y": 58
+          },
+          {
+            "X": 67,
+            "Y": 55
+          }
+        ]
+      },
+      "Width": 150,
+      "Height": 150
+    }
+  },
+  "BayeuxDemo2Assets.TypeResources.am6body.1.png": {
+    "MainType": "am6body",
+    "MainAnchor": {
+      "X": 65,
+      "Y": 70
+    },
+    "Overlay": {
+      "SourceType": "am6body",
+      "Points": {
+        "#FF00FF26": [
+          {
+            "X": 54,
+            "Y": 106
+          }
+        ],
+        "#FFFF00E5": [
+          {
+            "X": 39,
+            "Y": 91
+          }
+        ],
+        "#FF00EAFF": [
+          {
+            "X": 74,
+            "Y": 70
+          }
+        ]
+      },
+      "Width": 130,
+      "Height": 140
+    }
+  },
+  "BayeuxDemo2Assets.TypeResources.am6body.4.png": {
+    "MainType": "am6body",
+    "MainAnchor": {
+      "X": 65,
+      "Y": 70
+    },
+    "Overlay": {
+      "SourceType": "am6body",
+      "Points": {
+        "#FF00FF26": [
+          {
+            "X": 63,
+            "Y": 97
+          }
+        ],
+        "#FFFF00E5": [
+          {
+            "X": 55,
+            "Y": 88
+          }
+        ],
+        "#FF00EAFF": [
+          {
+            "X": 75,
+            "Y": 56
+          }
+        ]
+      },
+      "Width": 130,
+      "Height": 140
+    }
+  },
+  "BayeuxDemo2Assets.TypeResources.am6body.5.png": {
+    "MainType": "am6body",
+    "MainAnchor": {
+      "X": 65,
+      "Y": 70
+    },
+    "Overlay": {
+      "SourceType": "am6body",
+      "Points": {
+        "#FF00FF26": [
+          {
+            "X": 54,
+            "Y": 97
+          }
+        ],
+        "#FFFF00E5": [
+          {
+            "X": 50,
+            "Y": 81
+          }
+        ],
+        "#FF00EAFF": [
+          {
+            "X": 80,
+            "Y": 52
+          }
+        ]
+      },
+      "Width": 130,
+      "Height": 140
+    }
+  },
+  "BayeuxDemo2Assets.TypeResources.am6body.6.png": {
+    "MainType": "am6body",
+    "MainAnchor": {
+      "X": 65,
+      "Y": 70
+    },
+    "Overlay": {
+      "SourceType": "am6body",
+      "Points": {
+        "#FF00FF26": [
+          {
+            "X": 53,
+            "Y": 105
+          }
+        ],
+        "#FFFF00E5": [
+          {
+            "X": 48,
+            "Y": 96
+          }
+        ],
+        "#FF00EAFF": [
+          {
+            "X": 75,
+            "Y": 60
+          }
+        ]
+      },
+      "Width": 130,
+      "Height": 140
+    }
+  }
+}

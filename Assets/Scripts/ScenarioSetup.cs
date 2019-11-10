@@ -10,13 +10,25 @@ using Assets.Scripts.Bayeux;
 using BayeuxBundle;
 using BayeuxDemo2Assets;
 using Assets.Scripts.Generators;
+using Newtonsoft.Json;
 
 public class ScenarioSetup
 {
     public ScenarioSetup(int noOfMusicClips)
     {
+        TextAsset jsonObj = Resources.Load("resources_fwY") as TextAsset;
+        //var test1 = @"{""MainType"":""am6vase""}";
+        //var test2 = @"[{""MainType"":""am6vase"",""MainAnchor"":{""X"":75,""Y"":84}}, {""MainType"":""am6vase"",""MainAnchor"":{""X"":75,""Y"":84}}]";
+        //var pt = JsonConvert.DeserializeObject<Dictionary<string, string>>(test2);
+        //Debug.Log(pt.Keys.FirstOrDefault());
+        //Debug.Log(pt.Values.FirstOrDefault());
+        //var parsed = JsonConvert.DeserializeObject<Dictionary<string, ParsedMetaPoco>>(jsonObj.text);
+        //var test = JsonUtility.FromJson<List<ParsedMeta>>(test2);
+        var parsed = TinyJson.FromJson<Dictionary<string, ParsedMeta>>(jsonObj.text);
+        //var parsed = JsonUtility.FromJson<Dictionary<string, ParsedMetaPoco>>(jsonObj.text);
+        Debug.Log(parsed.Values.FirstOrDefault(v => v.MainType == "am6body").Overlay.Points.FirstOrDefault().Key);
         TextureTools = new TextureTools(OverlayRef.Am6RefDictWHash);
-        Assembler = new Assembler<Texture2D>(TextureTools, Demo2ResourcesAssembly.BundleAssembly, true);
+        Assembler = new Assembler<Texture2D>(TextureTools, Demo2ResourcesAssembly.BundleAssembly, null);
         TypesInfo.CabinetItemTypes = Assembler.GetAllSubtypes(ObjectType.am6item);
         // Skip 0, that's for the map        
         AvailableMusicClips = Enumerable.Range(1, noOfMusicClips - 1).ToList();

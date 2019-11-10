@@ -3,7 +3,6 @@ using Assets.Scripts.Generators;
 using Assets.Scripts.Resources;
 using BayeuxBundle;
 using BayeuxBundle.Models;
-using BayeuxBundle.Models.Instructions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

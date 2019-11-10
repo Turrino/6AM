@@ -16,7 +16,7 @@ public class ScenarioSetup
     public ScenarioSetup(int noOfMusicClips)
     {
         TextureTools = new TextureTools(OverlayRef.Am6RefDictWHash);
-        Assembler = new Assembler<Texture2D>(TextureTools, Demo2ResourcesAssembly.BundleAssembly);
+        Assembler = new Assembler<Texture2D>(TextureTools, Demo2ResourcesAssembly.BundleAssembly, true);
         TypesInfo.CabinetItemTypes = Assembler.GetAllSubtypes(ObjectType.am6item);
         // Skip 0, that's for the map        
         AvailableMusicClips = Enumerable.Range(1, noOfMusicClips - 1).ToList();
@@ -185,21 +185,5 @@ public class ScenarioSetup
     private AssemblerResource<Texture2D> CreateCharacterResource(Dictionary<PixelInfo, PixelInfo> palette)
     {
         return Assembler.Assemble(Demo2Instructions.CharacterInstructions(false, palette));
-    }
-
-    private static Vector2 RandomPoint(float XLimit, float YLimit)
-    {
-        return new Vector2(Random.Range(-XLimit, XLimit), Random.Range(-YLimit, YLimit));
-    }
-
-    private static List<bool> FlaggedList(int flagCount, int total)
-    {
-        var list = new List<bool>();
-        for (int i = 0; i < total; i++)
-        {
-            list.Add(flagCount - 1 >= i);
-        }
-        list.Shuffle();
-        return list;
     }
 }

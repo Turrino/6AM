@@ -29,13 +29,7 @@ namespace Assets.Scripts.Bayeux
         public PixelInfo GetPixel(int x, int y)
         {
             Color32 color = Image.GetPixel(x, y);
-            return new PixelInfo()
-            {
-                IsTransparent = color.a == 0,
-                R = color.r,
-                G = color.g,
-                B = color.b
-            };
+            return new PixelInfo(color.r, color.g, color.b, color.a);
         }
 
         public void SetPixel(int x, int y, PixelInfo color)

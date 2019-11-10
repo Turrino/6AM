@@ -57,12 +57,7 @@ namespace Assets.Scripts.Bayeux
                 Debug.Log($"Couldn't parse color string! {colorString}");
             }
             Color32 c32 = color;
-            return new PixelInfo()
-            {
-                R = c32.r,
-                G = c32.g,
-                B = c32.b
-            };
+            return new PixelInfo(c32.r, c32.g, c32.b, 255);
         }
 
         public Texture2D FlipTexture(Texture2D original)

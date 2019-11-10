@@ -17,7 +17,7 @@ public class Showroom : MonoBehaviour
     public Camera Camera;
 
 
-    private Assembler<Texture2D> _assembler;
+    //private Assembler<Texture2D> _assembler;
     private Stopwatch _sw;
     //private long LastChange = 0;
     private Instructions instr;

@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Bayeux;
 using Assets.Scripts.ScenarioLogic;
 using BayeuxBundle;
+using BayeuxBundle.ImageTools;
 using BayeuxBundle.Models;
 using System;
 using System.Collections.Generic;
@@ -195,7 +196,9 @@ namespace Assets.Scripts.Resources
             var image = resource.Data.Image;
             var imgSize = image.width > image.height ? image.width : image.height;
             var circleSize = (int)(imgSize / 1.7);
-            var color = bgColor;
+            //var color = bgColor;
+            var color = resource.Colors.Aggregate((a, b) => a.Value > b.Value ? a : b).Key;
+            color = color.GetContrast(true);
             var circle = tools.PixelPerfectCircle(circleSize, color);
             circle.Image.Apply();
 

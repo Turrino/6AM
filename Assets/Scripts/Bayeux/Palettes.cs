@@ -35,6 +35,7 @@ namespace Assets.Scripts.Bayeux
 
         public static Dictionary<string, string> Replacement0String = new Dictionary<string, string>()
         {
+            { "4C6049", "3AC8C7" },
             { "460C23", "312832" },
             { "5F4F5F", "38383E" },
             { "809B9F", "446b46" },

@@ -10,39 +10,18 @@ using Assets.Scripts.Bayeux;
 using BayeuxBundle;
 using BayeuxDemo2Assets;
 using Assets.Scripts.Generators;
-using Newtonsoft.Json;
-
 public class ScenarioSetup
 {
     public ScenarioSetup(int noOfMusicClips)
     {
-        TextAsset jsonObj = Resources.Load("resources_fwY") as TextAsset;
-        //var test1 = @"{""MainType"":""am6vase""}";
-        //var test2 = @"[{""MainType"":""am6vase"",""MainAnchor"":{""X"":75,""Y"":84}}, {""MainType"":""am6vase"",""MainAnchor"":{""X"":75,""Y"":84}}]";
-        //var pt = JsonConvert.DeserializeObject<Dictionary<string, string>>(test2);
-        //Debug.Log(pt.Keys.FirstOrDefault());
-        //Debug.Log(pt.Values.FirstOrDefault());
-        //var parsed = JsonConvert.DeserializeObject<Dictionary<string, ParsedMetaPoco>>(jsonObj.text);
-        //var test = JsonUtility.FromJson<List<ParsedMeta>>(test2);
-        var parsed = TinyJson.FromJson<Dictionary<string, ParsedMeta>>(jsonObj.text);
-        //var parsed = JsonUtility.FromJson<Dictionary<string, ParsedMetaPoco>>(jsonObj.text);
-        Debug.Log(parsed.Values.FirstOrDefault(v => v.MainType == "am6body").Overlay.Points.FirstOrDefault().Key);
+        var metaData = DataReader.ReadMeta("resources_fwY");
         TextureTools = new TextureTools(OverlayRef.Am6RefDictWHash);
-        Assembler = new Assembler<Texture2D>(TextureTools, Demo2ResourcesAssembly.BundleAssembly, null);
+        Assembler = new Assembler<Texture2D>(TextureTools, Demo2ResourcesAssembly.BundleAssembly, metaData);
         TypesInfo.CabinetItemTypes = Assembler.GetAllSubtypes(ObjectType.am6item);
         // Skip 0, that's for the map        
         AvailableMusicClips = Enumerable.Range(1, noOfMusicClips - 1).ToList();
         // This is valid for demo2 only. If re-using this code this probably will change.
         DefaultLocationAnchor = new Vector2(-2.7f, 2.3f);
-        //Characteristics = new Characteristics();
-
-        //// TODO this will depend on the level!
-        //// Do we need a new ScenarioLogic class every time the level changes?
-        //// double check what's happening wrt used up resources from the assembler
-        //LocationsCount = 3;
-        //// Maybe this can vary in levels later on..
-        //ManualLinesCount = LocationsCount - 1;
-        //NumberOfLiars = Random.Range(1, LocationsCount + 1);
     }
 
     public void OnNewLevel(LevelInfo level)

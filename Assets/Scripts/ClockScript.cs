@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ClockScript : MonoBehaviour
 {
     public Text countdown;
-    private int _secondsLeft;
+    private int _secondsLeft = 500;
 
     public void StartTimer(int seconds)
     {

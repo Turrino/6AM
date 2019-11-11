@@ -42,8 +42,21 @@ public static class TextResources
         ", for ever and a day", " and there's nothing you can do about it"
     };
 
+    public static string[] IDontKnow = {
+        "No idea",
+        "Don't know what that is, and I don't want to know either",
+        "No clue",
+        "Don't know what that is, but I don't like it",
+        "Not in the database. Thankfully.",
+        "Can't find it",
+        "It's a big nope"
+    };
+
     public static string DefinitionToText(ResourceDefinition definition)
     {
+        if (definition.ObjectType == ObjectType.am6thing)
+            return IDontKnow.PickRandom();
+
         var baseDesc = "It's a ";
         var hasNoise = false;
 

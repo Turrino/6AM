@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -124,7 +125,10 @@ public class DialogueManager : MonoBehaviour {
     public void GameEnd()
     {
         MenuBgImage.color = SuccessClr;
-        MenuText.text = "out of levels, work in progress :(";
+        MenuText.text = $"You did it!!! The world is now a safer place for cookies." +
+            $"{Environment.NewLine}This is as far the 6AM Alpha version goes." +
+            $"{Environment.NewLine}For updates, follow:" +
+            $"{Environment.NewLine}https://lizards-of-pluto.itch.io/6am";
         EnableMenuScreen();
         CaptureFailedFunction(false);
         MenuButton2Text.text = "Quit";

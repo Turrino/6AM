@@ -41,7 +41,10 @@ namespace Assets.Scripts.Resources
         //TODO update
         public static List<string> PersonNames = new List<string>()
         {
-            "Ribbity", "Rabbity", "Bob", "'Not Mathilda'", "Poppy"
+            "Ribbity", "Rabbity", "Bob", "'Not Mathilda'", "Poppy", "Yogurta",
+            "Yolanda", "Polentina", "Giuseppo", "Bobbby", "Frufru", "Notbob",
+            "Sbestos", "Pasteis", "Mapo", "Luotuo", "Piaochong", "FriFri",
+            "Chapatty", "Quorma"
         };
 
         /// <summary>

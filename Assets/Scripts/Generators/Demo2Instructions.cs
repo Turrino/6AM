@@ -34,6 +34,12 @@ namespace Assets.Scripts.Generators
                 {
                     new InstructionLayer(ObjectType.am6painting),
                 };
+            
+        public static Instructions ThingInstructions(Dictionary<PixelInfo, PixelInfo> palette)
+            => new Instructions(ObjectType.am6thing, true, SkeletonType.None, palette)
+                {
+                    new InstructionLayer(ObjectType.am6thing),
+                };
 
         public static Instructions CharacterInstructions(bool usePartsOnce, Dictionary<PixelInfo, PixelInfo> palette) =>
             new Instructions(ObjectType.am6body, usePartsOnce, SkeletonType.Overlay, palette)

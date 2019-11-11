@@ -12,6 +12,7 @@ public class Master : MonoBehaviour {
 
     public static Master GM;
     public GameObject Player;
+    public GameObject SplashScreen;
     public GameObject CurrentParent;
     public Texture2D CanvasTexture;
     public ScenarioData ScenarioData = null;
@@ -48,6 +49,7 @@ public class Master : MonoBehaviour {
     private GameObject _parentRef;
     private BackgroundMusic _music;
     private int LevelChangeFlag = int.MaxValue;
+    private bool _justStarted = true;
 
     void Awake () {
         //Debug.Log("awake GM");
@@ -70,15 +72,27 @@ public class Master : MonoBehaviour {
 
             ConfigureColors();
 
-            FirstTimeSetup();        
-
-            Save();
+            LevelSetup();            
         }            
         else
         {
             Destroy(gameObject);
             return;
         }
+    }
+
+    private void ActivateSplashScreen()
+    {
+        SplashScreen.SetActive(true);
+    }
+
+    public void RemoveSplashScreen()
+    {
+        SplashScreen.SetActive(false);
+        _justStarted = false;
+        AudioSrc.clip = _music.Clips[0];
+        AudioSrc.Play();
+        Clock.StartTimer(Levels.LevelList[LevelCounter].SecondsAvailable);
     }
 
     public static void ConfigureColors()
@@ -232,9 +246,11 @@ public class Master : MonoBehaviour {
         LocationInterface.SetActive(!isMap);
     }
 
-    //Called once for every game, also when the game is restarted
-    private void FirstTimeSetup()
+    private void LevelSetup()
     {
+        if (_justStarted)
+            ActivateSplashScreen();
+
         //Debug.Log("init GM");
         var scenarioGenerator = new ScenarioSetup(_music.Clips.Length);
         var level = Levels.LevelList[LevelCounter];
@@ -250,17 +266,18 @@ public class Master : MonoBehaviour {
 
         SceneInit();
 
-        AudioSrc.clip = _music.Clips[0];
-        AudioSrc.Play();
-
         ToggleLocation(true);
         DialogueManager.HideInfo();
 
+        if (!_justStarted)
+        {
+            AudioSrc.clip = _music.Clips[0];
+            AudioSrc.Play();
+            Clock.StartTimer(level.SecondsAvailable);
+        }
+
         SetLoadingScreenOff();
-
         PomaUI.GetComponentInChildren<Text>().text = GM.ScenarioData.PomaText;
-
-        Clock.StartTimer(level.SecondsAvailable);
     }
 
     private void SceneInit()
@@ -303,7 +320,7 @@ public class Master : MonoBehaviour {
     private void LoadLevel()
     {
         TearDown();
-        FirstTimeSetup();
+        LevelSetup();
         ChangeScene(ScenarioData.Main, true);
     }
 
@@ -318,27 +335,6 @@ public class Master : MonoBehaviour {
         }
     }
 
-    public void Save()
-    {
-        //TODO if we need save files
-        //using (var file = File.Create(DataPath))
-        //{
-        //    new BinaryFormatter().Serialize(file, Scenario.ScenarioData);
-        //}
-    }
-
-    public void Load()
-    {
-        //TODO if we need save files
-        //if (File.Exists(DataPath))
-        //{
-        //    using (var file = File.Open(DataPath, FileMode.Open))
-        //    {
-        //        var data = (ScenarioData)new BinaryFormatter().Deserialize(file);
-        //    }
-        //}
-    }
-
     private void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(1))
@@ -347,10 +343,14 @@ public class Master : MonoBehaviour {
                 TriggerPoma();
         }
 
-        // TODO TODO TODO debug, remove
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (SplashScreen.activeSelf && Input.GetKeyUp(KeyCode.Space))
         {
-            NextLevel();
+            RemoveSplashScreen();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 }

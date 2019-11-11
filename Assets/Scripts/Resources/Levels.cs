@@ -20,7 +20,7 @@ namespace Assets.Scripts.Resources
 
         public static LevelInfo Level1 = new LevelInfo()
         {
-            MapName = "pond3x",
+            MapName = "plant3x",
             ManualLinesCount = 3,
             LocationsCount = 3,
             SecondsAvailable = 109,
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Resources
 
         public static LevelInfo Level2 = new LevelInfo()
         {
-            MapName = "pond3x", // TODO change!
+            MapName = "pond3x",
             ManualLinesCount = 3,
             LocationsCount = 3,
             SecondsAvailable = 109,
@@ -47,7 +47,7 @@ namespace Assets.Scripts.Resources
 
         public static LevelInfo Level4 = new LevelInfo()
         {
-            MapName = "flower4x",
+            MapName = "plant4x",
             ManualLinesCount = 3,
             LocationsCount = 4,
             SecondsAvailable = 199,
@@ -56,7 +56,7 @@ namespace Assets.Scripts.Resources
 
         public static LevelInfo Level5 = new LevelInfo()
         {
-            MapName = "flower4x", // TODO change!
+            MapName = "flower4x",
             ManualLinesCount = 3,
             LocationsCount = 4,
             SecondsAvailable = 199,

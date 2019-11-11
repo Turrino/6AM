@@ -136,9 +136,9 @@ namespace Assets.Scripts.ScenarioLogic
                 var doesNotHave = manual.AvailableTypes.Except(currentTypes).ToList();
                 foreach (var item in doesNotHave)
                 {
-                    bool canBeAdded = StaticHelpers.Flip(25);
+                    bool canBeAdded = StaticHelpers.Flip(25) && props.Count < 4;
                     // Find out if it is regulated. It may be admissible if it is, but a relevant higher ranking rule exists in that location
-                    if (manual.RegulatedTypes.Contains(item))
+                    if (canBeAdded && manual.RegulatedTypes.Contains(item))
                     {
                         var regulatedRanks = manual.Where(r => r.ObjectType == item);
                         var regulatedRank = regulatedRanks.Any() ? regulatedRanks.Max(r => r.Rank) : 0;
@@ -207,6 +207,12 @@ namespace Assets.Scripts.ScenarioLogic
                     var paint = assembler.Assemble(
                             Demo2Instructions.PaintingInstructions(palette));
                     return paint.ToProp(tools, StaticHelpers.CentralPivot, PixelInfo.White, scale);
+                }
+                if (objectType == ObjectType.am6thing)
+                {
+                    var thing = assembler.Assemble(
+                            Demo2Instructions.ThingInstructions(palette));
+                    return thing.ToProp(tools, StaticHelpers.BottomCenterPivot, PixelInfo.White, scale);
                 }
                 throw new InvalidOperationException("missing prop!GetProp()");
             }

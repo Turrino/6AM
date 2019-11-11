@@ -14,7 +14,7 @@ namespace Assets.Scripts.Bayeux
         {
             var tex = new Texture2D(width, height)
             {
-                filterMode = FilterMode.Point
+                filterMode = FilterMode.Point,                
             };
             var alpha = new Color(0, 0, 0, 0);
             for (var y = 0; y < tex.height; y++)

@@ -23,7 +23,8 @@ namespace Assets.Scripts.ScenarioLogic
         public List<string> AvailableCabItems;
         public List<ObjectType> RegulatedTypes;
         public List<ObjectType> AvailableTypes;
-        public static ObjectType[] DefaultTypes = new[] { ObjectType.am6plant, ObjectType.am6vase, ObjectType.am6painting };
+        public static ObjectType[] DefaultTypes = new[] { ObjectType.am6plant, ObjectType.am6vase,
+            ObjectType.am6painting, ObjectType.am6thing };
 
         public new void Add(ManualPart item)
         {

@@ -42,6 +42,8 @@ public class Master : MonoBehaviour {
     public SfxScript Sfx;
     public bool LoadingScreenOn;
 
+    public bool RenderLowResAssets;
+
     private bool AllMenuOverlaysOff() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && !LoadingScreenOn;
     public bool TooltipEnabled() => AllMenuOverlaysOff() && !Contents.Open ;
     public bool DrawerTooltipEnabled() => AllMenuOverlaysOff() && Contents.Open;
@@ -52,13 +54,18 @@ public class Master : MonoBehaviour {
     private bool _justStarted = true;
 
     void Awake () {
-        //Debug.Log("awake GM");
-        //DataPath = Application.persistentDataPath + "/game.dat";
-
         if (GM == null)
         {
             GM = this;
             DontDestroyOnLoad(gameObject);
+
+            // If the screen is running below 1920*1080, scale procedural assets
+            if (Screen.currentResolution.width < 1920)
+            {
+                RenderLowResAssets = true;
+                Screen.SetResolution(1280, 720, true);
+            }
+
             LocalRandom.ConfigureRandom(new System.Random());
 
             _music = GetComponent<BackgroundMusic>();

@@ -17,11 +17,20 @@ public class ScenarioSetup
         var metaData = DataReader.ReadMeta("resources_fwY");
         TextureTools = new TextureTools(OverlayRef.Am6RefDictWHash);
         Assembler = new Assembler<Texture2D>(TextureTools, Demo2ResourcesAssembly.BundleAssembly, metaData);
+
+        if (Master.GM.RenderLowResAssets)
+        {
+            Scale *= 1.3f;
+            CharacterScale *= 1.3f;
+            LocationScale *= 1.3f;
+        }
+
         TypesInfo.CabinetItemTypes = Assembler.GetAllSubtypes(ObjectType.am6item);
         // Skip 0, that's for the map        
         AvailableMusicClips = Enumerable.Range(1, noOfMusicClips - 1).ToList();
         // This is valid for demo2 only. If re-using this code this probably will change.
-        DefaultLocationAnchor = new Vector2(-2.7f, 2.3f);
+        DefaultLocationAnchor = Master.GM.RenderLowResAssets ? new Vector2(-3.5f, 3f) : new Vector2(-2.7f, 2.3f);
+        DefaultLocationAnchor = Master.GM.RenderLowResAssets ? new Vector2(-3.5f, 3f) : new Vector2(-2.7f, 2.3f);
     }
 
     public void OnNewLevel(LevelInfo level)
@@ -43,6 +52,7 @@ public class ScenarioSetup
     public Vector2 DefaultLocationAnchor;
     public float Scale = 0.7f;
     public float CharacterScale = 1f;
+    public float LocationScale = 1f;
 
     public Assembler<Texture2D> Assembler;
     private List<int> AvailableMusicClips;
@@ -106,16 +116,36 @@ public class ScenarioSetup
     private LocationAssets CreateMap(string mapName)
     {
         var resource = Assembler.AssembleNamedPoly(mapName);
+        var resAdjustment = Master.GM.RenderLowResAssets ? 1.3f : 1f;
         // Slightly below the middle vertically and a center horizontally
-        var anchor = new Vector2(-((float)resource.OverlayData.Width / 100 / 2),
-            (float)resource.OverlayData.Height / 100 / 2.5f);
+        var anchor = new Vector2(-((float)resource.OverlayData.Width / 100 / 2 * resAdjustment),
+            (float)resource.OverlayData.Height / 100 / 2.5f * resAdjustment);
 
         return new LocationAssets(
             anchor,
-            resource.Backgrounds.Select(i => i.Image.ToSprite(StaticHelpers.TopLeftPivot)).ToList(),
-            resource.Foregrounds?.Select(i => i.Image.ToSprite(StaticHelpers.TopLeftPivot))?.ToList(),
-            resource.Collider.Image.ToSprite(StaticHelpers.TopLeftPivot),
-            resource.OverlayData);
+            resource.Backgrounds.Select(i => i.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale)).ToList(),
+            resource.Foregrounds?.Select(i => i.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale))?.ToList(),
+            resource.Collider.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale),
+            AdjustOverlayForResolution(resource.OverlayData));
+    }
+
+    private Overlay AdjustOverlayForResolution(Overlay overlay)
+    {
+        if (Master.GM.RenderLowResAssets)
+        {
+            overlay.Width = (int)(1.3 * overlay.Width);
+            overlay.Height = (int)(1.3 * overlay.Height);
+
+            foreach (var point in overlay.Points.SelectMany(p => p.Value))
+            {
+                point.X = (int)(1.3 * point.X);
+                // Y isn't really in use here, it's the flipwise Y
+                //point.Y = (int)(1.3 * point.Y);
+                point.FlipWiseY = (int)(1.3 * point.FlipWiseY);
+            }
+        }
+
+        return overlay;
     }
 
     private LocationAssets CreateLocation(string type, CharacterInfo character, PaletteInfo palettes)
@@ -129,11 +159,11 @@ public class ScenarioSetup
         //var calculatedSpawnPoint = new Vector2(-(resource.OverlayData.Width / 100 / 2), resource.OverlayData.Height / 100 / 2);
         return new LocationAssets(
             DefaultLocationAnchor,
-            resource.Backgrounds.Select(i => i.ToSprite(StaticHelpers.TopLeftPivot)).ToList(),
-            resource.Foregrounds?.Select(i => i.ToSprite(StaticHelpers.TopLeftPivot))?.ToList(),
-            resource.Collider?.ToSprite(StaticHelpers.TopLeftPivot),
+            resource.Backgrounds.Select(i => i.ToSprite(StaticHelpers.TopLeftPivot, LocationScale)).ToList(),
+            resource.Foregrounds?.Select(i => i.ToSprite(StaticHelpers.TopLeftPivot, LocationScale))?.ToList(),
+            resource.Collider?.ToSprite(StaticHelpers.TopLeftPivot, LocationScale),
             mainMapSprite.ToSprite(StaticHelpers.BottomCenterPivot + new Vector2(0, 0.2f)),
-            resource.OverlayData,
+            AdjustOverlayForResolution(resource.OverlayData),
             palettes);
     }
 

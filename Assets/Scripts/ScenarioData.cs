@@ -153,6 +153,9 @@ public class LocationAssets
     }
 
     public Vector2 Anchor;
+    /// <summary>
+    /// This refers to the sprite of the building for this location that appears on the main map
+    /// </summary>
     public Sprite MainMapSprite;
     public List<Sprite> BackgroundSprites;
     public List<Sprite> ForegroundSprites;

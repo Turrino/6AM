@@ -1116,7 +1116,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 634, y: 409}
+  m_AnchoredPosition: {x: 634, y: 424}
   m_SizeDelta: {x: 496.2, y: 163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &251974245
@@ -1275,7 +1275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 602.98987, y: 123}
+  m_AnchoredPosition: {x: 617, y: 97.8}
   m_SizeDelta: {x: 595.5, y: 95.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330791800
@@ -1346,7 +1346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342974858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.383, y: -1.768, z: 144.21317}
+  m_LocalPosition: {x: 5.383, y: -1.63, z: 144.21317}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1554530685}
@@ -2259,7 +2259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563747372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 642, y: 402, z: -9720}
+  m_LocalPosition: {x: 646, y: 417, z: -9720}
   m_LocalScale: {x: 222.156, y: 222.156, z: 222.156}
   m_Children: []
   m_Father: {fileID: 1943780881}
@@ -3189,7 +3189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142964825}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.233, y: -0.358, z: 144.21317}
+  m_LocalPosition: {x: 5.27, y: -0.19, z: 144.21317}
   m_LocalScale: {x: 1.217, y: 1.217, z: 1.217}
   m_Children: []
   m_Father: {fileID: 1554530685}
@@ -3876,7 +3876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 640.2, y: -49.7}
+  m_AnchoredPosition: {x: 645.3, y: -35.27}
   m_SizeDelta: {x: 560.9, y: 664.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1427172770
@@ -4488,10 +4488,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1980, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4795,8 +4795,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -164.09, y: -314.8}
-  m_SizeDelta: {x: 1393.5, y: 437.5}
+  m_AnchoredPosition: {x: -202, y: -339}
+  m_SizeDelta: {x: 1390.4, y: 437.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1709219205
 MonoBehaviour:
@@ -4833,15 +4833,16 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'How to play:
 
-    - <i><color=#FFFFFF>Left mouse button</color></i> to move on the map
+    - <i><color=#FFFFFF>Left mouse button:</color></i> move on the map
 
-    - <i><color=#FFFFFF>Right mouse button</color></i> / POMA button for the police
-    manual
+    - <i><color=#FFFFFF>Right mouse button</color></i> or <i><color=#FFFFFF>POMA button</color></i>:
+    Polis Manual
 
-    - Inside buildings, <i><color=#FFFFFF>mouse over</color></i> items to find out
-    what they are
+    - Inside buildings, <i><color=#FFFFFF>mouse over</color></i> items: item lookup
 
-    - <i><color=#FFFFFF>Left mouse button</color></i> on cabinets to open them'
+    - <i><color=#FFFFFF>Left mouse button</color></i> on cabinets: open cabinet
+
+    - <i><color=#FFFFFF>Esc</color></i> or <i><color=#FFFFFF>Q</color></i> to quit.'
 --- !u!222 &1709219206
 CanvasRenderer:
   m_ObjectHideFlags: 0

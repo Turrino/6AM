@@ -42,9 +42,9 @@ namespace Assets.Scripts.Resources
         public static List<string> PersonNames = new List<string>()
         {
             "Ribbity", "Rabbity", "Bob", "'Not Mathilda'", "Poppy", "Yogurta",
-            "Yolanda", "Polentina", "Giuseppo", "Bobbby", "Frufru", "Notbob",
+            "Yolanda", "Polentina", "Giuseppo", "Bobby J.", "Frufru", "Notbob",
             "Sbestos", "Pasteis", "Mapo", "Luotuo", "Piaochong", "FriFri",
-            "Chapatty", "Quorma"
+            "Chapatty", "Quorma", "Bobbo", "Bobbea"
         };
 
         /// <summary>

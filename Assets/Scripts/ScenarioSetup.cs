@@ -8,22 +8,26 @@ using BayeuxBundle.Models;
 using Assets.Scripts.ScenarioLogic;
 using Assets.Scripts.Bayeux;
 using BayeuxBundle;
-using BayeuxDemo2Assets;
 using Assets.Scripts.Generators;
+using BayeuxBundle.Serialization;
+
 public class ScenarioSetup
 {
     public ScenarioSetup(int noOfMusicClips)
     {
-        var metaData = DataReader.ReadMeta("resources_fwY");
+        var metaData = DataReader.ReadMeta();
         TextureTools = new TextureTools(OverlayRef.Am6RefDictWHash);
-        Assembler = new Assembler<Texture2D>(TextureTools, Demo2ResourcesAssembly.BundleAssembly, metaData);
+        var data = new Data();
+        var resP = JsonHelper.getJsonArray<SerializedItem>(data.Contents);
+        var res = resP.Select(x => new GarblerItem() { Path = x.Path, Content = x.Content }).ToList();
+        Assembler = new Assembler<Texture2D>(TextureTools, res, metaData);
 
-        if (Master.GM.RenderLowResAssets)
-        {
-            Scale *= 1.3f;
-            CharacterScale *= 1.3f;
-            LocationScale *= 1.3f;
-        }
+        //if (Master.GM.RenderLowResAssets)
+        //{
+        //    Scale *= 1.3f;
+        //    CharacterScale *= 1.3f;
+        //    LocationScale *= 1.3f;
+        //}
 
         TypesInfo.CabinetItemTypes = Assembler.GetAllSubtypes(ObjectType.am6item);
         // Skip 0, that's for the map        
@@ -50,9 +54,9 @@ public class ScenarioSetup
     public string Manual => $"STIRCTLY IN ORDER OF IMPORTENCE:{Environment.NewLine}•{string.Join($"{Environment.NewLine}•", ManualLines)}";
     //public Characteristics Characteristics;
     public Vector2 DefaultLocationAnchor;
-    public float Scale = 0.7f;
-    public float CharacterScale = 1f;
-    public float LocationScale = 1f;
+    public float Scale = 1f;
+    public float CharacterScale = 1.3f;
+    public float LocationScale = 1.3f;
 
     public Assembler<Texture2D> Assembler;
     private List<int> AvailableMusicClips;

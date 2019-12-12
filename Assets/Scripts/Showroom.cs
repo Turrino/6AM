@@ -4,7 +4,6 @@ using Assets.Scripts.Resources;
 using BayeuxBundle;
 using BayeuxBundle.Models;
 using BayeuxBundle.Models.Instructions;
-using BayeuxDemo2Assets;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;

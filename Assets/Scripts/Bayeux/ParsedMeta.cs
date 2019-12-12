@@ -41,6 +41,7 @@ namespace Assets.Scripts.Bayeux
     
     public class ParsedMeta
     {
+        public string Name;
         public string MainType;
         public ParsedPoint MainAnchor;
         public ParsedOverlay Overlay;
@@ -77,22 +78,16 @@ namespace Assets.Scripts.Bayeux
                 kv => kv.Value.Select(p => ToOverlayPoint(p)).ToList());
             return new Overlay(points, parsed.Width, parsed.Height, parsed.SourceType);
         }
-        public static Dictionary<string, ParsedMetaPoco> ReadMeta(string fromFile)
+        public static Dictionary<string, ParsedMetaPoco> ReadMeta()
         {
-            var jsonObj = UnityEngine.Resources.Load("resources_fwY") as TextAsset;
-            var parsed = TinyJson.FromJson<Dictionary<string, ParsedMeta>>(jsonObj.text);
+            //var data = new Data();
+            //JsonHelper.getJsonArray<ParsedMeta>(data.Meta);
+            var parsed = new MetaDataSource().ParsedMetaPocoDict; 
             var result = new Dictionary<string, ParsedMetaPoco>();
 
             foreach (var item in parsed)
             {
-                var v = item.Value;
-                result.Add(item.Key, new ParsedMetaPoco() {
-                    MainType = v.MainType,
-                    MainAnchor = ToPoint(v.MainAnchor),
-                    Overlay = ToOverlay(v.Overlay),
-                    Description = v.Description,
-                    Types = v.Types
-                });
+                result.Add(item.Name, item);
             }
 
             return result;

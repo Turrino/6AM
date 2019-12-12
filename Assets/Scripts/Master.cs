@@ -58,13 +58,13 @@ public class Master : MonoBehaviour {
         {
             GM = this;
             DontDestroyOnLoad(gameObject);
-
-            // If the screen is running below 1920*1080, scale procedural assets
-            if (Screen.currentResolution.width < 1920)
-            {
-                RenderLowResAssets = true;
-                Screen.SetResolution(1280, 720, true);
-            }
+            RenderLowResAssets = true;
+            //// If the screen is running below 1920*1080, scale procedural assets
+            //if (Screen.currentResolution.width < 1920)
+            //{
+            //    RenderLowResAssets = true;
+            //    Screen.SetResolution(1280, 720, true);
+            //}
 
             LocalRandom.ConfigureRandom(new System.Random());
 

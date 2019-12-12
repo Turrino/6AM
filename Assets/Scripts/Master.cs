@@ -42,7 +42,7 @@ public class Master : MonoBehaviour {
     public SfxScript Sfx;
     public bool LoadingScreenOn;
 
-    public bool RenderLowResAssets;
+    //public bool RenderLowResAssets;
 
     private bool AllMenuOverlaysOff() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && !LoadingScreenOn;
     public bool TooltipEnabled() => AllMenuOverlaysOff() && !Contents.Open ;
@@ -58,7 +58,7 @@ public class Master : MonoBehaviour {
         {
             GM = this;
             DontDestroyOnLoad(gameObject);
-            RenderLowResAssets = true;
+
             //// If the screen is running below 1920*1080, scale procedural assets
             //if (Screen.currentResolution.width < 1920)
             //{

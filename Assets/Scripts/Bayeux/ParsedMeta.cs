@@ -1,44 +1,9 @@
 ﻿using BayeuxBundle.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets.Scripts.Resources;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Assets.Scripts.Bayeux
-{
-    // This was meant to be a JSON file, but I can't get the Newtonsoft parser to work on core, for some reason
-    // TODO move back to JSON whenever possible..
-    //public class ParsedMeta
-    //{
-    //    Dictionary<string, BayeuxBundle.Models.ParsedMetaPoco> Data = new Dictionary<string, BayeuxBundle.Models.ParsedMetaPoco>()
-    //    {
-    //            new System.Collections.Generic.KeyValuePair<string, BayeuxBundle.Models.ParsedMetaPoco>
-    //{
-    //[Serializable]
-    //public class MetaContainer
-    //{
-    //    public ParsedMeta[] Meta;
-    //}
-
-    //[Serializable]
-    //public class ParsedMeta
-    //{
-    //    public string MainType;
-    //    public AnchorPoint MainAnchor;
-    //}
-
-    //[Serializable]
-    //public class AnchorPoint
-    //{
-    //    public int X;
-    //    public int Y;
-    //}
-
-    
+{    
     public class ParsedMeta
     {
         public string Name;
@@ -80,8 +45,6 @@ namespace Assets.Scripts.Bayeux
         }
         public static Dictionary<string, ParsedMetaPoco> ReadMeta()
         {
-            //var data = new Data();
-            //JsonHelper.getJsonArray<ParsedMeta>(data.Meta);
             var parsed = new MetaDataSource().ParsedMetaPocoDict; 
             var result = new Dictionary<string, ParsedMetaPoco>();
 

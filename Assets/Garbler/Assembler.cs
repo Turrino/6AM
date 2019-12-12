@@ -32,8 +32,9 @@ namespace BayeuxBundle
 
         public List<string> GetAllSubtypes(ObjectType mainType)
         {
-            return Loader.AllResourcesDefinitions.Where(r => r.ObjectType == mainType)
-                .Select(x => x.SubTypes)
+            var allitemsWithType = Loader.AllResourcesDefinitions.Where(r => r.ObjectType == mainType).ToList();
+
+            return allitemsWithType.Select(x => x.SubTypes)
                 .SelectMany(x => x)
                 .Distinct()
                 .ToList();

@@ -11,7 +11,7 @@ namespace Assets.Scripts.Bayeux
     {
         public List<ParsedMetaPoco> ParsedMetaPocoDict = new List<ParsedMetaPoco>()
         {
-new ParsedMetaPoco()
+            new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6hat.1.png",
                     MainType = "am6hat",
@@ -226,7 +226,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "It's a book about 'books'.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "book", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.17.png",
@@ -234,7 +234,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A piece of 'art'.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "piece of art", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.2.png",
@@ -242,7 +242,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A book about burds.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "book", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.3.png",
@@ -250,7 +250,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A book about words.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "book", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.4.png",
@@ -258,7 +258,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A speckled egg.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "egg", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.5.png",
@@ -266,7 +266,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A fat egg",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "egg", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.6.png",
@@ -274,7 +274,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "Appears to be a pear.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "pear", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.7.png",
@@ -282,7 +282,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A simple hair brush.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "hairbrush", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.8.png",
@@ -290,7 +290,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "Oversized lipstick.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "lipstick", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.9.png",
@@ -298,7 +298,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A 8 and a half ball.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "ball", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.10.png",
@@ -306,7 +306,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A rare potato.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "potato", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.11.png",
@@ -314,7 +314,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "The famous double-spoon.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "spoon", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.12.png",
@@ -322,7 +322,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A reproduction of the planets, astronomy and stuff.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "decorative", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.13.png",
@@ -330,7 +330,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A piece of 'art'.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "piece of art", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.14.png",
@@ -338,7 +338,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A piece of 'art'.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "piece of art", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.15.png",
@@ -346,7 +346,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A clock.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "clock", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.16.png",
@@ -354,7 +354,7 @@ new ParsedMetaPoco()
                     MainAnchor = new ImgPoint(67, 68),
                     Overlay = null,
                     Description = "A toy pyramid.",
-                    Types = new [] { "tpe", }
+                    Types = new [] { "decorative", }
                  },new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6painting.1.png",

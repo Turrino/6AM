@@ -33,8 +33,8 @@ public class ScenarioSetup
         // Skip 0, that's for the map        
         AvailableMusicClips = Enumerable.Range(1, noOfMusicClips - 1).ToList();
         // This is valid for demo2 only. If re-using this code this probably will change.
-        DefaultLocationAnchor = Master.GM.RenderLowResAssets ? new Vector2(-3.5f, 3f) : new Vector2(-2.7f, 2.3f);
-        DefaultLocationAnchor = Master.GM.RenderLowResAssets ? new Vector2(-3.5f, 3f) : new Vector2(-2.7f, 2.3f);
+        //DefaultLocationAnchor = Master.GM.RenderLowResAssets ? new Vector2(-3.5f, 3f) : new Vector2(-2.7f, 2.3f);
+        DefaultLocationAnchor = new Vector2(-3.5f, 2.8f);
     }
 
     public void OnNewLevel(LevelInfo level)
@@ -51,7 +51,7 @@ public class ScenarioSetup
     public int LocationsCount;
     public int ManualLinesCount;
     public ManualParts ManualLines;
-    public string Manual => $"STIRCTLY IN ORDER OF IMPORTENCE:{Environment.NewLine}•{string.Join($"{Environment.NewLine}•", ManualLines)}";
+    public string Manual => $"•{string.Join($"{Environment.NewLine}•", ManualLines)}";
     //public Characteristics Characteristics;
     public Vector2 DefaultLocationAnchor;
     public float Scale = 1f;
@@ -120,7 +120,8 @@ public class ScenarioSetup
     private LocationAssets CreateMap(string mapName)
     {
         var resource = Assembler.AssembleNamedPoly(mapName);
-        var resAdjustment = Master.GM.RenderLowResAssets ? 1.3f : 1f;
+        //var resAdjustment = Master.GM.RenderLowResAssets ? 1.3f : 1f;
+        var resAdjustment = 1.3f;
         // Slightly below the middle vertically and a center horizontally
         var anchor = new Vector2(-((float)resource.OverlayData.Width / 100 / 2 * resAdjustment),
             (float)resource.OverlayData.Height / 100 / 2.5f * resAdjustment);
@@ -135,8 +136,8 @@ public class ScenarioSetup
 
     private Overlay AdjustOverlayForResolution(Overlay overlay)
     {
-        if (Master.GM.RenderLowResAssets)
-        {
+        //if (Master.GM.RenderLowResAssets)
+        //{
             overlay.Width = (int)(1.3 * overlay.Width);
             overlay.Height = (int)(1.3 * overlay.Height);
 
@@ -147,7 +148,7 @@ public class ScenarioSetup
                 //point.Y = (int)(1.3 * point.Y);
                 point.FlipWiseY = (int)(1.3 * point.FlipWiseY);
             }
-        }
+        //}
 
         return overlay;
     }

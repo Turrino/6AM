@@ -249,7 +249,7 @@ public class Master : MonoBehaviour {
     public void ToggleLocation(bool isMap = true)
     {
         PlayerInstance.SetActive(isMap);
-        PlayerBadge.SetActive(!isMap);
+        Clock.ToggleBadge(isMap);
         LocationInterface.SetActive(!isMap);
     }
 

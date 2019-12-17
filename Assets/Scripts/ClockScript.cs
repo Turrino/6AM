@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class ClockScript : MonoBehaviour
 {
-    public Text countdown;
+    public Text countdownMinutes;
+    public Text countdownSeconds;
+    public Text countdownFull;
     private int _secondsLeft = 500;
+    public SpriteRenderer Panel;
 
     public void StartTimer(int seconds)
     {
@@ -20,9 +23,24 @@ public class ClockScript : MonoBehaviour
         StopCoroutine("LoseTime");
     }
 
+    public void DialogueMode(bool enabled)
+    {
+        countdownMinutes.enabled = !enabled;
+        countdownSeconds.enabled = !enabled;
+        countdownFull.enabled = enabled;
+    }
+
+    public void ToggleBadge(bool enabled)
+    {
+        Panel.enabled = enabled;
+    }
+
     void Update()
     {
-        countdown.text = TimeSpan.FromSeconds(_secondsLeft).ToString(@"mm\:ss");
+        var timeLeft = TimeSpan.FromSeconds(_secondsLeft);
+        countdownMinutes.text = timeLeft.Minutes.ToString();
+        countdownSeconds.text = timeLeft.Seconds.ToString();
+        countdownFull.text = TimeSpan.FromSeconds(_secondsLeft).ToString(@"mm\:ss");
         if (_secondsLeft == 0)
         {
             Master.GM.WDCTimeout();

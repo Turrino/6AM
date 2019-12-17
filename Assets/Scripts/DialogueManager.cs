@@ -40,6 +40,7 @@ public class DialogueManager : MonoBehaviour {
     public void ShowDialogue()
     {
         Master.GM.HidePoma();
+        Master.GM.Clock.DialogueMode(true);
         DialogueFace.GetComponent<Image>().sprite = Master.GM.CurrentLocation.Person.DialogueImg;
         DialogueText.text = Master.GM.CurrentLocation.Person.DialogueLine;
         DialogueFunction();
@@ -56,6 +57,7 @@ public class DialogueManager : MonoBehaviour {
     public void CloseDialogue()
     {
         DisableButtons();
+        Master.GM.Clock.DialogueMode(false);
         TriggerDialogue(false);
     }
     

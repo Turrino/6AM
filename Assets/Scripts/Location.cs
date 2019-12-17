@@ -148,6 +148,7 @@ public class Location : MonoBehaviour {
             renderer.sprite = bgPart;
             renderer.sortingLayerName = sortingLayer;
             renderer.sortingOrder = sortingOrder++;
+            renderer.size = renderer.size * 1.5f;
         }
     }
 

@@ -22,19 +22,10 @@ public class ScenarioSetup
         var res = resP.Select(x => new GarblerItem() { Path = x.Path, Content = x.Content }).ToList();
         Assembler = new Assembler<Texture2D>(TextureTools, res, metaData);
 
-        //if (Master.GM.RenderLowResAssets)
-        //{
-        //    Scale *= 1.3f;
-        //    CharacterScale *= 1.3f;
-        //    LocationScale *= 1.3f;
-        //}
-
         TypesInfo.CabinetItemTypes = Assembler.GetAllSubtypes(ObjectType.am6item);
         // Skip 0, that's for the map        
         AvailableMusicClips = Enumerable.Range(1, noOfMusicClips - 1).ToList();
-        // This is valid for demo2 only. If re-using this code this probably will change.
-        //DefaultLocationAnchor = Master.GM.RenderLowResAssets ? new Vector2(-3.5f, 3f) : new Vector2(-2.7f, 2.3f);
-        DefaultLocationAnchor = new Vector2(-3.5f, 2.8f);
+        DefaultLocationAnchor = new Vector2(-3.75f, 3.9f);
     }
 
     public void OnNewLevel(LevelInfo level)
@@ -54,9 +45,18 @@ public class ScenarioSetup
     public string Manual => $"•{string.Join($"{Environment.NewLine}•", ManualLines)}";
     //public Characteristics Characteristics;
     public Vector2 DefaultLocationAnchor;
+    /// <summary>
+    /// Scale for the props
+    /// </summary>
     public float Scale = 1f;
-    public float CharacterScale = 1.3f;
-    public float LocationScale = 1.3f;
+    /// <summary>
+    /// Scale for the caracter avatars (but not in dialogues)
+    /// </summary>
+    public float CharacterScale = 1.5f;
+    /// <summary>
+    /// Scale for the interior locations and maps
+    /// </summary>
+    public float LocationScale = 1.5f;
 
     public Assembler<Texture2D> Assembler;
     private List<int> AvailableMusicClips;
@@ -120,14 +120,8 @@ public class ScenarioSetup
     private LocationAssets CreateMap(string mapName)
     {
         var resource = Assembler.AssembleNamedPoly(mapName);
-        //var resAdjustment = Master.GM.RenderLowResAssets ? 1.3f : 1f;
-        var resAdjustment = 1.3f;
-        // Slightly below the middle vertically and a center horizontally
-        var anchor = new Vector2(-((float)resource.OverlayData.Width / 100 / 2 * resAdjustment),
-            (float)resource.OverlayData.Height / 100 / 2.5f * resAdjustment);
-
         return new LocationAssets(
-            anchor,
+            DefaultLocationAnchor,
             resource.Backgrounds.Select(i => i.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale)).ToList(),
             resource.Foregrounds?.Select(i => i.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale))?.ToList(),
             resource.Collider.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale),
@@ -136,19 +130,16 @@ public class ScenarioSetup
 
     private Overlay AdjustOverlayForResolution(Overlay overlay)
     {
-        //if (Master.GM.RenderLowResAssets)
-        //{
-            overlay.Width = (int)(1.3 * overlay.Width);
-            overlay.Height = (int)(1.3 * overlay.Height);
+        overlay.Width = (int)(LocationScale * overlay.Width);
+        overlay.Height = (int)(LocationScale * overlay.Height);
 
-            foreach (var point in overlay.Points.SelectMany(p => p.Value))
-            {
-                point.X = (int)(1.3 * point.X);
-                // Y isn't really in use here, it's the flipwise Y
-                //point.Y = (int)(1.3 * point.Y);
-                point.FlipWiseY = (int)(1.3 * point.FlipWiseY);
-            }
-        //}
+        foreach (var point in overlay.Points.SelectMany(p => p.Value))
+        {
+            point.X = (int)(LocationScale * point.X);
+            // Y isn't really in use here, it's the flipwise Y
+            //point.Y = (int)(LocationScale * point.Y);
+            point.FlipWiseY = (int)(LocationScale * point.FlipWiseY);
+        }
 
         return overlay;
     }

@@ -40,7 +40,7 @@ public class ClockScript : MonoBehaviour
         var timeLeft = TimeSpan.FromSeconds(_secondsLeft);
         countdownMinutes.text = timeLeft.Minutes.ToString();
         countdownSeconds.text = timeLeft.Seconds.ToString();
-        countdownFull.text = TimeSpan.FromSeconds(_secondsLeft).ToString(@"mm\:ss");
+        countdownFull.text = timeLeft.ToString(@"mm\:ss");
         if (_secondsLeft == 0)
         {
             Master.GM.WDCTimeout();

@@ -124,7 +124,8 @@ public class ScenarioSetup
             DefaultLocationAnchor,
             resource.Backgrounds.Select(i => i.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale)).ToList(),
             resource.Foregrounds?.Select(i => i.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale))?.ToList(),
-            resource.Collider.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale),
+            null, // Colliders have been removed from maps
+            //resource.Collider.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale),
             AdjustOverlayForResolution(resource.OverlayData));
     }
 

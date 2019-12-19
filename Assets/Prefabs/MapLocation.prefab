@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 224224489455185742}
   - component: {fileID: 212071120123067588}
   - component: {fileID: 6220215996530850766}
+  - component: {fileID: 1967951035902910561}
   m_Layer: 0
   m_Name: MapLocation
   m_TagString: Location
@@ -99,6 +100,18 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00020593405, y: 0.2541896}
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.4142245
+--- !u!114 &1967951035902910561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272459799026658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64055a0fd400a8448fd5b360eb0a0b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

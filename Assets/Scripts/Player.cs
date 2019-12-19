@@ -1,103 +1,40 @@
-﻿using Assets.Scripts.Resources;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour {
 
     public float Speed;
-    //public bool CaptureMessageOn;
     public int SortingOrder;
 
-    //private Stopwatch _dialogueCooldown;
-    /// <summary>
-    /// The entrance colliders are placed right by the player spawn point
-    /// this flag tracks whether the player is still colliding with the entrance
-    /// </summary>
-    private int _hasEnteredLocation;
-
-
-    //void Start()
-    //{        
-    //    _dialogueCooldown = new Stopwatch();
-    //}
+    private Vector2 TargetPos = Vector2.zero;
+    private bool Moving;
 
     void FixedUpdate()
     {
-        if(Input.GetMouseButton(0) && !Master.GM.PomaButtonOver)
+        if(!Moving && Input.GetMouseButton(0) && !Master.GM.PomaButtonOver)
         {
-            var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            targetPos.z = transform.position.z;
-
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, Speed * Time.deltaTime);
+            TargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
+            if (hit.collider != null && Master.GM.ScenarioData.LocationsDict.ContainsKey(hit.collider.gameObject.name))
+            {
+                Moving = true;
+                GetComponentInChildren<SpriteRenderer>().flipX = TargetPos.x > transform.position.x;
+            }
         }
 
-        //if (!CaptureMessageOn && Input.GetMouseButton(0) && !Master.GM.ListButton.MouseOver)
-        //{
-        //    if (Master.GM.DialogueManager.DialogueEnabled && _dialogueCooldown.ElapsedMilliseconds > 400)
-        //    {
-        //        _dialogueCooldown.Reset();
-        //        Master.GM.DialogueManager.CloseDialogue();
-        //    }
-        //    else
-        //    {               
-        //        var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //        targetPos.z = transform.position.z;
-
-        //        transform.position = Vector2.MoveTowards(transform.position, targetPos, Speed * Time.deltaTime);
-        //    }
-        //}
-
-        //if (Input.GetKeyUp("space"))
-        //{
-        //    if (Master.GM.CurrentLocation.IsMap)
-        //        return;
-
-        //    if (!CaptureMessageOn)
-        //    {
-        //        Master.GM.CaptureAttempt();
-        //        CaptureMessageOn = true;
-        //    }
-        //    else
-        //    {
-        //        CaptureMessageOn = false;
-        //        Master.GM.DialogueManager.CloseDialogue();
-        //    }            
-        //}
+        if (Moving)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, TargetPos, Speed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {        
         if (Master.GM.ScenarioData.LocationsDict.ContainsKey(other.gameObject.name))
         {
-            _hasEnteredLocation++;
-            if (_hasEnteredLocation == 1)
-                Master.GM.ChangeScene(Master.GM.ScenarioData.LocationsDict[other.gameObject.name]);
+            Master.GM.ChangeScene(Master.GM.ScenarioData.LocationsDict[other.gameObject.name]);
+            Moving = false;
+            TargetPos = Vector2.zero;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (Master.GM.ScenarioData.LocationsDict.ContainsKey(other.gameObject.name))
-        {
-            _hasEnteredLocation = _hasEnteredLocation == 1 ? 2 : 0;
-        }
-    }
-
-    //void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    if (other.gameObject.name == NamesList.ExitToMain)
-    //    {
-            
-    //    }
-    //    if (other.gameObject.tag == NamesList.Character)
-    //    {
-    //        Master.GM.DialogueManager.ShowDialogue();
-    //        _dialogueCooldown.Start();
-    //    }
-    //}
-
-    public enum AnimationType
-    {
-        map,
-        location
     }
 }

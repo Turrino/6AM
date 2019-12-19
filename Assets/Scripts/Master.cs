@@ -168,9 +168,10 @@ public class Master : MonoBehaviour {
         CurrentLocation.MusicPlaybackTime = AudioSrc.time;
         AudioSrc.Stop();
 
-        // Check where the player is coming from and save it
-        var playerLoc = restart ? ScenarioData.Main.SpawnPoint
-            : CurrentLocation.CoordsOnMainMap;
+        // with the new map movement, we no longer store the location & always spawn at the center
+        //var playerLoc = restart ? ScenarioData.Main.SpawnPoint
+        //    : CurrentLocation.CoordsOnMainMap;
+
 
         // LOCATION CHANGE!
         CurrentLocation = To;
@@ -189,7 +190,7 @@ public class Master : MonoBehaviour {
             DialogueManager.HideInfo();
             SceneManager.LoadScene(NamesList.MainScenario, LoadSceneMode.Single);
             Location.CreateLocation(CurrentLocation, GetSceneTransform());
-            PlayerInstance.transform.position = playerLoc;
+            PlayerInstance.transform.position = ScenarioData.Main.SpawnPoint;
         }
         else
         {

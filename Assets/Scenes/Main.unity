@@ -1635,7 +1635,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Someone stole Mayo's cookie. It is up to you to find them. Talk to characters
-    and use the Polis Manual to find out the thief.
+    and use the Polis Manual to find the thief.
 --- !u!222 &418826109
 CanvasRenderer:
   m_ObjectHideFlags: 0

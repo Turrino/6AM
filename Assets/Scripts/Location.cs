@@ -113,25 +113,25 @@ public class Location : MonoBehaviour {
             }
         }
     }
-
+    
     private void InstantiateBackground(Transform parent)
     {        
         AddBgParts(_locInfo.Assets.BackgroundSprites, parent, false);
         if (_locInfo.Assets.ForegroundSprites != null)
             AddBgParts(_locInfo.Assets.ForegroundSprites, parent, true);
 
-        // Create the collider sprite (NB. not in use currently, this gets skipped. recycle if needed)
-        if (_locInfo.Assets.ColliderSprite != null) 
-        {
-            var cInstance = Instantiate(Background, Anchor, Quaternion.identity);
-            cInstance.transform.SetParent(parent);
-            var renderer = cInstance.GetComponent<SpriteRenderer>();
-            renderer.sprite = _locInfo.Assets.ColliderSprite;
-            renderer.sortingOrder = 0;
-            // add the collider component to it
-            cInstance.AddComponent<PolygonCollider2D>();
-            renderer.enabled = false;
-        }
+        //// Create the collider sprite
+        //if (_locInfo.Assets.ColliderSprite != null) 
+        //{
+        //    var cInstance = Instantiate(Background, Anchor, Quaternion.identity);
+        //    cInstance.transform.SetParent(parent);
+        //    var renderer = cInstance.GetComponent<SpriteRenderer>();
+        //    renderer.sprite = _locInfo.Assets.ColliderSprite;
+        //    renderer.sortingOrder = 0;
+        //    // add the collider component to it
+        //    cInstance.AddComponent<PolygonCollider2D>();
+        //    renderer.enabled = false;
+        //}
     }
 
     private void AddBgParts(List<Sprite> sprites, Transform parent, bool foreGround)

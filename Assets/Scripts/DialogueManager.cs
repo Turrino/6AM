@@ -128,9 +128,7 @@ public class DialogueManager : MonoBehaviour {
     {
         MenuBgImage.color = SuccessClr;
         MenuText.text = $"You did it!!! The world is now a safer place for cookies." +
-            $"{Environment.NewLine}This is as far the 6AM Alpha version goes." +
-            $"{Environment.NewLine}For updates, follow:" +
-            $"{Environment.NewLine}https://lizards-of-pluto.itch.io/6am";
+            $"{Environment.NewLine}This is as far the 6AM Alpha version goes.";
         EnableMenuScreen();
         CaptureFailedFunction(false);
         MenuButton2Text.text = "Quit";

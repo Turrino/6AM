@@ -9,6 +9,7 @@ public class Location : MonoBehaviour {
 
     public Sprite ph;
     public GameObject Character;
+    public GameObject SpawnBeacon;
     public GameObject Background;
     // TODO replace with the actual locations
     public GameObject MapLocation;
@@ -32,6 +33,9 @@ public class Location : MonoBehaviour {
 
         if (_locInfo.IsMap)
         {
+            var beacon = Instantiate(SpawnBeacon, GetSpawnPoint(ColorsList.OverlayMapSpawn), Quaternion.identity);
+            beacon.transform.SetParent(parent);
+
             foreach (var location in Master.GM.ScenarioData.Locations)
             {                
                 var instance = Instantiate(MapLocation, location.CoordsOnMainMap, Quaternion.identity);

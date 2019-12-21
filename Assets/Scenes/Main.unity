@@ -279,18 +279,19 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 30fc3a6d35eb8f0419eca3f516c3be16, type: 2}
-    m_FontSize: 60
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 3
+    m_MinSize: 4
     m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 1
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CBA CBA
+  m_Text: 'CBA CBA CBA CBACBA CBACBA CBACBA CBACBA CBACBA CBACBA CBACBA CBACBA CBACBA
+    CBACBA '
 --- !u!222 &69143280
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2578,6 +2579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ph: {fileID: 21300000, guid: 699ccbc35a8bf714d86a8a4efe033bec, type: 3}
   Character: {fileID: 1551567592181752, guid: c448da5e1c7c89d4c8c276c2446b16ac, type: 3}
+  SpawnBeacon: {fileID: 3233745609586353628, guid: 4d6a213f23c79414999c4365e4b65ab0,
+    type: 3}
   Background: {fileID: 1823053929400184, guid: 8b5fa902679f65a4096d9cba58de2fe9, type: 3}
   MapLocation: {fileID: 1272459799026658, guid: c76c9a6569c270b43bf3e919aa2a516e,
     type: 3}

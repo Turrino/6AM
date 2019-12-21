@@ -99,6 +99,7 @@ public class Master : MonoBehaviour {
         _justStarted = false;
         AudioSrc.clip = _music.Clips[0];
         AudioSrc.Play();
+        AudioSrc.loop = true;
         Clock.StartTimer(Levels.LevelList[LevelCounter].SecondsAvailable);
     }
 
@@ -181,6 +182,7 @@ public class Master : MonoBehaviour {
         AudioSrc.clip = _music.Clips[CurrentLocation.MusicClipIndex];
         AudioSrc.time = CurrentLocation.MusicPlaybackTime;
         AudioSrc.Play();
+        AudioSrc.loop = true;
 
         ToggleLocation(To.IsMap);
 
@@ -281,6 +283,7 @@ public class Master : MonoBehaviour {
         {
             AudioSrc.clip = _music.Clips[0];
             AudioSrc.Play();
+            AudioSrc.loop = true;
             Clock.StartTimer(level.SecondsAvailable);
         }
 

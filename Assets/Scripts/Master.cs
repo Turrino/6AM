@@ -2,6 +2,7 @@
 using Assets.Scripts.Resources;
 using BayeuxBundle;
 using BayeuxBundle.Models.Palettes;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,6 +36,7 @@ public class Master : MonoBehaviour {
     public GameObject LocationInterface;
     public GameObject PlayerBadge;
     public ClockScript Clock;
+    public TimeSpan TotalTimeSpent;
     public AudioSource AudioSrc;
 
     public int LevelCounter;
@@ -205,6 +207,8 @@ public class Master : MonoBehaviour {
 
     public void ArrestAttempt()
     {
+        Clock.StopTimer();
+        TotalTimeSpent = TotalTimeSpent + Clock.GetTimeSpent();
         var success = CurrentLocation.Person.IsThief;
         var function = success ? DiagButtonsFunction.ArrestSuccess :
             DiagButtonsFunction.ArrestFailed;
@@ -216,9 +220,7 @@ public class Master : MonoBehaviour {
 
         AudioSrc.Stop();
 
-        if (success)
-            Sfx.Success();
-        else
+        if (!success)
             Sfx.Fail();
 
         DialogueManager.CaptureMenu(function, arrestMsg);
@@ -242,7 +244,7 @@ public class Master : MonoBehaviour {
             TextResources.ArrestTimeout);
     }
 
-    //public void SetupList()
+    //public void pList()
     //{
     //    _listInstance.name = "List";
     //    _listInstance.transform.SetParent(gameObject.transform);
@@ -260,6 +262,9 @@ public class Master : MonoBehaviour {
     {
         if (_justStarted)
             ActivateSplashScreen();
+
+        if (LevelCounter == 0)
+            TotalTimeSpent = new TimeSpan();
 
         //Debug.Log("init GM");
         var scenarioGenerator = new ScenarioSetup(_music.Clips.Length);

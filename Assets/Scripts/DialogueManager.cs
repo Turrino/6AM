@@ -32,6 +32,8 @@ public class DialogueManager : MonoBehaviour {
     public Text MenuText;
     public bool MenuEnabled;
 
+    public GameObject TotalTimeCounter;
+
     private IEnumerator InfoDisplayCr;
 
     private Color32 SuccessClr = new Color32(90, 200, 84, 255); 
@@ -134,8 +136,33 @@ public class DialogueManager : MonoBehaviour {
         MenuButton2Text.text = "Quit";
     }
 
+    void Update()
+    {
+        if (AnimateTotalTimeWidget)
+        {
+            var aPos = TotalTimeCounter.transform.position;
+            aPos.x = aPos.z = 0;
+            aPos.y = 10 * Time.deltaTime;
+            TotalTimeCounter.transform.position -= aPos;
+            if (TotalTimeCounter.transform.position.y < 2.05f)
+            {
+                AnimateTotalTimeWidget = false;
+                Master.GM.Sfx.Success();
+            }
+        }
+    }
+
+    private bool AnimateTotalTimeWidget;
+
     public void CaptureSuccessFunction()
     {
+        TotalTimeCounter.transform.position = new Vector2(3.66f,5.3f);
+        TotalTimeCounter.transform.Find("totaltime")
+            .GetComponent<Text>().text = Master.GM.TotalTimeSpent.ToString(@"mm\:ss");
+
+        TotalTimeCounter.SetActive(true);
+        AnimateTotalTimeWidget = true;
+
         MenuBgImage.color = SuccessClr;
         EnableMenuScreen();
         MenuButton1Text.text = "Next!";
@@ -168,6 +195,7 @@ public class DialogueManager : MonoBehaviour {
     {
         // no need to re-enable the timer, master will do that when restarting the level
         MenuEnabled = false;
+        TotalTimeCounter.SetActive(false);
         MenuScreen.SetActive(false);
     }
 

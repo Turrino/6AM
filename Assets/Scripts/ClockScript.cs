@@ -8,11 +8,13 @@ public class ClockScript : MonoBehaviour
     public Text countdownMinutes;
     public Text countdownSeconds;
     public Text countdownFull;
+    private int _secondsTotal;
     private int _secondsLeft = 500;
     public SpriteRenderer Panel;
 
     public void StartTimer(int seconds)
     {
+        _secondsTotal = seconds;
         _secondsLeft = seconds;
         StartCoroutine("LoseTime");
         Time.timeScale = 1;
@@ -33,6 +35,11 @@ public class ClockScript : MonoBehaviour
     public void ToggleBadge(bool enabled)
     {
         Panel.enabled = enabled;
+    }
+
+    public TimeSpan GetTimeSpent()
+    {
+        return TimeSpan.FromSeconds(_secondsTotal - _secondsLeft);
     }
 
     void Update()

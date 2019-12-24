@@ -13,7 +13,6 @@ public class Master : MonoBehaviour {
 
     public static Master GM;
     public GameObject Player;
-    public GameObject SplashScreen;
     public GameObject CurrentParent;
     public Texture2D CanvasTexture;
     public ScenarioData ScenarioData = null;
@@ -53,20 +52,12 @@ public class Master : MonoBehaviour {
     private GameObject _parentRef;
     private BackgroundMusic _music;
     private int LevelChangeFlag = int.MaxValue;
-    private bool _justStarted = true;
 
     void Awake () {
         if (GM == null)
         {
             GM = this;
             DontDestroyOnLoad(gameObject);
-
-            //// If the screen is running below 1920*1080, scale procedural assets
-            //if (Screen.currentResolution.width < 1920)
-            //{
-            //    RenderLowResAssets = true;
-            //    Screen.SetResolution(1280, 720, true);
-            //}
 
             LocalRandom.ConfigureRandom(new System.Random());
 
@@ -88,21 +79,6 @@ public class Master : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
-    }
-
-    private void ActivateSplashScreen()
-    {
-        SplashScreen.SetActive(true);
-    }
-
-    public void RemoveSplashScreen()
-    {
-        SplashScreen.SetActive(false);
-        _justStarted = false;
-        AudioSrc.clip = _music.Clips[0];
-        AudioSrc.Play();
-        AudioSrc.loop = true;
-        Clock.StartTimer(Levels.LevelList[LevelCounter].SecondsAvailable);
     }
 
     public static void ConfigureColors()
@@ -260,13 +236,8 @@ public class Master : MonoBehaviour {
 
     private void LevelSetup()
     {
-        if (_justStarted)
-            ActivateSplashScreen();
-
         if (LevelCounter == 0)
             TotalTimeSpent = new TimeSpan();
-
-        //Debug.Log("init GM");
         var scenarioGenerator = new ScenarioSetup(_music.Clips.Length);
         var level = Levels.LevelList[LevelCounter];
         ScenarioData = scenarioGenerator.GenerateScenarioData(level);
@@ -277,20 +248,15 @@ public class Master : MonoBehaviour {
         PlayerInstance.transform.SetParent(gameObject.transform);
         PlayerInstance.name = NamesList.Player;
 
-        //PlayerScript = PlayerInstance.GetComponent<Player>();
-
         SceneInit();
 
         ToggleLocation(true);
         DialogueManager.HideInfo();
 
-        if (!_justStarted)
-        {
-            AudioSrc.clip = _music.Clips[0];
-            AudioSrc.Play();
-            AudioSrc.loop = true;
-            Clock.StartTimer(level.SecondsAvailable);
-        }
+        AudioSrc.clip = _music.Clips[0];
+        AudioSrc.Play();
+        AudioSrc.loop = true;
+        Clock.StartTimer(Levels.LevelList[LevelCounter].SecondsAvailable);
 
         SetLoadingScreenOff();
         PomaUI.GetComponentInChildren<Text>().text = GM.ScenarioData.PomaText;
@@ -357,11 +323,6 @@ public class Master : MonoBehaviour {
         {
             if (AllMenuOverlaysOff())
                 TriggerPoma();
-        }
-
-        if (SplashScreen.activeSelf && Input.GetKeyUp(KeyCode.Space))
-        {
-            RemoveSplashScreen();
         }
 
         if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.Escape))

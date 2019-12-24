@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class intro : MonoBehaviour
 {
+    public GameObject LoadingScreen;
     public intro2script Intro2;
     public intro4script skipTo4;
     public Text SleepText;
@@ -65,6 +66,7 @@ public class intro : MonoBehaviour
 
     public void Skip()
     {
+        LoadingScreen.SetActive(true);
         SceneManager.LoadScene(NamesList.MainScenario, LoadSceneMode.Single);
     }
 

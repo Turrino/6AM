@@ -3,6 +3,7 @@ using Assets.Scripts.Resources;
 using BayeuxBundle;
 using BayeuxBundle.Models.Palettes;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,6 @@ public class Master : MonoBehaviour {
     public static Master GM;
     public GameObject Player;
     public GameObject CurrentParent;
-    public Texture2D CanvasTexture;
     public ScenarioData ScenarioData = null;
     public Location Location;
     public LocationInfo CurrentLocation = null;
@@ -33,16 +33,21 @@ public class Master : MonoBehaviour {
     public Texture2D MasterTexture;
     public GameObject LoadingScreen;
     public GameObject LocationInterface;
-    public GameObject PlayerBadge;
     public ClockScript Clock;
+    public GameObject ClockUI;
     public TimeSpan TotalTimeSpent;
     public AudioSource AudioSrc;
+
+    public GameObject Final;
+    public FinalScript FinalScript;
+
+    public GameObject CanvasBars;
 
     public int LevelCounter;
 
     public SfxScript Sfx;
     public bool LoadingScreenOn;
-
+    public bool IsFinalScene;
     //public bool RenderLowResAssets;
 
     private bool AllMenuOverlaysOff() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && !LoadingScreenOn;
@@ -52,6 +57,7 @@ public class Master : MonoBehaviour {
     private GameObject _parentRef;
     private BackgroundMusic _music;
     private int LevelChangeFlag = int.MaxValue;
+    private List<Sprite> VariousCharacters;
 
     void Awake () {
         if (GM == null)
@@ -81,6 +87,7 @@ public class Master : MonoBehaviour {
         }
     }
 
+    public Queue<Sprite> GetFinalChars() => new Queue<Sprite>(VariousCharacters); 
     public static void ConfigureColors()
     {
         var textureTools = new TextureTools(OverlayRef.Am6RefDictWHash);
@@ -117,8 +124,9 @@ public class Master : MonoBehaviour {
 
     public void RestartButton()
     {
+        DialogueManager.Setup();
         LevelCounter = 0;
-        CallNextLevel();
+        CallNextLevel();        
     }
 
     public void NextLevel()
@@ -127,7 +135,8 @@ public class Master : MonoBehaviour {
         LevelCounter++;
         if (LevelCounter == Levels.LevelList.Length)
         {
-            DialogueManager.GameEnd();
+            FinalMapSetup();
+            //DialogueManager.GameEnd();
         }
         else
         {
@@ -140,6 +149,53 @@ public class Master : MonoBehaviour {
     //    LocationInterface.SetActive(on);
     //    PomaButton.enabled = on;
     //}
+    public void ToOutro()
+    {
+        Destroy(_parentRef);
+        DialogueManager.HideInfo();
+        ClockUI.SetActive(false);
+        LocationInterface.SetActive(false);
+        FinalScript.Location.enabled = false;
+        HidePoma();
+        CanvasBars.SetActive(false);
+    }
+
+    public void FinalMapSetup()
+    {
+        SetLoadingScreen();
+        IsFinalScene = true;
+        Destroy(_parentRef);
+        var finalStuff = Instantiate(Final, Vector2.zero, Quaternion.identity);
+        finalStuff.transform.SetParent(gameObject.transform);
+        FinalScript = finalStuff.GetComponent<FinalScript>();
+        PlayerInstance.transform.position = FinalScript.PolisSpawnPoint.transform.position + new Vector3(-0.2f, 0.2f, 0);
+
+        DialogueManager.HideInfo();
+        DialogueManager.FinalSceneSetup();
+
+        ToggleLocation(true);
+
+        // TODO final l music
+        //AudioSrc.clip = _music.Clips[0];
+        //AudioSrc.Play();
+        //AudioSrc.loop = true;
+
+        Clock.FinalTimer();
+        PomaUI.GetComponentInChildren<Text>().text = "Mr. Mayor Mayo IS A BIG FAT LIAR";
+
+        SetLoadingScreenOff();
+    }
+
+    public void FinalLoc()
+    {
+        FinalScript.PolisSpawnPoint.enabled = false;
+        FinalScript.Map.enabled = false;
+        FinalScript.Location.enabled = true;
+
+        ToggleLocation(false);
+
+        DialogueManager.ShowInfo("Mr. Mayor Mayo");
+    }
 
     public void ChangeScene(LocationInfo To, bool restart = false)
     {
@@ -237,10 +293,17 @@ public class Master : MonoBehaviour {
     private void LevelSetup()
     {
         if (LevelCounter == 0)
+        {
             TotalTimeSpent = new TimeSpan();
+            VariousCharacters = new List<Sprite>();
+            ClockUI.gameObject.SetActive(true);
+            CanvasBars.SetActive(true);
+        }
+
         var scenarioGenerator = new ScenarioSetup(_music.Clips.Length);
         var level = Levels.LevelList[LevelCounter];
         ScenarioData = scenarioGenerator.GenerateScenarioData(level);
+        VariousCharacters.Add(ScenarioData.Locations.PickRandom().Person.Sprite);
         // TODO depending on the setup, get the location where the player is supposed to start off
         CurrentLocation = ScenarioData.Main;
 
@@ -325,9 +388,15 @@ public class Master : MonoBehaviour {
                 TriggerPoma();
         }
 
-        if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.Escape))
+        // No longer needed with browser
+        //if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.Escape))
+        //{
+        //    Application.Quit();
+        //}
+
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            Application.Quit();
+            NextLevel();
         }
     }
 }

@@ -15,7 +15,8 @@ public class Player : MonoBehaviour {
             TargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
-            if (hit.collider != null && Master.GM.ScenarioData.LocationsDict.ContainsKey(hit.collider.gameObject.name))
+            if (hit.collider != null && Master.GM.ScenarioData.LocationsDict.ContainsKey(hit.collider.gameObject.name)
+                || hit.collider.gameObject.name == "FinalLocCollider")
             {
                 Moving = true;
                 GetComponentInChildren<SpriteRenderer>().flipX = TargetPos.x > transform.position.x;
@@ -29,10 +30,16 @@ public class Player : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other)
-    {        
+    {
         if (Master.GM.ScenarioData.LocationsDict.ContainsKey(other.gameObject.name))
         {
             Master.GM.ChangeScene(Master.GM.ScenarioData.LocationsDict[other.gameObject.name]);
+            Moving = false;
+            TargetPos = Vector2.zero;
+        }
+        else if (other.gameObject.name == "FinalLocCollider")
+        {
+            Master.GM.FinalLoc();
             Moving = false;
             TargetPos = Vector2.zero;
         }

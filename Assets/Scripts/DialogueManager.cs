@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Assets.Scripts.Resources;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour {
@@ -12,6 +15,7 @@ public class DialogueManager : MonoBehaviour {
     public bool DialogueEnabled;
     public GameObject DialogueFace;
     public ClockScript Clock;
+    public LocationButtons LocButtons;
 
     // This is the name of the location at the top left
     public Image InfoBox;
@@ -34,19 +38,114 @@ public class DialogueManager : MonoBehaviour {
 
     public GameObject TotalTimeCounter;
 
+    public GameObject InfoboxLarge;
+    public Text InfoboxText;
+
     private IEnumerator InfoDisplayCr;
 
     private Color32 SuccessClr = new Color32(90, 200, 84, 255); 
     private Color32 FailClr = new Color32(244, 85, 110, 255); 
 
-    public void ShowDialogue()
+    public void Setup()
+    {
+        InfoboxLarge.SetActive(false);
+        LocButtons.Setup();
+    }
+
+    public void ShowDialogue(string text = null)
     {
         Master.GM.HidePoma();
         Master.GM.Clock.DialogueMode(true);
         DialogueFace.GetComponent<Image>().sprite = Master.GM.CurrentLocation.Person.DialogueImg;
-        DialogueText.text = Master.GM.CurrentLocation.Person.DialogueLine;
+        DialogueText.text = text ?? Master.GM.CurrentLocation.Person.DialogueLine;
         DialogueFunction();
         TriggerDialogue(true);
+    }
+
+    public void FinalSceneSetup()
+    {
+        FinalDialogueIdx = 0;
+        LocButtons.FinalScene();
+    }
+
+    private int FinalDialogueIdx;
+    private string[] FinalDialogueSequence = new string[] {
+        "Why are you looking at me like I stole something?",
+        "Have you got nothing better to do!?",
+        "Whoops, did my mask fall off?"
+    };
+
+    public void FinalSceneDialogue()
+    {
+        ShowDialogue(FinalDialogueSequence[FinalDialogueIdx]);
+
+        DialogueFace.GetComponent<Image>().sprite = FinalDialogueIdx == 2 ? Master.GM.FinalScript.MayoNoMask : Master.GM.FinalScript.MayoWithMask;
+
+        if (FinalDialogueIdx == 2)
+        {
+            Master.GM.FinalScript.LocationSpriteNoMask();
+        }
+        else
+        {
+            FinalDialogueIdx++;
+        }
+
+        DialogueText.fontSize = 50;
+    }
+
+    public void FinalSceneArrest()
+    {
+        if (FinalDialogueIdx != 2)
+        {
+            ShowDialogue("YOU CAN'T ARREST ME.");
+            DialogueText.fontSize = 58;
+            DialogueFace.GetComponent<Image>().sprite = Master.GM.FinalScript.MayoWithMask;
+        }
+        else
+        {
+            ShowDialogue("Oh snap.");
+            DialogueText.fontSize = 58;
+            DialogueFace.GetComponent<Image>().sprite = Master.GM.FinalScript.MayoNoMask;
+            DiagButton1Text.text = "Continue";
+            DiagButton1.onClick.RemoveAllListeners();
+            DiagButton1.onClick.AddListener(() => {
+                CloseDialogue();
+                Master.GM.HidePoma();
+                InfoboxLarge.SetActive(true);
+                MenuEnabled = true;
+                MenuScreen.SetActive(true);
+
+
+                //TotalTimeCounter.transform.position = new Vector2(3.66f, 5.3f);
+                //TotalTimeCounter.transform.Find("totaltime")
+                //    .GetComponent<Text>().text = Master.GM.TotalTimeSpent.ToString(@"mm\:ss");
+
+                //TotalTimeCounter.SetActive(true);
+                //AnimateTotalTimeWidget = true;
+
+                //MenuBgImage.color = SuccessClr;
+                MenuButton1Text.text = "Continue";
+                MenuButton2.gameObject.SetActive(false);
+
+                MenuButton1.onClick.RemoveAllListeners();
+                MenuButton1.onClick.AddListener(() =>
+                {
+                    InfoboxText.text =
+                        $"Now, where might the actual Mayor Mayo be?" +
+                        $"{Environment.NewLine}No one really knows." +
+                        $"{Environment.NewLine}To be honest, no one really cares." +
+                        $"{Environment.NewLine}{Environment.NewLine}It's time to celebrate the REAL hero of this story...";
+                    MenuButton1.onClick.RemoveAllListeners();
+                    MenuButton1.onClick.AddListener(() =>
+                    {
+                        Master.GM.ToOutro();
+                        SceneManager.LoadScene(NamesList.Outro, LoadSceneMode.Single);
+                    });
+                });
+            });
+            TriggerButtonOne(true);
+
+        }
     }
 
     public void CaptureMenu(DiagButtonsFunction function, string message)

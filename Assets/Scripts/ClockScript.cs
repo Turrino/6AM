@@ -11,6 +11,7 @@ public class ClockScript : MonoBehaviour
     private int _secondsTotal;
     private int _secondsLeft = 500;
     public SpriteRenderer Panel;
+    private bool _final;
 
     public void StartTimer(int seconds)
     {
@@ -18,6 +19,15 @@ public class ClockScript : MonoBehaviour
         _secondsLeft = seconds;
         StartCoroutine("LoseTime");
         Time.timeScale = 1;
+    }
+
+    public void FinalTimer()
+    {
+        _final = true;
+        StopCoroutine("LoseTime");
+        countdownMinutes.text = "?";
+        countdownSeconds.text = "??";
+        countdownFull.text = "??:??";
     }
 
     public void StopTimer()
@@ -44,6 +54,9 @@ public class ClockScript : MonoBehaviour
 
     void Update()
     {
+        if (_final)
+            return;
+
         var timeLeft = TimeSpan.FromSeconds(_secondsLeft);
         countdownMinutes.text = timeLeft.Minutes.ToString();
         countdownSeconds.text = timeLeft.Seconds.ToString();

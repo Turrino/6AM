@@ -61,6 +61,44 @@ public class ScenarioSetup
     public Assembler<Texture2D> Assembler;
     private List<int> AvailableMusicClips;
 
+    //public ScenarioData FinalLevelSetup()
+    //{
+    //    var resource = Assembler.AssembleNamedPoly("final");
+    //    var map = new LocationAssets(
+    //        DefaultLocationAnchor,
+    //        resource.Backgrounds.Select(i => i.Image.ToSprite(StaticHelpers.TopLeftPivot, LocationScale)).ToList(),
+    //        null,
+    //        null,
+    //        AdjustOverlayForResolution(resource.OverlayData));
+
+    //    var mainMap = new LocationInfo(map);
+
+    //    var person = new CharacterInfo(
+    //        true,
+    //        "Mr. Mayor Mayo",
+    //        null,
+    //        Master.GM.Final.MayoSpriteMask,
+    //        Master.GM.Final.MayoSpriteMask);
+
+    //    return new LocationAssets(
+    //        DefaultLocationAnchor,
+    //         ,
+    //        resource.Foregrounds?.Select(i => i.ToSprite(StaticHelpers.TopLeftPivot, LocationScale))?.ToList(),
+    //        resource.Collider?.ToSprite(StaticHelpers.TopLeftPivot, LocationScale),
+    //        mainMapSprite.ToSprite(StaticHelpers.BottomCenterPivot + new Vector2(0, 0.2f)),
+    //        AdjustOverlayForResolution(resource.OverlayData),
+    //        palettes);
+
+    //    var location = new LocationInfo(
+    //        person,
+    //        locationAssets,
+    //        locationsPlacement[i].Anchor(mainMap.Assets.Anchor),
+    //        AvailableMusicClips.PickRandom());
+
+
+    //    return new ScenarioData(mainMap, null, Manual);
+    //}
+
     public ScenarioData GenerateScenarioData(LevelInfo level)
     {
         var startTime = Time.realtimeSinceStartup;

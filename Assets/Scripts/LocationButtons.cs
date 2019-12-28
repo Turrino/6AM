@@ -12,8 +12,13 @@ public class LocationButtons : MonoBehaviour
 
     private bool _dialogueOn;
 
-    public void Start()
+    public void Setup()
     {
+        LeaveBtn.gameObject.SetActive(true);
+        TalkBtn.onClick.RemoveAllListeners();
+        LeaveBtn.onClick.RemoveAllListeners();
+        ArrestBtn.onClick.RemoveAllListeners();
+
         TalkBtn.onClick.AddListener(() => {
             _dialogueOn = !_dialogueOn;
             Master.GM.DialogueManager.ShowDialogue();
@@ -29,6 +34,36 @@ public class LocationButtons : MonoBehaviour
             Master.GM.ArrestAttempt();
             Master.GM.Contents.HideContents();
         });
+    }
+
+    public void Start()
+    {
+        Setup();
+    }
+
+    public void FinalScene()
+    {
+        TalkBtn.onClick.RemoveAllListeners();
+        LeaveBtn.onClick.RemoveAllListeners();
+        ArrestBtn.onClick.RemoveAllListeners();
+
+        TalkBtn.onClick.AddListener(() => {
+            _dialogueOn = !_dialogueOn;
+            Master.GM.DialogueManager.FinalSceneDialogue();
+            Master.GM.Contents.HideContents();
+        });
+
+        LeaveBtn.gameObject.SetActive(false);
+        //LeaveBtn.onClick.AddListener(() => {
+        //    Master.GM.DialogueManager.FinalSceneLeave();
+        //    Master.GM.Contents.HideContents();
+        //});
+
+        ArrestBtn.onClick.AddListener(() => {
+            Master.GM.DialogueManager.FinalSceneArrest();
+            Master.GM.Contents.HideContents();
+        });
+
     }
 
 

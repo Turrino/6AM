@@ -29,8 +29,15 @@ public class SfxScript : MonoBehaviour
     {
         if (!_src.isPlaying && _playNext != null)
         {
-            Play(_playNext, false);
-            _playNext = null;
+            if(Master.GM.AudioSrc.isPlaying)
+            {
+                _playNext = null;
+            }
+            else
+            {
+                Play(_playNext, false);
+                _playNext = null;
+            }
         }
     }
 

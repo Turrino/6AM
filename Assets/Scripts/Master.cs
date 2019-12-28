@@ -49,6 +49,7 @@ public class Master : MonoBehaviour {
     public bool LoadingScreenOn;
     public bool IsFinalScene;
     //public bool RenderLowResAssets;
+    private int difficulty;
 
     private bool AllMenuOverlaysOff() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && !LoadingScreenOn;
     public bool TooltipEnabled() => AllMenuOverlaysOff() && !Contents.Open ;
@@ -69,6 +70,11 @@ public class Master : MonoBehaviour {
 
             _music = GetComponent<BackgroundMusic>();
             AudioSrc = GetComponent<AudioSource>();
+
+            var settings = GameObject.Find("Settings");
+            difficulty = settings != null?
+                settings.GetComponent<Settings>().DifficultySetting
+                : 1;
 
             LevelCounter = 0;
 
@@ -144,11 +150,14 @@ public class Master : MonoBehaviour {
         }
     }
 
-    //public void ToggleInterface(bool on)
-    //{
-    //    LocationInterface.SetActive(on);
-    //    PomaButton.enabled = on;
-    //}
+    public void MayoIsCaughtMusic()
+    {
+        AudioSrc.clip = _music.OutroMusic;
+        AudioSrc.time = 0;
+        AudioSrc.Play();
+        AudioSrc.loop = true;
+    }
+
     public void ToOutro()
     {
         Destroy(_parentRef);
@@ -175,10 +184,11 @@ public class Master : MonoBehaviour {
 
         ToggleLocation(true);
 
-        // TODO final l music
-        //AudioSrc.clip = _music.Clips[0];
-        //AudioSrc.Play();
-        //AudioSrc.loop = true;
+        
+        AudioSrc.clip = _music.MayoMusic;
+        AudioSrc.time = 0;
+        AudioSrc.Play();
+        AudioSrc.loop = true;
 
         Clock.FinalTimer();
         PomaUI.GetComponentInChildren<Text>().text = "Mr. Mayor Mayo IS A BIG FAT LIAR";

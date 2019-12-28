@@ -63,7 +63,7 @@ namespace Assets.Scripts.Resources
             GetManual = RulesLevels.Complexity2Cab
         };
 
-        public static LevelInfo[] LevelList = new[] { Level0, Level1, Level2, Level3, Level4, Level5 };
+        public static LevelInfo[] LevelList = new[] { Level0 };
         //public static LevelInfo[] LevelList = new[] { Level0 };
     }
 }

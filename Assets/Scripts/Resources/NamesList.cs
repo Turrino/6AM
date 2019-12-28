@@ -17,6 +17,7 @@ namespace Assets.Scripts.Resources
 
         public const string MainScenario = "Main";
         public const string MainMenu = "MainMenu";
+        public const string Intro = "Intro";
         public const string Loading = "Loading";
         public const string Location = "Location";
         public const string ExitToMain = "Exit";

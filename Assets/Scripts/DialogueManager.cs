@@ -44,8 +44,9 @@ public class DialogueManager : MonoBehaviour {
     private IEnumerator InfoDisplayCr;
 
     private Color32 SuccessClr = new Color32(90, 200, 84, 255); 
-    private Color32 FailClr = new Color32(244, 85, 110, 255); 
+    private Color32 FailClr = new Color32(244, 85, 110, 255);
 
+    bool CanArrestMayo;
     public void Setup()
     {
         InfoboxLarge.SetActive(false);
@@ -84,6 +85,7 @@ public class DialogueManager : MonoBehaviour {
         if (FinalDialogueIdx == 2)
         {
             Master.GM.FinalScript.LocationSpriteNoMask();
+            CanArrestMayo = true;
         }
         else
         {
@@ -93,9 +95,21 @@ public class DialogueManager : MonoBehaviour {
         DialogueText.fontSize = 50;
     }
 
+    private Queue<string> OutroStory = new Queue<string>(new string[]
+    {
+        $"Well, well, well!{Environment.NewLine}What a story.",
+        "The fiendish Sbarlo was posing as Mayor Mayo and pocketing all the cookies in Biscotja.",
+        "Sbarlo sent the Polis Manual to Scimatta thinking the crime would never be solved.",
+        "Boy oh boy, you showed them, didn't you.",
+        "Now, where might the actual Mayor Mayo be?",
+        "No one really knows.",
+        "To be honest, no one really cares.",
+        $"Why should anyone?{Environment.NewLine}It's time to celebrate the REAL hero of this story..."
+    });
+
     public void FinalSceneArrest()
     {
-        if (FinalDialogueIdx != 2)
+        if (!CanArrestMayo)
         {
             ShowDialogue("YOU CAN'T ARREST ME.");
             DialogueText.fontSize = 58;
@@ -109,38 +123,29 @@ public class DialogueManager : MonoBehaviour {
             DiagButton1Text.text = "Continue";
             DiagButton1.onClick.RemoveAllListeners();
             DiagButton1.onClick.AddListener(() => {
+                Master.GM.MayoIsCaughtMusic();
                 CloseDialogue();
                 Master.GM.HidePoma();
+                InfoboxText.text = OutroStory.Dequeue();
                 InfoboxLarge.SetActive(true);
                 MenuEnabled = true;
                 MenuScreen.SetActive(true);
-
-
-                //TotalTimeCounter.transform.position = new Vector2(3.66f, 5.3f);
-                //TotalTimeCounter.transform.Find("totaltime")
-                //    .GetComponent<Text>().text = Master.GM.TotalTimeSpent.ToString(@"mm\:ss");
-
-                //TotalTimeCounter.SetActive(true);
-                //AnimateTotalTimeWidget = true;
-
-                //MenuBgImage.color = SuccessClr;
                 MenuButton1Text.text = "Continue";
                 MenuButton2.gameObject.SetActive(false);
 
                 MenuButton1.onClick.RemoveAllListeners();
                 MenuButton1.onClick.AddListener(() =>
                 {
-                    InfoboxText.text =
-                        $"Now, where might the actual Mayor Mayo be?" +
-                        $"{Environment.NewLine}No one really knows." +
-                        $"{Environment.NewLine}To be honest, no one really cares." +
-                        $"{Environment.NewLine}{Environment.NewLine}It's time to celebrate the REAL hero of this story...";
-                    MenuButton1.onClick.RemoveAllListeners();
-                    MenuButton1.onClick.AddListener(() =>
+                    InfoboxText.text = OutroStory.Dequeue();
+                    if (OutroStory.Count == 0)
                     {
-                        Master.GM.ToOutro();
-                        SceneManager.LoadScene(NamesList.Outro, LoadSceneMode.Single);
-                    });
+                        MenuButton1.onClick.RemoveAllListeners();
+                        MenuButton1.onClick.AddListener(() =>
+                        {
+                            Master.GM.ToOutro();
+                            SceneManager.LoadScene(NamesList.Outro, LoadSceneMode.Single);
+                        });
+                    }
                 });
             });
             TriggerButtonOne(true);

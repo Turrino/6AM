@@ -279,26 +279,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 30fc3a6d35eb8f0419eca3f516c3be16, type: 2}
-    m_FontSize: 40
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 60
-    m_Alignment: 3
+    m_MaxSize: 69
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Well, well, well! What a story.
-
-
-    The fiendish Sbarlo was posing as Mayor Mayo and pocketing all the cookies in
-    Biscotja.
-
-
-    Sbarlo sent the Polis Manual to Scimatta thinking the crime would never be solved,
-    but, boy oh boy, you showed them, didn''t you.'
+  m_Text: Text here pls
 --- !u!222 &31962448
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4671,6 +4663,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d1a7919607153254eb52b76147f70859, type: 3}
   - {fileID: 8300000, guid: 24a5a002f097d104393016c66ceb5310, type: 3}
   - {fileID: 8300000, guid: 017ef6b783f8b8641b00dbf8e344db90, type: 3}
+  OutroMusic: {fileID: 8300000, guid: 59f4a3f91cacd044795dd6d0848acc09, type: 3}
+  MayoMusic: {fileID: 8300000, guid: 8db0494617e67074a9b5812f8c4e3ce8, type: 3}
 --- !u!1 &1720804748
 GameObject:
   m_ObjectHideFlags: 0

@@ -98,9 +98,9 @@ public class DialogueManager : MonoBehaviour {
     private Queue<string> OutroStory = new Queue<string>(new string[]
     {
         $"Well, well, well!{Environment.NewLine}What a story.",
-        "The fiendish Sbarlo was posing as Mayor Mayo and pocketing all the cookies in Biscotja.",
-        "Sbarlo sent the Polis Manual to Scimatta thinking the crime would never be solved.",
-        "Boy oh boy, you showed them, didn't you.",
+        "The fiendish Sbarlo was posing as Mayor Mayo, pocketing all the cookies in Biscotja.",
+        "Sbarlo sent the Polis Manual to Scimatta, thinking the crime would never be solved.",
+        $"Boy oh boy,{Environment.NewLine}you showed them,{Environment.NewLine}didn't you.",
         "Now, where might the actual Mayor Mayo be?",
         "No one really knows.",
         "To be honest, no one really cares.",

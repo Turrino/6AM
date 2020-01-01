@@ -192,7 +192,7 @@ public class Master : MonoBehaviour {
 
         Clock.FinalTimer();
         PomaUI.GetComponentInChildren<Text>().text = "Mr. Mayor Mayo IS A BIG FAT LIAR";
-
+        Sfx.Stop();
         SetLoadingScreenOff();
     }
 
@@ -212,6 +212,7 @@ public class Master : MonoBehaviour {
         // Save the current playback time & stop music
         CurrentLocation.MusicPlaybackTime = AudioSrc.time;
         AudioSrc.Stop();
+        Sfx.Stop();
 
         // with the new map movement, we no longer store the location & always spawn at the center
         //var playerLoc = restart ? ScenarioData.Main.SpawnPoint
@@ -223,7 +224,7 @@ public class Master : MonoBehaviour {
         SceneInit();
 
         // Restart music        
-        AudioSrc.clip = _music.Clips[CurrentLocation.MusicClipIndex];
+        AudioSrc.clip = To.IsMap ? GetMapMusicClip() : _music.Clips[CurrentLocation.MusicClipIndex];
         AudioSrc.time = CurrentLocation.MusicPlaybackTime;
         AudioSrc.Play();
         AudioSrc.loop = true;
@@ -326,13 +327,18 @@ public class Master : MonoBehaviour {
         ToggleLocation(true);
         DialogueManager.HideInfo();
 
-        AudioSrc.clip = _music.Clips[0];
+        AudioSrc.clip = GetMapMusicClip();
         AudioSrc.Play();
         AudioSrc.loop = true;
         Clock.StartTimer(Levels.LevelList[LevelCounter].SecondsAvailable);
 
         SetLoadingScreenOff();
         PomaUI.GetComponentInChildren<Text>().text = GM.ScenarioData.PomaText;
+    }
+
+    private AudioClip GetMapMusicClip()
+    {
+        return LevelCounter < 2 ? _music.MapMusic1 : LevelCounter < 4 ? _music.MapMusic2 : _music.MapMusic3; ;
     }
 
     private void SceneInit()
@@ -355,7 +361,6 @@ public class Master : MonoBehaviour {
     private void SetLoadingScreen()
     {
         LoadingScreenOn = true;
-        Sfx.Stop();
         DialogueManager.MenuScreen.SetActive(false);
         LoadingScreen.SetActive(true);
     }

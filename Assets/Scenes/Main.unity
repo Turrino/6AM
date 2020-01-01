@@ -4654,7 +4654,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Clips:
-  - {fileID: 8300000, guid: ad01488a7d2ce5a4694cf5c584fe7aba, type: 3}
   - {fileID: 8300000, guid: 22ade222d4f531b4db7e80908fcaef5a, type: 3}
   - {fileID: 8300000, guid: 32e99a3936d3a0549bbcb0ba933c4d94, type: 3}
   - {fileID: 8300000, guid: c971b3a70a8b2044db1bd56003767528, type: 3}
@@ -4663,6 +4662,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d1a7919607153254eb52b76147f70859, type: 3}
   - {fileID: 8300000, guid: 24a5a002f097d104393016c66ceb5310, type: 3}
   - {fileID: 8300000, guid: 017ef6b783f8b8641b00dbf8e344db90, type: 3}
+  MapMusic1: {fileID: 8300000, guid: 18c1b84b7d519c244ac3f1a7c92e3cbd, type: 3}
+  MapMusic2: {fileID: 8300000, guid: d500be739d264844f82e402f9010fc28, type: 3}
+  MapMusic3: {fileID: 8300000, guid: ad01488a7d2ce5a4694cf5c584fe7aba, type: 3}
   OutroMusic: {fileID: 8300000, guid: 59f4a3f91cacd044795dd6d0848acc09, type: 3}
   MayoMusic: {fileID: 8300000, guid: 8db0494617e67074a9b5812f8c4e3ce8, type: 3}
 --- !u!1 &1720804748

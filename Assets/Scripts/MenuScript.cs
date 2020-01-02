@@ -17,6 +17,9 @@ public class MenuScript : MonoBehaviour
     public Text DifficultyBtnText;
     public Text DifficultyDescriptionText;
     private int DifficultyIdx = 1;
+
+    private int LevelChangeFlag = int.MaxValue;
+    private Action LevelChange;
     private string[] Difficulties = new string[] {
         @"<color=""#460C23"">Difficulty:</color> Easy-Peasy",
         @"<color=""#460C23"">Difficulty:</color> El Normal",
@@ -25,14 +28,25 @@ public class MenuScript : MonoBehaviour
     private string[] DifficultiesDesc = new string[] {
         $"Easy mode.{Environment.NewLine}Like normal,{Environment.NewLine}but can re-try levels.",
         $"Regular Difficulty.{Environment.NewLine}Cannot re-try levels.",
-        $"Hurd mode.{Environment.NewLine}Extra challenge." };
+        $"Hurd mode.{Environment.NewLine}Cannot re-try levels + extra challenge." };
 
-    //Cannot re-try levels.
     public void StartGame()
     {
         Master.Difficulty = DifficultyIdx;
         LoadingScreen.SetActive(true);
-        SceneManager.LoadScene(playintro? NamesList.Intro : NamesList.MainScenario, LoadSceneMode.Single);
+        if (playintro)
+        {
+            SceneManager.LoadScene(NamesList.Intro, LoadSceneMode.Single);
+        }
+        else
+        {
+            LevelChangeFlag = Time.frameCount;
+
+            if (Master.GM != null)
+                LevelChange = () => Master.GM.LoadLevel();
+            else
+                LevelChange = () => SceneManager.LoadScene(NamesList.MainScenario, LoadSceneMode.Single);
+        }        
     }
 
     public void PlayIntroToggle() {
@@ -43,7 +57,6 @@ public class MenuScript : MonoBehaviour
     {
         if (Master.GM != null)
         {
-            Master.GM.MasterCanvas.SetActive(false);
             Master.GM.SetLoadingScreenOff();
         }
     }
@@ -62,5 +75,11 @@ public class MenuScript : MonoBehaviour
     {
         Invoke("DisableLoad", 0.1f);
         Logo.transform.position = Logo.transform.position + new Vector3(0, Mathf.Sin(Time.time * speed) * amount, 0);
+
+        if (Time.frameCount - LevelChangeFlag > 3)
+        {
+            LevelChangeFlag = int.MaxValue;
+            LevelChange();
+        }
     }
 }

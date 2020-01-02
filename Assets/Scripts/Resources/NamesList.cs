@@ -1,4 +1,5 @@
 ﻿
+using BayeuxBundle;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -41,13 +42,59 @@ namespace Assets.Scripts.Resources
         public static string OverlayMapSpawn = "#FF00E5";
 
 
-        //TODO update
-        public static List<string> PersonNames = new List<string>()
+
+        public static List<string> GetNamesForLevel(bool hurdMode, int count)
         {
-            "Ribbity", "Rabbity", "Bob", "'Not Mathilda'", "Poppy", "Yogurta",
-            "Yolanda", "Polentina", "Giuseppo", "Bobby J.", "Frufru", "Notbob",
-            "Sbestos", "Pasteis", "Mapo", "Luotuo", "Piaochong", "FriFri",
-            "Chapatty", "Quorma", "Bobbo", "Bobbea"
+            if (hurdMode)
+            {
+                if (CurrentDifficultNames == null || CurrentDifficultNames.Count == 0)
+                {
+                    CurrentDifficultNames = DifficultNames.Select(x => new List<string>(x)).ToList();
+                    foreach (var item in CurrentDifficultNames)
+                    {
+                        item.Shuffle();
+                    }
+                }
+                return CurrentDifficultNames.PopRandom();
+            }
+
+            if (CurrentPersonNames == null || CurrentPersonNames.Count == 0)
+            {
+                CurrentPersonNames = new List<string>(PersonNames);
+            }
+
+            var names = new List<string>();
+            for (int i = 0; i < count; i++)
+            {
+                names.Add(CurrentPersonNames.PopRandom());
+            }
+
+            return names;
+        }
+
+        private static List<List<string>> CurrentDifficultNames;
+        private static List<string> CurrentPersonNames;
+
+        private static List<List<string>> DifficultNames = new List<List<string>>()
+        {
+            new List<string>() { "Bob", "Bobbea", "Bob Jr.", "Bobby", "Bobert", "B. O. Bert" },
+            new List<string>() { "Ribbity", "Rabbity", "Wobbity", "Wabbity" },
+            new List<string>() { "Fruffu", "Friffi", "Cricri", "Cracra", "Furfra", "Frafri" },
+            new List<string>() { "Claire", "Klare", "Klaire", "Clara", "Klaar", "Claro" },
+            new List<string>() { "Purlì", "Purlà", "Perelà", "Perelì", "Perlilà" },
+            new List<string>() { "Nini", "Nana", "Nunu", "Nene", "Nono" },
+            new List<string>() { "Lila", "Lala", "Lollo", "Lola", "Lalla", "Lallì" },
+            new List<string>() { "Ubu", "Aba", "Uba", "Bau", "Boa", "Abu" }
+        };
+
+        private static List<string> PersonNames = new List<string>()
+        {
+            "Ribbity", "Bobbea", "'Not Mathilda'", "Poppy", "Yogurta",
+            "Yolanda", "Polentina", "Giuseppo", "Wobbity", "Perelà", "Nana",
+            "Ubu", "Aba", "Ululì", "Mappo", "Fra", "Mr. No",
+            "Chapatty", "Ms. Maybe", "Dear Prudence", "Carlito",
+            "Juanita", "Wally", "Uùuu", "Aha", "Oh-Yeah", "Chipo",
+            "Yayai", "Araffa", "Stealino", "Thiefella", "Honestina",
         };
 
         /// <summary>

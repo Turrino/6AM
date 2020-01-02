@@ -1,9 +1,4 @@
 ﻿using Assets.Scripts.ScenarioLogic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.Scripts.Resources
 {
@@ -14,7 +9,7 @@ namespace Assets.Scripts.Resources
             MapName = "flower2x",
             ManualLinesCount = 1,
             LocationsCount = 2,
-            SecondsAvailable = 109,
+            SecondsAvailable = 180,
             GetManual = RulesLevels.Complexity0
         };
 
@@ -23,7 +18,7 @@ namespace Assets.Scripts.Resources
             MapName = "plant3x",
             ManualLinesCount = 3,
             LocationsCount = 3,
-            SecondsAvailable = 109,
+            SecondsAvailable = 120,
             GetManual = RulesLevels.Complexity1
         };
 
@@ -32,7 +27,7 @@ namespace Assets.Scripts.Resources
             MapName = "pond3x",
             ManualLinesCount = 3,
             LocationsCount = 3,
-            SecondsAvailable = 109,
+            SecondsAvailable = 120,
             GetManual = RulesLevels.Complexity1Cab
         };
 
@@ -64,6 +59,5 @@ namespace Assets.Scripts.Resources
         };
 
         public static LevelInfo[] LevelList = new[] { Level0, Level1, Level2, Level3, Level4, Level5 };
-        //public static LevelInfo[] LevelList = new[] { Level0 };
     }
 }

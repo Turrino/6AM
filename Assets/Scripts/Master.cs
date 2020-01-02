@@ -55,7 +55,7 @@ public class Master : MonoBehaviour {
     public int Lives;
 
     private bool AllMenuOverlaysOff() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && !LoadingScreenOn;
-    public bool TooltipEnabled() => AllMenuOverlaysOff() && !Contents.Open ;
+    public bool TooltipEnabled() => AllMenuOverlaysOff() && !Contents.Open;
     public bool DrawerTooltipEnabled() => AllMenuOverlaysOff() && Contents.Open;
 
     private GameObject _parentRef;
@@ -362,7 +362,9 @@ public class Master : MonoBehaviour {
         AudioSrc.clip = GetMapMusicClip();
         AudioSrc.Play();
         AudioSrc.loop = true;
-        Clock.StartTimer(Levels.LevelList[LevelCounter].SecondsAvailable);
+        // 70% time allowed for hurd mode
+        var timeMultiplier = Difficulty == 2 ? 0.7f : 1;
+        Clock.StartTimer((int)(Levels.LevelList[LevelCounter].SecondsAvailable * timeMultiplier));
 
         SetLoadingScreenOff();
         PomaUI.GetComponentInChildren<Text>().text = GM.ScenarioData.PomaText;
@@ -435,15 +437,17 @@ public class Master : MonoBehaviour {
                 TriggerPoma();
         }
 
+#if UNITY_EDITOR
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            NextLevel();
+        }
+#endif
+
         // No longer needed with browser
         //if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.Escape))
         //{
         //    Application.Quit();
         //}
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            NextLevel();
-        }
     }
 }

@@ -36,6 +36,9 @@ public class DialogueManager : MonoBehaviour {
     public Text MenuText;
     public bool MenuEnabled;
 
+    public GameObject LivesObj;
+    public Text LivesCounter;
+
     public GameObject TotalTimeCounter;
 
     public GameObject InfoboxLarge;
@@ -43,7 +46,7 @@ public class DialogueManager : MonoBehaviour {
 
     private IEnumerator InfoDisplayCr;
 
-    private Color32 SuccessClr = new Color32(90, 200, 84, 255); 
+    private Color32 SuccessClr = new Color32(147, 204, 144, 255); 
     private Color32 FailClr = new Color32(244, 85, 110, 255);
 
     bool CanArrestMayo;
@@ -51,6 +54,9 @@ public class DialogueManager : MonoBehaviour {
     {
         InfoboxLarge.SetActive(false);
         LocButtons.Setup();
+        LivesObj.SetActive(Master.Difficulty == 0);
+        LivesCounter.text = "3";
+        LivesCounter.color = SuccessClr;
     }
 
     public void ShowDialogue(string text = null)
@@ -153,7 +159,7 @@ public class DialogueManager : MonoBehaviour {
         }
     }
 
-    public void CaptureMenu(DiagButtonsFunction function, string message)
+    public void ArrestMenu(DiagButtonsFunction function, string message)
     {
         Master.GM.HidePoma();
         MenuText.text = message;
@@ -208,36 +214,47 @@ public class DialogueManager : MonoBehaviour {
         TriggerButtonOne(true);
     }
 
-    public void CaptureFailedFunction(bool failedColor = true)
+    public void CaptureFailedFunction(bool useFailColor = true)
     {
-        MenuBgImage.color = failedColor? FailClr : SuccessClr;
+        MenuBgImage.color = useFailColor? FailClr : SuccessClr;
         EnableMenuScreen();
+        var canContinue = Master.GM.CanContinueFailedLevel();
+        LivesCounter.text = Master.GM.Lives.ToString();
 
-        MenuButton1Text.text = "Restart";
-        MenuButton2Text.text = "Ragequit";
-
-        MenuButton1.onClick.RemoveAllListeners();
-        MenuButton1.onClick.AddListener(() =>
+        if (canContinue)
         {
-            DisableMenuScreen();
-            Master.GM.RestartButton();
-        });
-        MenuButton2.onClick.RemoveAllListeners();
-        MenuButton2.onClick.AddListener(() =>
-        {
-            Master.GM.QuitButton();
-        });
-        MenuButton2.gameObject.SetActive(true);
-    }
+            MenuButton1Text.text = "Continue";
+            MenuButton1.onClick.RemoveAllListeners();
+            MenuButton1.onClick.AddListener(() =>
+            {
+                DisableMenuScreen();
+                Master.GM.ContinueAfterFail();
+            });
 
-    public void GameEnd()
-    {
-        MenuBgImage.color = SuccessClr;
-        MenuText.text = $"You did it!!! The world is now a safer place for cookies." +
-            $"{Environment.NewLine}This is as far the 6AM Alpha version goes.";
-        EnableMenuScreen();
-        CaptureFailedFunction(false);
-        MenuButton2Text.text = "Quit";
+            MenuButton2Text.text = "Main Menu";
+            MenuButton2.onClick.RemoveAllListeners();
+            MenuButton2.gameObject.SetActive(true);
+            MenuButton2.onClick.AddListener(() =>
+            {
+                DisableMenuScreen();
+                Master.GM.ReturnToMainMenu();
+            });
+
+            MenuButton2.gameObject.SetActive(true);
+        }
+        else
+        {
+            LivesCounter.color = FailClr;
+            MenuButton1Text.text = "Main Menu";
+            MenuButton1.onClick.RemoveAllListeners();
+            MenuButton1.onClick.AddListener(() =>
+            {
+                Master.GM.SetLoadingScreen();
+                DisableMenuScreen();
+                Master.GM.ReturnToMainMenu();
+            });
+            MenuButton2.gameObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -275,6 +292,7 @@ public class DialogueManager : MonoBehaviour {
         MenuButton1.onClick.RemoveAllListeners();
         MenuButton1.onClick.AddListener(() =>
         {
+            
             DisableMenuScreen();
             Master.GM.NextLevel();
         });

@@ -79,7 +79,10 @@ public class intro : MonoBehaviour
     public void Skip()
     {
         LoadingScreen.SetActive(true);
-        SceneManager.LoadScene(NamesList.MainScenario, LoadSceneMode.Single);
+        if (Master.GM != null)
+            Master.GM.LoadLevel();
+        else
+            SceneManager.LoadScene(NamesList.MainScenario, LoadSceneMode.Single);
     }
 
     private void Update()

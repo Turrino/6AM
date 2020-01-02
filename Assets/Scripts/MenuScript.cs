@@ -11,7 +11,6 @@ public class MenuScript : MonoBehaviour
 
     public GameObject Logo;
     public GameObject LoadingScreen;
-    public Settings Set;
     float speed = 1f;
     float amount = 0.003f;
     bool playintro = true;
@@ -31,12 +30,22 @@ public class MenuScript : MonoBehaviour
     //Cannot re-try levels.
     public void StartGame()
     {
+        Master.Difficulty = DifficultyIdx;
         LoadingScreen.SetActive(true);
         SceneManager.LoadScene(playintro? NamesList.Intro : NamesList.MainScenario, LoadSceneMode.Single);
     }
 
     public void PlayIntroToggle() {
         playintro = !playintro;
+    }
+
+    void DisableLoad()
+    {
+        if (Master.GM != null)
+        {
+            Master.GM.MasterCanvas.SetActive(false);
+            Master.GM.SetLoadingScreenOff();
+        }
     }
 
     public void ChangeDifficulty()
@@ -46,11 +55,12 @@ public class MenuScript : MonoBehaviour
         DifficultyBtnText.text = Difficulties[DifficultyIdx];
         DifficultyDescriptionText.text = DifficultiesDesc[DifficultyIdx];
 
-        Set.DifficultySetting = DifficultyIdx;
+        Master.Difficulty = DifficultyIdx;
     }
 
     void Update()
     {
+        Invoke("DisableLoad", 0.1f);
         Logo.transform.position = Logo.transform.position + new Vector3(0, Mathf.Sin(Time.time * speed) * amount, 0);
     }
 }

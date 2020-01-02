@@ -88,13 +88,15 @@ public static class TextResources
     }
     public static string GetArrestMessage(bool correct, string name)
     {
-        return correct? $"YOU GOT THE THEIF! {name} stole the cookies."
-            : $"WHOOPS, THAT WAS NOT THE THEIF. {name} was innocent...";
+        return correct? $"YOU GOT {name.ToUpper()}, THE THEIF!" +
+            $"{Environment.NewLine}Alas, the stolen cookie was just a DECOY." +
+            $"{Environment.NewLine}The real one might be in the next town..."
+            : $"OUCH, THAT WAS NOT THE THEIF. {name} was innocent...";
     }
 
     // Menus
     // TODO move all the menu texts here
-    public static string ArrestTimeout = "Oh snap... Time's up. The theif ate the cookie. GG mate.";
+    public static string ArrestTimeout = "Oh snap... Time's up. The theif ate the cookie.";
 
 
     // Manual lines

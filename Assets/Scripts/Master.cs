@@ -13,7 +13,9 @@ using static DialogueManager;
 public class Master : MonoBehaviour {
 
     public static Master GM;
+    public static int Difficulty;
     public GameObject Player;
+    public GameObject MasterCanvas;
     public GameObject CurrentParent;
     public ScenarioData ScenarioData = null;
     public Location Location;
@@ -37,6 +39,7 @@ public class Master : MonoBehaviour {
     public GameObject ClockUI;
     public TimeSpan TotalTimeSpent;
     public AudioSource AudioSrc;
+    private AudioListener _listener;
 
     public GameObject Final;
     public FinalScript FinalScript;
@@ -49,7 +52,7 @@ public class Master : MonoBehaviour {
     public bool LoadingScreenOn;
     public bool IsFinalScene;
     //public bool RenderLowResAssets;
-    private int difficulty;
+    public int Lives;
 
     private bool AllMenuOverlaysOff() => !DialogueManager.DialogueEnabled && !DialogueManager.MenuEnabled && !LoadingScreenOn;
     public bool TooltipEnabled() => AllMenuOverlaysOff() && !Contents.Open ;
@@ -68,13 +71,9 @@ public class Master : MonoBehaviour {
 
             LocalRandom.ConfigureRandom(new System.Random());
 
+            _listener = GetComponent<AudioListener>();
             _music = GetComponent<BackgroundMusic>();
             AudioSrc = GetComponent<AudioSource>();
-
-            var settings = GameObject.Find("Settings");
-            difficulty = settings != null?
-                settings.GetComponent<Settings>().DifficultySetting
-                : 1;
 
             LevelCounter = 0;
 
@@ -114,25 +113,52 @@ public class Master : MonoBehaviour {
         return _parentRef.transform;
     }
 
-    public void QuitButton()
+    public bool CanContinueFailedLevel()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-             Application.Quit();
-#endif
+        if (Difficulty > 0)
+            return false;
+        Lives--;
+        return Lives > 0;
     }
+
+    public void ContinueAfterFail()
+    {
+        Clock.StartTimer(Levels.LevelList[LevelCounter].SecondsAvailable);
+        ChangeScene(ScenarioData.Map);
+    }
+
+    // Not needed since the switch to web version
+//    public void QuitButton()
+//    {
+//#if UNITY_EDITOR
+//        UnityEditor.EditorApplication.isPlaying = false;
+//#else
+//             Application.Quit();
+//#endif
+//    }
 
     public void Start()
     {
         Location.CreateLocation(CurrentLocation, GetSceneTransform());
     }
 
-    public void RestartButton()
+    public void ReturnToMainMenu()
     {
-        DialogueManager.Setup();
+        MasterCanvas.SetActive(false);
+        //PomaButton.enabled = false;
+        //PomaUI.SetActive(false);
+        PlayerInstance.SetActive(false);
+        //Clock.ToggleBadge(false);
+        //LocationInterface.SetActive(false);
+        Destroy(_parentRef);
+        //ClockUI.SetActive(false);
+        //CanvasBars.SetActive(false);        
         LevelCounter = 0;
-        CallNextLevel();        
+        Lives = 0;
+        Sfx.Stop();
+        AudioSrc.Stop();
+        _listener.gameObject.SetActive(false);
+        SceneManager.LoadScene(NamesList.MainMenu, LoadSceneMode.Single);
     }
 
     public void NextLevel()
@@ -207,7 +233,7 @@ public class Master : MonoBehaviour {
         DialogueManager.ShowInfo("Mr. Mayor Mayo");
     }
 
-    public void ChangeScene(LocationInfo To, bool restart = false)
+    public void ChangeScene(LocationInfo To)
     {
         // Save the current playback time & stop music
         CurrentLocation.MusicPlaybackTime = AudioSrc.time;
@@ -237,7 +263,7 @@ public class Master : MonoBehaviour {
             DialogueManager.HideInfo();
             SceneManager.LoadScene(NamesList.MainScenario, LoadSceneMode.Single);
             Location.CreateLocation(CurrentLocation, GetSceneTransform());
-            PlayerInstance.transform.position = ScenarioData.Main.SpawnPoint;
+            PlayerInstance.transform.position = ScenarioData.Map.SpawnPoint;
         }
         else
         {
@@ -266,7 +292,7 @@ public class Master : MonoBehaviour {
         if (!success)
             Sfx.Fail();
 
-        DialogueManager.CaptureMenu(function, arrestMsg);
+        DialogueManager.ArrestMenu(function, arrestMsg);
     }
 
     public void TriggerPoma()
@@ -283,7 +309,7 @@ public class Master : MonoBehaviour {
     {
         AudioSrc.Stop();
         Sfx.TimeUp();
-        DialogueManager.CaptureMenu(DiagButtonsFunction.ArrestFailed,
+        DialogueManager.ArrestMenu(DiagButtonsFunction.ArrestFailed,
             TextResources.ArrestTimeout);
     }
 
@@ -305,10 +331,16 @@ public class Master : MonoBehaviour {
     {
         if (LevelCounter == 0)
         {
+            MasterCanvas.SetActive(true);
+            DialogueManager.Setup();
+            PomaButton.enabled = true;
+            _listener.gameObject.SetActive(true);
             TotalTimeSpent = new TimeSpan();
             VariousCharacters = new List<Sprite>();
             ClockUI.gameObject.SetActive(true);
             CanvasBars.SetActive(true);
+            if (Difficulty == 0)
+                Lives = 3;
         }
 
         var scenarioGenerator = new ScenarioSetup(_music.Clips.Length);
@@ -316,9 +348,9 @@ public class Master : MonoBehaviour {
         ScenarioData = scenarioGenerator.GenerateScenarioData(level);
         VariousCharacters.Add(ScenarioData.Locations.PickRandom().Person.Sprite);
         // TODO depending on the setup, get the location where the player is supposed to start off
-        CurrentLocation = ScenarioData.Main;
+        CurrentLocation = ScenarioData.Map;
 
-        PlayerInstance = Instantiate(Player, ScenarioData.Main.SpawnPoint, Quaternion.identity);
+        PlayerInstance = Instantiate(Player, ScenarioData.Map.SpawnPoint, Quaternion.identity);
         PlayerInstance.transform.SetParent(gameObject.transform);
         PlayerInstance.name = NamesList.Player;
 
@@ -338,7 +370,7 @@ public class Master : MonoBehaviour {
 
     private AudioClip GetMapMusicClip()
     {
-        return LevelCounter < 2 ? _music.MapMusic1 : LevelCounter < 4 ? _music.MapMusic2 : _music.MapMusic3; ;
+        return LevelCounter < 2 ? _music.MapMusic1 : LevelCounter < 4 ? _music.MapMusic2 : _music.MapMusic3;
     }
 
     private void SceneInit()
@@ -358,14 +390,14 @@ public class Master : MonoBehaviour {
         AudioSrc.Stop();
     }
 
-    private void SetLoadingScreen()
+    public void SetLoadingScreen()
     {
         LoadingScreenOn = true;
         DialogueManager.MenuScreen.SetActive(false);
         LoadingScreen.SetActive(true);
     }
 
-    private void SetLoadingScreenOff()
+    public void SetLoadingScreenOff()
     {
         LoadingScreenOn = false;
         LoadingScreen.SetActive(false);
@@ -377,11 +409,11 @@ public class Master : MonoBehaviour {
         LevelChangeFlag = Time.frameCount;
     }
 
-    private void LoadLevel()
+    public void LoadLevel()
     {
         TearDown();
         LevelSetup();
-        ChangeScene(ScenarioData.Main, true);
+        ChangeScene(ScenarioData.Map);
     }
 
     private void Update()

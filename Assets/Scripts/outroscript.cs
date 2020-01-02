@@ -15,9 +15,12 @@ public class outroscript : MonoBehaviour
     bool keepchant;
     public GameObject Tally;
     public Text TallyText;
+    public Text ModeText;
 
     private void Start()
     {
+        ModeText.text = Master.Difficulty == 0 ? "Easy-Peasy Mode >" 
+            : Master.Difficulty == 1 ? "El Normal Mode >" : "Hurd Mode >";
         var chars = Master.GM.GetFinalChars();
 
         foreach (var item in Sprites.GetComponentsInChildren<SpriteRenderer>())
@@ -85,6 +88,6 @@ public class outroscript : MonoBehaviour
 
 
         Tally.transform.position = Vector2.MoveTowards(Tally.transform.position,
-            new Vector2(-7.5f, Tally.transform.position.y), 2 * Time.deltaTime);
+            new Vector2(-5.5f, Tally.transform.position.y), 2 * Time.deltaTime);
     }
 }

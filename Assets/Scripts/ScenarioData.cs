@@ -14,7 +14,7 @@ public class ScenarioData {
     {
         Locations = locations;
         Initialised = true;
-        Main = mainMap;
+        Map = mainMap;
         LocationsDict = Locations.ToDictionary(
             kv => kv.Person.Name,
             kv => kv);
@@ -25,7 +25,7 @@ public class ScenarioData {
     public bool Initialised = false;
     public List<LocationInfo> Locations;
     public Dictionary<string, LocationInfo> LocationsDict;
-    public LocationInfo Main;
+    public LocationInfo Map;
     public string PomaText;
 }
 

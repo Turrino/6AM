@@ -26,7 +26,7 @@ public class LocationButtons : MonoBehaviour
         });
 
         LeaveBtn.onClick.AddListener(() => {
-            Master.GM.ChangeScene(Master.GM.ScenarioData.Main);
+            Master.GM.ChangeScene(Master.GM.ScenarioData.Map);
             Master.GM.Contents.HideContents();
         });
 

@@ -15,8 +15,12 @@ public class Player : MonoBehaviour {
             TargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
-            if (hit.collider != null && Master.GM.ScenarioData.LocationsDict.ContainsKey(hit.collider.gameObject.name)
-                || hit.collider.gameObject.name == "FinalLocCollider")
+            var collider = hit.collider;
+            if (collider == null)
+                return;
+
+            if (Master.GM.ScenarioData.LocationsDict.ContainsKey(hit.collider.gameObject.name)
+                    || hit.collider.gameObject.name == "FinalLocCollider")
             {
                 Moving = true;
                 GetComponentInChildren<SpriteRenderer>().flipX = TargetPos.x > transform.position.x;

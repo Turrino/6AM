@@ -118,8 +118,10 @@ namespace BayeuxBundle
                 resources.Insert(0, AssemblerResource<T>.Canvas(canvas));
             }
             var assembled = resources.Aggregate((res, next) => Merge(res, next, skeletonType, overlay));
-            CleanupLayers(assembled, skeletonType);            
+            CleanupLayers(assembled, skeletonType);
 
+            // TODO, IMPORTANT - this somehow breaks the loader's definitions!
+            // It replaces the type in the original resource definition 
             if (mainType != ObjectType.na)
                 assembled.Definition.ObjectType = mainType;
 

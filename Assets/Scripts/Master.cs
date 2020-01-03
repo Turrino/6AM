@@ -50,7 +50,6 @@ public class Master : MonoBehaviour {
 
     public SfxScript Sfx;
     public bool LoadingScreenOn;
-    public bool IsFinalScene;
     //public bool RenderLowResAssets;
     public int Lives;
 
@@ -144,15 +143,10 @@ public class Master : MonoBehaviour {
 
     public void ReturnToMainMenu()
     {
+        DialogueManager.DisableMenuScreen();
         MasterCanvas.SetActive(false);
-        //PomaButton.enabled = false;
-        //PomaUI.SetActive(false);
         PlayerInstance.SetActive(false);
-        //Clock.ToggleBadge(false);
-        //LocationInterface.SetActive(false);
-        Destroy(_parentRef);
-        //ClockUI.SetActive(false);
-        //CanvasBars.SetActive(false);        
+        Destroy(_parentRef);  
         LevelCounter = 0;
         Lives = 0;
         Sfx.Stop();
@@ -198,10 +192,13 @@ public class Master : MonoBehaviour {
     public void FinalMapSetup()
     {
         SetLoadingScreen();
-        IsFinalScene = true;
         Destroy(_parentRef);
         var finalStuff = Instantiate(Final, Vector2.zero, Quaternion.identity);
-        finalStuff.transform.SetParent(gameObject.transform);
+
+        SceneInit();
+
+        finalStuff.transform.SetParent(_parentRef.transform);
+
         FinalScript = finalStuff.GetComponent<FinalScript>();
         PlayerInstance.transform.position = FinalScript.PolisSpawnPoint.transform.position + new Vector3(-0.2f, 0.2f, 0);
 
@@ -331,6 +328,7 @@ public class Master : MonoBehaviour {
     {
         if (LevelCounter == 0)
         {
+            Clock.Final = false;
             MasterCanvas.SetActive(true);
             DialogueManager.Setup();
             PomaButton.enabled = true;

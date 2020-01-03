@@ -67,7 +67,25 @@ namespace Assets.Scripts.Bayeux
                     Overlay = null,
                     Description = "null",
                     Types = null
+                 },
+                 new ParsedMetaPoco()
+                {
+                    Name = "BayeuxDemo2Assets.TypeResources.am6hat.8.png",
+                    MainType = "am6hat",
+                    MainAnchor = new ImgPoint(15, 7),
+                    Overlay = null,
+                    Description = "null",
+                    Types = null
                  },new ParsedMetaPoco()
+                {
+                    Name = "BayeuxDemo2Assets.TypeResources.am6hat.9.png",
+                    MainType = "am6hat",
+                    MainAnchor = new ImgPoint(15, 7),
+                    Overlay = null,
+                    Description = "null",
+                    Types = null
+                 },
+            new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6cabinetdoor.1.png",
                     MainType = "am6cabinetdoor",
@@ -219,7 +237,49 @@ namespace Assets.Scripts.Bayeux
                     Overlay = null,
                     Description = "null",
                     Types = null
+                 },
+            new ParsedMetaPoco()
+            {
+                    Name = "BayeuxDemo2Assets.TypeResources.am6face.7.png",
+                    MainType = "am6face",
+                    MainAnchor = new ImgPoint(25, 26),
+                    Overlay = null,
+                    Description = "null",
+                    Types = null
                  },new ParsedMetaPoco()
+                {
+                    Name = "BayeuxDemo2Assets.TypeResources.am6face.8.png",
+                    MainType = "am6face",
+                    MainAnchor = new ImgPoint(23, 27),
+                    Overlay = null,
+                    Description = "null",
+                    Types = null
+                 },new ParsedMetaPoco()
+                {
+                    Name = "BayeuxDemo2Assets.TypeResources.am6face.9.png",
+                    MainType = "am6face",
+                    MainAnchor = new ImgPoint(26, 27),
+                    Overlay = null,
+                    Description = "null",
+                    Types = null
+                 },new ParsedMetaPoco()
+                {
+                    Name = "BayeuxDemo2Assets.TypeResources.am6face.10.png",
+                    MainType = "am6face",
+                    MainAnchor = new ImgPoint(24, 28),
+                    Overlay = null,
+                    Description = "null",
+                    Types = null
+                 },new ParsedMetaPoco()
+                {
+                    Name = "BayeuxDemo2Assets.TypeResources.am6face.11.png",
+                    MainType = "am6face",
+                    MainAnchor = new ImgPoint(23, 26),
+                    Overlay = null,
+                    Description = "null",
+                    Types = null
+                 },
+            new ParsedMetaPoco()
                 {
                     Name = "BayeuxDemo2Assets.TypeResources.am6item.1.png",
                     MainType = "am6item",
@@ -888,6 +948,28 @@ namespace Assets.Scripts.Bayeux
                     Description = "null",
                     Types = null
                  },
+            new ParsedMetaPoco()
+                {
+                    Name = "BayeuxDemo2Assets.TypeResources.am6body.7.png",
+                    MainType = "am6body",
+                    MainAnchor = new ImgPoint(65, 70),
+                    Overlay = new Overlay(new Dictionary<PixelInfo, List<OverlayPoint>>()
+            {
+
+                {  new PixelInfo("#FF00FF26"),
+                    new List<OverlayPoint>() {new OverlayPoint(41, 118, 236),}
+                },
+                {  new PixelInfo("#FFFF00E5"),
+                    new List<OverlayPoint>() {new OverlayPoint(34, 97, 194),}
+                },
+                {  new PixelInfo("#FF00EAFF"),
+                    new List<OverlayPoint>() {new OverlayPoint(91, 68, 136),}
+                },
+            }, 130, 140, "am6body"),
+                    Description = "null",
+                    Types = null
+                 }
+
         };
     }
 }

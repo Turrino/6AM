@@ -52,6 +52,7 @@ public class DialogueManager : MonoBehaviour {
     bool CanArrestMayo;
     public void Setup()
     {
+        CanArrestMayo = false;
         InfoboxLarge.SetActive(false);
         LocButtons.Setup();
         LivesObj.SetActive(Master.Difficulty == 0);
@@ -101,7 +102,7 @@ public class DialogueManager : MonoBehaviour {
         DialogueText.fontSize = 50;
     }
 
-    private Queue<string> OutroStory = new Queue<string>(new string[]
+    private Queue<string> GetOutroStory() => new Queue<string>(new string[]
     {
         $"Well, well, well!{Environment.NewLine}What a story.",
         "The fiendish Sbarlo was posing as Mayor Mayo, pocketing all the cookies in Biscotja.",
@@ -132,18 +133,20 @@ public class DialogueManager : MonoBehaviour {
                 Master.GM.MayoIsCaughtMusic();
                 CloseDialogue();
                 Master.GM.HidePoma();
-                InfoboxText.text = OutroStory.Dequeue();
+
+                EnableMenuScreen();
+                LivesObj.SetActive(false);
+                var outroStory = GetOutroStory();
+                InfoboxText.text = outroStory.Dequeue();
                 InfoboxLarge.SetActive(true);
-                MenuEnabled = true;
-                MenuScreen.SetActive(true);
                 MenuButton1Text.text = "Continue";
                 MenuButton2.gameObject.SetActive(false);
 
                 MenuButton1.onClick.RemoveAllListeners();
                 MenuButton1.onClick.AddListener(() =>
                 {
-                    InfoboxText.text = OutroStory.Dequeue();
-                    if (OutroStory.Count == 0)
+                    InfoboxText.text = outroStory.Dequeue();
+                    if (outroStory.Count == 0)
                     {
                         MenuButton1.onClick.RemoveAllListeners();
                         MenuButton1.onClick.AddListener(() =>
@@ -227,7 +230,6 @@ public class DialogueManager : MonoBehaviour {
             MenuButton1.onClick.RemoveAllListeners();
             MenuButton1.onClick.AddListener(() =>
             {
-                DisableMenuScreen();
                 Master.GM.ContinueAfterFail();
             });
 
@@ -236,7 +238,6 @@ public class DialogueManager : MonoBehaviour {
             MenuButton2.gameObject.SetActive(true);
             MenuButton2.onClick.AddListener(() =>
             {
-                DisableMenuScreen();
                 Master.GM.ReturnToMainMenu();
             });
 
@@ -250,7 +251,6 @@ public class DialogueManager : MonoBehaviour {
             MenuButton1.onClick.AddListener(() =>
             {
                 Master.GM.SetLoadingScreen();
-                DisableMenuScreen();
                 Master.GM.ReturnToMainMenu();
             });
             MenuButton2.gameObject.SetActive(false);
@@ -313,7 +313,7 @@ public class DialogueManager : MonoBehaviour {
         MenuScreen.SetActive(true);
     }
 
-    void DisableMenuScreen()
+    public void DisableMenuScreen()
     {
         // no need to re-enable the timer, master will do that when restarting the level
         MenuEnabled = false;

@@ -11,7 +11,7 @@ public class ClockScript : MonoBehaviour
     private int _secondsTotal;
     private int _secondsLeft = 500;
     public SpriteRenderer Panel;
-    private bool _final;
+    public bool Final;
 
     public void StartTimer(int seconds)
     {
@@ -23,7 +23,7 @@ public class ClockScript : MonoBehaviour
 
     public void FinalTimer()
     {
-        _final = true;
+        Final = true;
         StopCoroutine("LoseTime");
         countdownMinutes.text = "?";
         countdownSeconds.text = "??";
@@ -54,7 +54,7 @@ public class ClockScript : MonoBehaviour
 
     void Update()
     {
-        if (_final)
+        if (Final)
             return;
 
         var timeLeft = TimeSpan.FromSeconds(_secondsLeft);

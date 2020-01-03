@@ -17,10 +17,20 @@ public class outroscript : MonoBehaviour
     public Text TallyText;
     public Text ModeText;
 
+    public void BackToMenu()
+    {
+        Master.GM.ReturnToMainMenu();
+    }
     private void Start()
     {
+        Master.GM.MasterCanvas.SetActive(false);
+
         ModeText.text = Master.Difficulty == 0 ? "Easy-Peasy Mode >" 
             : Master.Difficulty == 1 ? "El Normal Mode >" : "Hurd Mode >";
+
+        TallyText.text = Master.GM.TotalTimeSpent.ToString(@"mm\:ss");
+        InvokeRepeating("Chant", 0, 1f);
+
         var chars = Master.GM.GetFinalChars();
 
         foreach (var item in Sprites.GetComponentsInChildren<SpriteRenderer>())
@@ -30,11 +40,6 @@ public class outroscript : MonoBehaviour
                 item.sprite = chars.Dequeue();
             }
         }
-        TallyText.text = Master.GM.TotalTimeSpent.ToString(@"mm\:ss");
-
-
-
-        InvokeRepeating("Chant", 0, 1f);
     }
 
     void Chant()

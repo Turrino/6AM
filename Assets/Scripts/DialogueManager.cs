@@ -52,6 +52,7 @@ public class DialogueManager : MonoBehaviour {
     bool CanArrestMayo;
     public void Setup()
     {
+        DialogueText.fontSize = 42;
         CanArrestMayo = false;
         InfoboxLarge.SetActive(false);
         LocButtons.Setup();

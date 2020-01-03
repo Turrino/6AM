@@ -10,22 +10,58 @@ public static class TextResources
 {
     public static string LocationInfo(string characterName) => $"{characterName}'s place";
 
-    //TODO could add a bit of variation here
-    public static string LineAboutSelfStole => $"I stoled the cookie ;)";
-    public static string LineAboutSelfDidNotSteal => $"I did not stole the cookie!!1";
-    public static string LineAboutOthersStole(string otherCharacter) => $"{otherCharacter} is teh thief.";
-    public static string LineAboutOthersDidNotSteal(string otherCharacter) => $"{otherCharacter} is innosent.";
 
-    //public static string EnrichDialogue(LocationInfo locInfo, string originalDialogue)
-    //{
+    private static string[] LinesAboutSelfStole = new string[]
+    {
+        "I stoled the cookie ;)",
+        $"I must confess.{Environment.NewLine}I am the thief.",
+        $"Do I look like a thief?{Environment.NewLine}That's because I am one.",
+        $"Arrest me offiser,{Environment.NewLine}I stole teh cookie.",
+        $"Yes, I stole it.{Environment.NewLine}Free the cookies!{Environment.NewLine}Carbs to the masses!",
+        $"I'm the theif.{Environment.NewLine}Do I need to spell it for you?{Environment.NewLine}T-H-E-I-F",
+        $"Boogie-woogie, I stole the cookie.{Environment.NewLine}Yessir."
+    };
 
-    //}
+    private static string[] LinesAboutSelfInnocent = new string[]
+    {
+        "I did not stole the cookie!!1",
+        "I am as innocent as they come ;)",
+        $"Wasn't me.{Environment.NewLine}Why would I steal something that delicious?",
+        "Wasn't me, sir. Was here looking at my nose all day.",
+        $"I didn't do it.{Environment.NewLine}Do I have an alibi?{Environment.NewLine}Yeah but it's in my other coat.",
+        $"I did naht steal the cookie.",
+        $"Steal? Me? That's funny.{Environment.NewLine}Of course not. Totally.",
+        $"I didn't steal anything.{Environment.NewLine}Would you like to see my pebbles collection?",
+    };
 
-    //private static string Enrich1 = "Hey do you like my place?";
-    //private static string Enrich1 = "How do you do?";
-    //private static string Enrich1 = "Hey bud.";
-    //private static string Enrich1 = "Do you like my REPL";
-    //private static string Enrich1 = "";
+    private static string[] LinesAboutOthersStole = new string[]
+    {
+         "OTHER is teh thief. Pinky Swear.",
+         $"OTHER did it.{Environment.NewLine}Saw it with my eyes, my dog saw it too,{Environment.NewLine}and my dog's cousing's fiancee as well.",
+         $"OTHER is such a crooked, thieving son-of-a-bandit.{Environment.NewLine}Their hoodlum hands must be dripping with evidence.",
+         "OTHER is 100% thief. I know because reasons.",
+         $"The thief can only be, must be,{Environment.NewLine}positively, totally, without a shade of doubt, be: OTHER.",
+         $"Oh yes, the village thief is OTHER.{Environment.NewLine}Lives over there.",
+         $"Thief could only be OTHER.{Environment.NewLine}Walking definition of pick-pocket, right there."
+    };
+
+    private static string[] LinesAboutOthersDidNotSteal = new string[]
+    {
+        $"I would trust OTHER with my own loaf.{Environment.NewLine}OTHER definitely isn't the culprit.",
+         "OTHER is innosent. OTHER and I grew up together.",
+         "OTHER didn't do it. I vouch for OTHER.",
+         $"I love OTHER,{Environment.NewLine}and I don't love thieves,{Environment.NewLine}so OTHER is not the thief.",
+         $"The thief is not OTHER,{Environment.NewLine}we go way back the two of us.",
+         $"OTHER would never do such a thing.{Environment.NewLine}OTHER is on a diet.",
+         $"OTHER is my best friend, a bit smelly yeah,{Environment.NewLine}but certainly not a thief.",
+         $"Oh gosh, who would do such a thing.{Environment.NewLine}Certainly not OTHER,{Environment.NewLine}OTHER is always innocent.",
+    };
+
+    public static string LineAboutSelfStole() => LinesAboutSelfStole.PickRandom();
+    public static string LineAboutSelfDidNotSteal() => LinesAboutSelfInnocent.PickRandom();
+    public static string LineAboutOthersStole(string otherCharacter) => LinesAboutOthersStole.PickRandom().Replace("OTHER", otherCharacter);
+    public static string LineAboutOthersDidNotSteal(string otherCharacter) => LinesAboutOthersDidNotSteal.PickRandom().Replace("OTHER", otherCharacter);
+
 
     // this just makes the text a bit silly and gives no information
     public static string[] NoiseCategoriesAdj =
@@ -96,7 +132,7 @@ public static class TextResources
 
     // Menus
     // TODO move all the menu texts here
-    public static string ArrestTimeout = "Oh snap... Time's up. The theif ate the cookie.";
+    public static string ArrestTimeout = "Oh no... Time's up. The theif ate the cookie.";
 
 
     // Manual lines
@@ -130,7 +166,7 @@ public static class TextResources
             var claimsInnocence = character.IsThief == character.Liar;
 
             return claimsInnocence ?
-                LineAboutSelfDidNotSteal : LineAboutSelfStole;
+                LineAboutSelfDidNotSteal() : LineAboutSelfStole();
         }
 
         throw new InvalidOperationException($"Unknown {characterDialogueType}");

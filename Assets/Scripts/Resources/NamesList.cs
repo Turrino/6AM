@@ -58,7 +58,7 @@ namespace Assets.Scripts.Resources
                 return CurrentDifficultNames.PopRandom();
             }
 
-            if (CurrentPersonNames == null || CurrentPersonNames.Count == 0)
+            if (CurrentPersonNames == null || CurrentPersonNames.Count < count)
             {
                 CurrentPersonNames = new List<string>(PersonNames);
             }

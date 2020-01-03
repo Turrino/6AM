@@ -9,6 +9,8 @@ namespace Assets.Scripts.Bayeux
         public static Dictionary<PixelInfo, PixelInfo> Replacement0;
         public static Dictionary<PixelInfo, PixelInfo> Replacement1;
         public static Dictionary<PixelInfo, PixelInfo> Replacement2;
+        public static Dictionary<PixelInfo, PixelInfo> Replacement3;
+        public static Dictionary<PixelInfo, PixelInfo> Replacement4;
         public static List<Color32> BgColors;
 
         public static Color32[] Backgrounds = new[] {
@@ -70,6 +72,38 @@ namespace Assets.Scripts.Bayeux
             { "5F4F5F", "AF6D76" },
             { "460C23", "65526F" },
             { "809B9F", "D8EAC6" }
+        };
+
+        public static Dictionary<string, string> Replacement3String = new Dictionary<string, string>()
+        {
+            { "3361DF", "E58B2B" },
+            { "F4546E", "CC8CB7" },
+            { "3B6AE2", "7E3F62" },
+            { "E7C801", "E3A594" },
+            { "ADBFA8", "CBB7BF" },
+            { "BA6767", "AC2727" },
+            { "80A3C7", "AC0EA3" },
+            { "556952", "511135" },
+            { "464668", "574668" },
+            { "5F4F5F", "5F4F5F" },
+            { "460C23", "373850" },
+            { "809B9F", "C4467E" }
+        };
+
+        public static Dictionary<string, string> Replacement4String = new Dictionary<string, string>()
+        {
+            { "3361DF", "487476" },
+            { "F4546E", "755952" },
+            { "3B6AE2", "535F7F" },
+            { "E7C801", "172B5F" },
+            { "ADBFA8", "5C563D" },
+            { "BA6767", "3D5C51" },
+            { "80A3C7", "7E8286" },
+            { "556952", "8F8555" },
+            { "464668", "292C3D" },
+            { "5F4F5F", "AFBCB9" },
+            { "460C23", "A8AA9E" },
+            { "809B9F", "683D4F" }
         };
     }
 }

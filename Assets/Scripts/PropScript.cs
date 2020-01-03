@@ -13,6 +13,7 @@ public class PropScript : MonoBehaviour
     public List<PropInfo> Contents;
 
     private int _regularOrder;
+    private int _regularOrderBg;
     private bool _mouseOver;
 
     void OnMouseDown()
@@ -31,6 +32,7 @@ public class PropScript : MonoBehaviour
         {
             Master.GM.Sfx.Tooltip();
             _regularOrder = Prop.sortingOrder;
+            _regularOrderBg = Background.sortingOrder;
             Background.sortingOrder = 999;
             Prop.sortingOrder = 1000;
 
@@ -45,6 +47,7 @@ public class PropScript : MonoBehaviour
     void OnMouseExit()
     {
         Prop.sortingOrder = _regularOrder;
+        Background.sortingOrder = _regularOrderBg;
         Background.enabled = false;
         Master.GM.Tooltip.SetActive(false);
         _mouseOver = false;

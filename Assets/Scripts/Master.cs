@@ -105,6 +105,8 @@ public class Master : MonoBehaviour {
         Palettes.Replacement0 = textureTools.ConvertPalette(Palettes.Replacement0String.AddHashes());
         Palettes.Replacement1 = textureTools.ConvertPalette(Palettes.Replacement1String.AddHashes());
         Palettes.Replacement2 = textureTools.ConvertPalette(Palettes.Replacement2String.AddHashes());
+        Palettes.Replacement3 = textureTools.ConvertPalette(Palettes.Replacement3String.AddHashes());
+        Palettes.Replacement4 = textureTools.ConvertPalette(Palettes.Replacement4String.AddHashes());
     }
 
     public Transform GetSceneTransform()

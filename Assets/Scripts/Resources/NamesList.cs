@@ -81,7 +81,7 @@ namespace Assets.Scripts.Resources
             new List<string>() { "Ribbity", "Rabbity", "Wobbity", "Wabbity" },
             new List<string>() { "Fruffu", "Friffi", "Cricri", "Cracra", "Furfra", "Frafri" },
             new List<string>() { "Claire", "Klare", "Klaire", "Clara", "Klaar", "Claro" },
-            new List<string>() { "Purli", "Purla", "Perela'", "Pereli'", "Perlila" },
+            new List<string>() { "Purli", "Purla", "Perela", "Pereli", "Perlila" },
             new List<string>() { "Nini", "Nana", "Nunu", "Nene", "Nono" },
             new List<string>() { "Lila", "Lala", "Lollo", "Lola", "Lalla", "Lalli" },
             new List<string>() { "Ubu", "Aba", "Uba", "Bau", "Boa", "Abu" }
@@ -90,11 +90,12 @@ namespace Assets.Scripts.Resources
         private static List<string> PersonNames = new List<string>()
         {
             "Ribbity", "Bobbea", "'Not Mathilda'", "Poppy", "Yogurta",
-            "Yolanda", "Polentina", "Giuseppo", "Wobbity", "Perela'", "Nana",
+            "Yolanda", "Polentina", "Giuseppo", "Wobbity", "Perela", "Nana",
             "Ubu", "Aba", "Ululi", "Mappo", "Fra", "Mr. No",
             "Chapatty", "Ms. Maybe", "Dear Prudence", "Carlito",
-            "Juanita", "Wally", "Uùuu", "Aha", "Oh-Yeah", "Chipo",
+            "Juanita", "Wally", "U-uuu", "Aha", "Oh-Yeah", "Chipo",
             "Yayai", "Araffa", "Stealino", "Thiefella", "Honestina",
+            "Yettr"
         };
 
         /// <summary>

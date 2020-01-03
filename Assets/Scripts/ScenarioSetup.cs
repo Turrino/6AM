@@ -183,7 +183,8 @@ public class ScenarioSetup
     {
         // null is the default palette
         var availablePalettes = new List<Dictionary<PixelInfo, PixelInfo>>
-            { Palettes.Replacement0, Palettes.Replacement1, Palettes.Replacement2 };
+            { Palettes.Replacement0, Palettes.Replacement1, Palettes.Replacement2,
+            Palettes.Replacement4, Palettes.Replacement3 };
         var chosen = availablePalettes.PopRandom();
 
         return new PaletteInfo()

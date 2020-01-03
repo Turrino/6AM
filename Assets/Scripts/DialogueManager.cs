@@ -230,6 +230,7 @@ public class DialogueManager : MonoBehaviour {
             MenuButton1.onClick.RemoveAllListeners();
             MenuButton1.onClick.AddListener(() =>
             {
+                DisableMenuScreen();
                 Master.GM.ContinueAfterFail();
             });
 
